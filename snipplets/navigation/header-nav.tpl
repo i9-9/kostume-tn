@@ -86,7 +86,7 @@
                 <div class="mobile-logo-home m-none text-center-xs">
             {% endif %}
                 <div id="logo" class="mobile-logo-home logo-img-container {% if not has_logo %}hidden{% endif %}">
-                    <a href="{{ store.url }}">
+                    <a href="https://kostumeweb.net/">
                         {% include "snipplets/svg/logo.tpl" %}
                     </a>
                 </div>
@@ -107,7 +107,7 @@
                         display: inline-block;">
             {% endif %}
                 <div id="logo"  style="padding-top: 10px;">
-                    <a href="{{ store.url }}">
+                    <a href="https://kostumeweb.net">
                         {% include "snipplets/svg/logo.tpl" %}
                     </a>
                 </div>
