@@ -1,0 +1,2 @@
+{% set last_item_added = (cart.items | first) %}
+<a href="{{ last_item_added.product.category.url }}" class="btn btn-link continue-buying col-xs-12 col-md-6 text-left text-center-xs m-top p-none">{{ 'Ver más productos' | translate }}</a>    

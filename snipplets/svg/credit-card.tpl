@@ -1,0 +1,1 @@
+<svg class="svg-credit-card-icon {{ fa_custom_class }} {% if payment %} payment-credit-icon{% endif %}" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="-285 408.9 24 24"><path fill="none" d="M-285 409h24v24h-24v-24z"/><path d="M-265 413h-16c-1 0-2 .8-2 2v12c0 1 1 2 2 2h16c1 0 2-1 2-2v-12c0-1.2-1-2-2-2zm0 14h-16v-6h16v6zm0-10h-16v-2h16v2z"/></svg>

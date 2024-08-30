@@ -1,0 +1,1 @@
+<svg class="svg-home-icon" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="-285 408.9 24 24"><path d="M-275 429v-6h4v6h5v-8h3l-10-9-10 9h3v8h5z"/><path fill="none" d="M-285 409h24v24h-24v-24z"/></svg>

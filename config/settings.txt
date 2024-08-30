@@ -1,0 +1,633 @@
+Colores de tu marca
+	meta
+		icon = paint-brush
+		advanced = false
+	color
+		name = primary_brand_color
+		description = Color principal
+	subtitle
+		subtitle = <div class='js-color-description'>Aplica al encabezado, botón secundario, precio del producto y las etiquetas de promoción.</div>
+	color
+		name = accent_brand_color
+		description = Color secundario
+	subtitle
+		subtitle = <div class='js-color-description'>Aplica al botón principal.</div>
+	title
+		title = Colores de contraste
+	color
+		name = text_color
+		description = Color de textos
+	color
+		name = background_color
+		description = Color de fondo
+	description
+		description = Para facilitar la lectura, asegurate de que los colores contrasten entre sí.
+	title
+		title = Combinaciones predeterminadas
+	description
+		description = Ideales para restablecer los colores por defecto del diseño.
+	palettes
+		palettes
+			palette_1
+				primary_brand_color = #6901AD
+				accent_brand_color = #6901AD
+				text_color = #434343
+				background_color = #FFFFFF
+			palette_2
+				primary_brand_color = #8AC3B8
+				accent_brand_color = #E6D4C4
+				text_color = #727272
+				background_color = #FFFFFF
+			palette_3
+				primary_brand_color = #3A3A3A
+				accent_brand_color = #54D4C4
+				text_color = #48C1B2
+				background_color = #FAFAFA
+	subtitle
+		subtitle = <a target='_blank' href='https://ayuda.tiendanube.com/es_ES/124497-colores-de-tu-marca/como-cambiar-los-colores-de-mi-diseno/?utm_source=admin-desktop&utm_medium=feature-page&utm_campaign=help'>¿Cómo cambio los colores de mi diseño?</a>
+
+Tipo de letra
+	meta
+		icon = font
+		advanced = false
+	font
+		name = font_logo
+		description = Texto del logo
+		values
+			"Roboto", Sans-serif = Roboto
+			"Droid Sans", Sans-serif = Droid Sans
+			"Palatino Linotype","Book Antiqua",Palatino,serif = Palatino Linotype
+			Impact,Charcoal,sans-serif = Impact
+			"Open Sans",sans-serif = Open Sans
+			"Slabo 27px", serif = Slabo
+			"Oswald", Sans-serif = Oswald
+			"Lora", serif = Lora
+			Arial,sans-serif = Arial
+			Helvetica,Arial,sans-serif = Helvetica
+			"Times New Roman",Times,serif = Times New Roman
+			Georgia,"Times New Roman",serif = Georgia
+			Verdana,Geneva,sans-serif = Verdana
+			Tahoma,Geneva,sans-serif = Tahoma
+			"Lato",sans-serif = Lato
+			"Istok Web",sans-serif = Istok Web
+			"Arvo",serif = Arvo
+			"Montserrat", Sans-serif = Montserrat
+	font
+		name = font_headings
+		description = Títulos de páginas y banners
+		values
+			"Roboto", Sans-serif = Roboto
+			"Droid Sans", Sans-serif = Droid Sans
+			"Palatino Linotype","Book Antiqua",Palatino,serif = Palatino Linotype
+			Impact,Charcoal,sans-serif = Impact
+			"Open Sans",sans-serif = Open Sans
+			"Slabo 27px", serif = Slabo
+			"Oswald", Sans-serif = Oswald
+			"Lora", serif = Lora
+			Arial,sans-serif = Arial
+			Helvetica,Arial,sans-serif = Helvetica
+			"Times New Roman",Times,serif = Times New Roman
+			Georgia,"Times New Roman",serif = Georgia
+			Verdana,Geneva,sans-serif = Verdana
+			Tahoma,Geneva,sans-serif = Tahoma
+	font
+		name = font_rest
+		description = Texto en el resto del sitio
+		values
+			"Roboto", Sans-serif = Roboto
+			"Droid Sans", Sans-serif = Droid Sans
+			"Palatino Linotype","Book Antiqua",Palatino,serif = Palatino Linotype
+			Impact,Charcoal,sans-serif = Impact
+			"Open Sans",sans-serif = Open Sans
+			"Slabo 27px", serif = Slabo
+			"Oswald", Sans-serif = Oswald
+			"Lora", serif = Lora
+			Arial,sans-serif = Arial
+			Helvetica,Arial,sans-serif = Helvetica
+			"Times New Roman",Times,serif = Times New Roman
+			Georgia,"Times New Roman",serif = Georgia
+			Verdana,Geneva,sans-serif = Verdana
+			Tahoma,Geneva,sans-serif = Tahoma
+
+Encabezado
+	meta
+		icon = arrow-up
+		advanced = true
+	title
+		title = Ancho de columna
+	dropdown
+		name = version_theme
+		description = Seleccionar el ancho de columna
+		values
+			wide = Mediano
+			full = Completo
+	checkbox
+		name = head_fix
+		description = Encabezado siempre visible al navegar la tienda
+	checkbox
+		name = tab_menu
+		description = Menú de solapas visible en celulares
+	title
+		title = Barra de anuncio
+	checkbox
+		name = ad_bar
+		description = Mostrar barra de anuncio
+	i18n_input
+		name = ad_text
+		description = Mensaje
+	i18n_input
+		name = ad_url
+		description = Link (opcional)
+
+Página de inicio
+	meta
+		icon = home
+		advanced = true
+	collapse
+		title = Carrusel de imágenes
+	gallery
+		name = slider
+		gallery_image = Selecciona una imagen
+		gallery_link = [Opcional] Página web a la que quieres que te lleve la imagen al hacer click
+		gallery_width = 1400
+		gallery_height = 520
+		option_auto = slider_auto
+	checkbox
+		name = slider_auto
+		description = Pasar las imágenes de forma automática en computadoras
+	collapse
+		title = Mensaje institucional
+	i18n_input
+		name = welcome_message
+		description = Descripción
+	collapse
+		title = Banners de categorías
+	description
+		description = Los banners se mostrarán de izquierda a derecha en computadoras y de arriba hacia abajo en celulares
+	subtitle
+		subtitle = CATEGORÍA 1
+	checkbox
+		name = banner_01_show
+		description = Mostrar banner
+	description
+		description = Imagen de fondo
+	image
+		original = banner_01.jpg
+		title = Cargar imagen (JPG, GIF, PNG)
+		width = 770
+		height = 620
+	i18n_input
+		name = banner_01_title
+		description = Título
+	i18n_input
+		name = banner_01_description
+		description = Descripción
+	i18n_input
+		name = banner_01_url
+		description = Link
+	subtitle
+		subtitle = CATEGORÍA 2
+	checkbox
+		name = banner_02_show
+		description = Mostrar banner
+	description
+		description = Imagen de fondo
+	image
+		original = banner_02.jpg
+		title = Cargar imagen (JPG, GIF, PNG)
+		width = 770
+		height = 620
+	i18n_input
+		name = banner_02_title
+		description = Título
+	i18n_input
+		name = banner_02_description
+		description = Descripción
+	i18n_input
+		name = banner_02_url
+		description = Link
+	subtitle
+		subtitle = CATEGORÍA 3
+	checkbox
+		name = banner_03_show
+		description = Mostrar banner
+	description
+		description = Imagen de fondo
+	image
+		original = banner_03.jpg
+		title = Cargar imagen (JPG, GIF, PNG)
+		width = 770
+		height = 620
+	i18n_input
+		name = banner_03_title
+		description = Título
+	i18n_input
+		name = banner_03_description
+		description = Descripción
+	i18n_input
+		name = banner_03_url
+		description = Link
+	collapse
+		title = Categorías principales
+	checkbox
+		name = home_main_categories
+		description = Mostrar un listado de las categorías principales en la página de inicio
+	collapse
+		title = Banner con imagen
+	image
+		title = Imagen para la página de inicio (se verá arriba del footer)
+		original = banner-home.jpg
+		url = banner_home_url
+		url_description = [Opcional] Página web a la que quieres que te lleve el banner de las página de inicio al hacer click
+		width = 1170
+		height = 100
+	collapse
+		title = Banners promocionales
+	description
+		description = Los tamaños de los banners promocionales dependen de la cantidad que quieras mostrar en la página de inicio de tu tienda.
+	subtitle
+		subtitle = ¿Cuántos banners promocionales queres en tu página de inicio?
+	dropdown_banners
+		name = banners_qty
+		description = Cantidad de Banners
+		values
+			two_banner = 2 Banners
+			one_banner = 1 Banner
+		infograph
+			one_banner = <svg width="135" height="57" fill="none"><path fill="#fff" d="M0 0h135v57H0z"/><rect x=".5" y=".5" width="134" height="56" rx="1.5" fill="#C8E9FF" stroke="#439BD7"/><path d="M68.3494 22.42v9.1h-.936v-8.268h-2.145v-.832h3.081z" fill="#439BD7"/></svg>
+			two_banner = <svg width="135" height="56" fill="none"><path fill="#fff" d="M0 0h135v56H0z"/><rect x=".5" y=".5" width="63.4663" height="55" rx="1.5" fill="#C8E9FF" stroke="#439BD7"/><rect x="71.0337" y=".5" width="63.4663" height="55" rx="1.5" fill="#C8E9FF" stroke="#439BD7"/><path d="M33.0825 22.06v9.1h-.936v-8.268h-2.145v-.832h3.081zM105.204 30.328v.832h-6.3829v-.663l3.7829-3.705c.477-.468.797-.871.962-1.209.173-.3466.26-.6933.26-1.04 0-.5373-.186-.9533-.559-1.248-.364-.3033-.888-.455-1.573-.455-1.066 0-1.8936.338-2.4829 1.014l-.663-.572c.3553-.416.806-.7366 1.352-.962.5549-.2253 1.1789-.338 1.8719-.338.927 0 1.66.221 2.197.663.546.4334.819 1.0314.819 1.794 0 .468-.104.9187-.312 1.352-.208.4334-.602.9317-1.183 1.495l-3.094 3.042h5.005z" fill="#439BD7"/></svg>
+		infosizes
+			one_banner = <span class="size"><span class="title">Banner 1</span><i class="far fa-arrows-alt-h"></i>1200px<i class="far fa-arrows-alt-v"></i>700px</span>
+			two_banner = <span class="size"><span class="title">Banner 1 y 2</span><i class="far fa-arrows-alt-h"></i>600px<i class="far fa-arrows-alt-v"></i>700px</span>
+	subtitle
+		subtitle = BANNER 1
+	checkbox
+		name = banner_promotional_01_show
+		description = Mostrar banner
+	description
+		description = Imagen de fondo
+	image
+		original = banner_promotional_01.jpg
+		title = Cargar imagen (JPG, GIF, PNG)
+		width = 600
+		height = 700
+		dynamic_dimensions
+			one_banner = 1200x700
+			two_banner = 600x700
+	i18n_input
+		name = banner_promotional_01_title
+		description = Título
+	i18n_input
+		name = banner_promotional_01_url
+		description = Link
+	subtitle
+		subtitle = BANNER 2
+	checkbox
+		name = banner_promotional_02_show
+		description = Mostrar banner
+	description
+		description = Imagen de fondo
+	image
+		original = banner_promotional_02.jpg
+		title = Cargar imagen (JPG, GIF, PNG)
+		width = 600
+		height = 700
+	i18n_input
+		name = banner_promotional_02_title
+		description = Título
+	i18n_input
+		name = banner_promotional_02_url
+		description = Link
+	collapse
+		title = Módulo de video y texto
+	description
+		description = El módulo mostrará el video y un texto al lado de la misma en computadoras y debajo de ella en celulares
+	checkbox
+		name = module_show
+		description = Mostrar módulo
+	subtitle
+		subtitle = Video
+	i18n_input
+		name = video_embed
+		description = Link (Youtube o Vimeo)
+	description
+		description = Ej: https://www.youtube.com/watch?v=dptrWehSI8c
+	i18n_input
+		name = module_title
+		description = Título
+	textarea
+		name = module_text
+		description = Descripción
+	i18n_input
+		name = module_button
+		description = Texto del botón
+	i18n_input
+		name = module_url
+		description = Link
+	collapse
+		title = Información de envíos, pagos y compra
+	subtitle
+		subtitle = Ubicación de los banners
+	checkbox
+		name = banner_services
+		description = Mostrar el banner de servicios en toda la tienda (se verá arriba del footer)
+	subtitle
+		subtitle = BANNER 1
+	dropdown
+		name = banner_services_01_icon
+		description = Ícono
+		values
+			shipping = Envíos
+			card = Tarjetas de crédito
+			security = Seguridad
+			returns = Cambios y devoluciones
+			whatsapp = WhatsApp
+			promotions = Promociones
+			cash = Pago en efectivo
+			hand = Cuidados
+			home = Quedate en casa
+			office = Estamos juntos
+	i18n_input
+		name = banner_services_01_title
+		description = Título
+	i18n_input
+		name = banner_services_01_description
+		description = Descripción
+	i18n_input
+		name = banner_services_01_url
+		description = Link
+	subtitle
+		subtitle = BANNER 2
+	dropdown
+		name = banner_services_02_icon
+		description = Ícono
+		values
+			shipping = Envíos
+			card = Tarjetas de crédito
+			security = Seguridad
+			returns = Cambios y devoluciones
+			whatsapp = WhatsApp
+			promotions = Promociones
+			cash = Pago en efectivo
+			hand = Cuidados
+			home = Quedate en casa
+			office = Estamos juntos
+	i18n_input
+		name = banner_services_02_title
+		description = Título
+	i18n_input
+		name = banner_services_02_description
+		description = Descripción
+	i18n_input
+		name = banner_services_02_url
+		description = Link
+	subtitle
+		subtitle = BANNER 3
+	dropdown
+		name = banner_services_03_icon
+		description = Ícono
+		values
+			shipping = Envíos
+			card = Tarjetas de crédito
+			security = Seguridad
+			returns = Cambios y devoluciones
+			whatsapp = WhatsApp
+			promotions = Promociones
+			cash = Pago en efectivo
+			hand = Cuidados
+			home = Quedate en casa
+			office = Estamos juntos
+	i18n_input
+		name = banner_services_03_title
+		description = Título
+	i18n_input
+		name = banner_services_03_description
+		description = Descripción
+	i18n_input
+		name = banner_services_03_url
+		description = Link
+	collapse
+		title = Newsletter
+	subtitle
+		subtitle = Suscripción al newsletter desde un pop-up en el inicio
+	checkbox
+		name = show_news_box
+		description = Permitir que tus clientes se registren para recibir novedades desde un pop-up en la página de inicio
+	subtitle
+		subtitle = Frase motivadora para el pop-up
+	i18n_input
+		name = news_popup_txt
+		description = ¡Invitá a los clientes a registrarse para recibir tus novedades!
+	subtitle
+		subtitle = <a target='_blank' href='http://ayuda.tiendanube.com/diseno/que-es-un-pop-up-y-como-agrego-uno-en-mi-tienda/?utm_source=admin-desktop&utm_medium=feature-page&utm_campaign=help'>¿Qué es un pop-up y cómo lo agrego?</a>
+	image
+		title = Imagen para el pop-up
+		original = newsletter_image.jpg
+		width = 280
+		height = 320
+
+Listado de productos
+	meta
+		icon = list-ul
+		advanced = true
+	title
+		title = Filtros
+	checkbox
+		name = product_filters
+		description = Mostrar filtros en el listado de productos
+	title
+		title = Imagen para las categorías
+	description
+		description = Se va a mostrar arriba del pie de página.
+	image
+		title = Cargar imagen (JPG, GIF, PNG)
+		original = banner-products.jpg
+		url = banner_products_url
+		url_description = [Opcional] Página web a la que quieres que te lleve el banner de las páginas de categorías al hacer click
+		width = 1580
+		height = 220
+	subtitle
+		subtitle = Podés subir una imagen diferente para cada categoría <a target='_blank' href='/admin/categories/'>desde acá</a>
+	title
+		title = Columnas en los listados de productos
+	dropdown
+		name = columns_quantity_products
+		description = Cantidad de columnas
+		values
+			1 = 1 en celular y 3 en computadora
+			2 = 2 en celular y 4 en computadora
+	title
+		title = Productos en el listado
+	dropdown
+		name = category_quantity_products
+		description = Cantidad de productos por página
+		values
+			12 = 12
+			24 = 24
+	title
+		title = Botón de seguir cargando productos
+	checkbox
+		name = infinite_scrolling
+		description = ¿Permitir que en el listado de productos tus clientes carguen nuevos productos cuando llegan al final de la página?
+	title
+		title = Variantes de color
+	checkbox
+		name = product_color_variants
+		description = Mostrar variantes de color en listado de productos
+	title
+		title = Compra rápida
+	checkbox
+		name = quick_view
+		description = Permitir que tus clientes puedan agregar productos a su carrito rápidamente desde el listado de productos
+
+Detalle de producto
+	meta
+		icon = cube
+		advanced = true
+	checkbox
+		name = show_description_bottom
+		description = Mostrar el contenido en una sola columna
+	title
+		title = Formas de entrega
+	checkbox_global
+		name = shipping_calculator_product_page
+		description = Mostrar el calculador de costos de envío y locales físicos en la página de producto
+	subtitle
+		subtitle = <a target='_blank' href='/admin/shipping/'>Agregar medios de envío o locales físicos</a>
+
+Carrito de compras
+	meta
+		icon = shopping-cart
+		advanced = true
+	checkbox
+		name = continue_buying
+		description = Mostrar el botón 'Ver más productos' en el carrito de compras
+	title
+		title = Monto mínimo de compra
+	text
+		name = cart_minimum_value
+		description = ¿Cuál es el monto mínimo que tus clientes deben gastar?
+		placeholder = Ej.: 3000
+	subtitle
+		subtitle = <span class='legend'>Ingresá solamente números</span>
+	title
+		title = Carrito de compras rápidas
+	checkbox
+		name = ajax_cart
+		description = Carrito de compras rápidas. Tus clientes pueden agregar y ver los productos que van a comprar sin necesidad de ir a otra página, ya que la información está siempre visible.
+	title
+		title = Formas de entrega
+	checkbox_global
+		name = shipping_calculator_cart_page
+		description = Mostrar el calculador de costos de envío y locales físicos en el carrito
+	subtitle
+		subtitle = <a target='_blank' href='/admin/shipping/'>Agregar medios de envío o locales físicos</a>
+
+Contacto
+	meta
+		icon = phone
+		advanced = true
+	title
+		title = Banner con imagen
+	image
+		title = Imagen para la página de contacto (se verá arriba del footer)
+		original = banner-contact.jpg
+		url = banner_contact_url
+		url_description = [Opcional] Página web a la que quieres que te lleve el banner de la página de contacto al hacer click
+		width = 1170
+		height = 100
+
+Pie de página
+	meta
+		icon = arrow-down
+		advanced = true
+	title
+		title = Menú
+	subtitle
+		subtitle = Elegí el menú para el final de la página (footer). Si aún no configuraste ninguno, podés hacerlo <a target='_blank' href='/admin/navigation/?ref=submenu'>desde acá</a>
+	subtitle
+		subtitle = <a target='_blank' href='http://ayuda.tiendanube.com/diseno/como-cambio-el-menu-inferior-de-mi-tienda/?utm_source=admin-desktop&utm_medium=feature-page&utm_campaign=help'>¿Cómo cambio el menú inferior de mi tienda?</a>
+	menu
+		name = footer_menu
+		description = ¿Qué menú vas a mostrar al final de la página?
+	title
+		title = Medios de envío
+	checkbox_global
+		name = shipping_show
+		description = Mostrar medios de envío en tu tienda
+	title
+		title = Medios de pago
+	checkbox_global
+		name = payments_show
+		description = Mostrar medios de pago en tu tienda
+	title
+		title = Suscripción al newsletter desde el footer
+	subtitle
+		subtitle = Elegí el título para la sección 'Newsletter' en el footer
+	i18n_input
+		name = news_message
+		description = ¡Escribí algo para que tus clientes se suscriban a tu newsletter!
+	title
+		title = Sellos personalizados en el footer
+	description
+		description = Podés agregar sellos de dos formas: subiendo una imagen o pegando el código Javascript o HTML
+	image
+		title = Imagen del sello
+		original = seal_img.jpg
+		width = 24
+		height = 24
+		url = seal_url
+		url_description = [Opcional] Página web externa a la que llevará la imagen del sello al hacer clic
+	subtitle
+		subtitle = Código Javascript o HTML del sello
+	textarea
+		name = custom_seal_code
+
+Redes sociales
+	meta
+		icon = share-alt
+		advanced = true
+	title
+		title = Publicaciones de Instagram
+	subtitle
+		subtitle = El Feed de Instagram muestra automáticamente tus últimas publicaciones en la página de inicio de tu tienda. Tu perfil debe ser público.
+	checkbox
+		name = show_instafeed
+		description = Mostrar tus publicaciones de Instagram en la página de inicio de tu tienda
+	subtitle
+		subtitle = Para mostrar tus publicaciones necesitás generar un token, <a target='_blank' href='https://ayuda.tiendanube.com/es_ES/como-mostrar-mis-publicaciones-de-instagram-en-mi-tienda'>¿cómo configurarlo?</a>
+	title
+		title = Facebook
+	subtitle
+		subtitle = Recuadro de 'Me gusta' de tu Página de Facebook
+	checkbox
+		name = show_footer_fb_like_box
+		description = Mostrar el recuadro de 'Me gusta' de tu Página de Facebook en la página de inicio (tenés que configurar la página de Facebook desde <a target='_blank' href='/admin/preferences/social_networks/'>acá</a>)
+	subtitle
+		subtitle = Comentarios en el producto
+	checkbox
+		name = show_product_fb_comment_box
+		description = Permitir que tus clientes te dejen comentarios con su usuario de Facebook en la página de producto
+	text
+		name = fb_admins
+		description = ID de tu perfil de Facebook
+	subtitle
+		subtitle = Es necesario si querés moderar los comentarios. Podés obtenerlo <a target='_blank' href='https://findmyfbid.in/'>acá</a>
+	title
+		title = Twitter
+	textarea
+		name = twitter_widget
+		description = Mostrar tus últimos Tweets (se debe configurar <a href='https://twitter.com/settings/widgets/' target='_blank'>un nuevo widget en Twitter</a> y copiar y pegar el HTML aquí)
+
+Edición avanzada de CSS
+	meta
+		icon = code
+		advanced = true
+	title
+		title = Para diseñadores web
+	css_code
+		name = css_code
+		description = Acá podes escribir código CSS para que se muestre en tu tienda
+	subtitle
+		subtitle = <a target='_blank' href='https://ayuda.tiendanube.com/es_ES/123225-edicion-avanzada-de-css/como-editar-el-diseno-con-codigo-css'>¿Cómo edito el código CSS de mi tienda?</a>
+		

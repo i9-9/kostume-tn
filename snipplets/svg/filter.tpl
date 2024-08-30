@@ -1,0 +1,1 @@
+<svg class="svg-share-icon" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="-285 408.9 24 24"><path d="M-275 427h4v-2h-4v2zm-7-12v2h18v-2h-18zm3 7h12v-2h-12v2z"/><path fill="none" d="M-285 409h24v24h-24v-24z"/></svg>

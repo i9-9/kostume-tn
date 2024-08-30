@@ -1,0 +1,1 @@
+<svg class="svg-angle-right-icon {{ fa_custom_class }}" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="-285 408.9 24 24"><path d="M-269.6 425l-4.6-4.6 4.6-4.6-1.4-1.4-6 6 6 6 1.4-1.4z"/><path fill="none" d="M-285 408.4h24v24h-24v-24z"/></svg>

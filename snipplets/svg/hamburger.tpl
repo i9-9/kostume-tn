@@ -1,0 +1,1 @@
+<svg class="svg-hamburger-icon" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="-285 408.9 24 24"><path fill="none" d="M-285 409h24v24h-24v-24z"/><path d="M-282 427h18v-2h-18v2zm0-5h18v-2h-18v2zm0-7v2h18v-2h-18z"/></svg>
