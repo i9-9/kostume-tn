@@ -1,6 +1,6 @@
 {% for item in navigation %}
 	{% if item.subitems %}
-	    <li class="desktop-nav-item {{ item.current ? 'selected' : '' }} {{ loop.first ? 'first' : '' }} {{ loop.index == 7 ? 'on-sale' : '' }} {{ loop.index == 4 ? 'col-md-3' : '' }} {{ loop.index == 6 ? '' : '' }}" style="{{ loop.index == 6 ? '' : '' }} {{ loop.index == 7 ? '' : '' }}">
+	    <li class="desktop-nav-item {{ item.current ? 'selected' : '' }} {{ loop.first ? 'first' : '' }} {{ loop.index == 7 ? 'on-sale' : '' }} {{ loop.index == 4 ? 'col-md-3' : '' }} {{ loop.index == 5 ? 'col-md-3' : '' }} {{ loop.index == 6 ? '' : '' }}" style="{{ loop.index == 6 ? '' : '' }} {{ loop.index == 7 ? '' : '' }}">
 			 <a href="{{ item.url }}" class="desktop-nav-link with-subitems "  {% if item.url | is_external %}target="_blank"{% endif %} style="font-weight: bold; font-size: 12px; {{ loop.index == 6 ? '' : '' }} {{ loop.index == 7 ? '' : '' }}">
 			    {{ item.name }}
 			 </a>

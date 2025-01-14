@@ -293,16 +293,16 @@
                     <div {% if installment < 2 or ( store.country == 'AR' and interest == true ) %} style="display: none;" {% endif %} data-interest="{{ interest_value }}" data-cart-installment="{{ installment }}" class="js-installments-cart-total font-body clear-both text-right p-top-quarter">    
                         {{ 'O hasta' | translate }}
                         {% if interest == true %}
-                          {{ "<span class='js-cart-installments-amount'>{1}</span> cuotas de <span class='js-cart-installments installment-price'>{2}</span>" | t(installment, (total_installment / installment) | money) }}
+                          {{ "<span class='js-cart-installments-amount'>3 y 6</span> cuotas de <span class='js-cart-installments installment-price'>{2}</span>" | t(installment, (total_installment / installment) | money) }}
                         {% else %}
-                          {{ "<span class='js-cart-installments-amount'>{1}</span> cuotas sin interés de <span class='js-cart-installments installment-price'>{2}</span>" | t(installment, (total_installment / installment) | money) }}
+                          {{ "<span class='js-cart-installments-amount'>3 y 6</span> cuotas sin interés de <span class='js-cart-installments installment-price'>{2}</span>" | t(installment, (total_installment / installment) | money) }}
                         {% endif %}
                     </div>
 
                 </div>
 
                 {# Cart CTA #}
-                <div class="m-top">
+                <div class="m-top"> 
                     {% set cart_total = (settings.cart_minimum_value * 100) %}
                     {% if cart.checkout_enabled %}
                         <input id="go-to-checkout" class="js-go-checkout-btn btn btn-primary col-xs-12 col-sm-6 col-md-6 col-lg-6 pull-right" type="submit" name="go_to_checkout" value="{{ 'Iniciar Compra' | translate }}" autocomplete="off" style="border-radius: 0;">
