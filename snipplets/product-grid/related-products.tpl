@@ -1,4 +1,4 @@
-<div id="related-products" class="container-fluid m-top m-bottom" data-store="related-products">
+<div id="related-products" class="container-fluid m-top m-bottom m-left m-right" data-store="related-products">
     {% set related_products = [] %}
     {% set related_products_ids_from_app = product.metafields.related_products.related_products_ids %}
     {% set has_related_products_from_app = related_products_ids_from_app | get_products | length > 0 %}
