@@ -1,5 +1,5 @@
 <div class="marquee">
     <marquee>
-        <span>{{"6 CUOTAS SIN INTERÉS HASTA EL 31 DE AGOSTO" | translate }}</span>
+        <span>{{"" | translate }}</span>
     </marquee>
 </div>

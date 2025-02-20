@@ -125,7 +125,7 @@
                 <span class="transition-soft text-center">MENU</span>
             </a>
         </div>
-        <ul class="js-pages-accordion hamburger-panel-accordion hidden-xs" style="display:none; position: absolute; margin-top: 300px; list-style: none; background: rgba(7, 7, 7, 0.9); width: 100%; padding: 20px 15px;">
+        <ul class="js-pages-accordion hamburger-panel-accordion hidden-xs" style="display:none; position: absolute; margin-top: 490px; list-style: none; background: rgba(7, 7, 7, 0.9); width: 100%; padding: 20px 15px;">
             {% snipplet "navigation/navigation.tpl" %}
         </ul>
 

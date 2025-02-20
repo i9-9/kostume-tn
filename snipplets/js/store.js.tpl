@@ -614,8 +614,10 @@ LS.ready.then(function() {
 
         //Pages inside hamburguer sidenav navigation
         $(".js-toggle-page-accordion").click(function(){
-            $(this).toggleClass("selected").closest(".js-hamburger-panel-toggle-accordion").next(".js-pages-accordion").slideToggle(300);
-        });
+        $(this).toggleClass("selected");
+        $(".js-pages-accordion").toggleClass("open");
+});
+
         
         // Mobile subcategories navigation
         $(".js-open-mobile-subcategory").click(function(e){

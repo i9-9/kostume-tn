@@ -144,7 +144,7 @@
     {#  **** Store Main Container ****  #}
         {# Marquee #}
         {% if template == 'home' %}
-            {% include 'snipplets/marquee.tpl'%}
+            {# {% include 'snipplets/marquee.tpl' %} #}
         {% endif %}
         {% snipplet "navigation/header-nav.tpl" %}
         {# template_content renders the template file #}

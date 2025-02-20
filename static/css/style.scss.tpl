@@ -80,6 +80,12 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,secti
   #Components
 ==============================================================================*/ #}
 
+.menu-open {
+    display: flex !important;
+    justify-content: center;
+    align-items: flex-start;
+}
+
 {# /* // Mixins */ #}
 
 @mixin text-decoration-none(){
@@ -2139,4 +2145,12 @@ label {
 }
 .product-single-image{
   height: auto;
+}
+.js-pages-accordion {
+    display: none; /* Oculto por defecto */
+}
+.js-pages-accordion.open {
+    display: flex !important;
+    align-items: start;
+    justify-content: center;
 }
