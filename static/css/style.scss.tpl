@@ -2154,3 +2154,9 @@ label {
     align-items: start;
     justify-content: center;
 }
+
+@media (max-width: 767px) {
+  .js-pages-accordion.open {
+    flex-direction: column; /* Stack items vertically on mobile */
+  }
+}

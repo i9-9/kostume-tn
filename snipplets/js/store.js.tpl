@@ -614,9 +614,9 @@ LS.ready.then(function() {
 
         //Pages inside hamburguer sidenav navigation
         $(".js-toggle-page-accordion").click(function(){
-        $(this).toggleClass("selected");
-        $(".js-pages-accordion").toggleClass("open");
-});
+            $(this).toggleClass("selected");
+            $(".js-pages-accordion").toggleClass("open").stop(true, true).slideToggle(300);
+        });
 
         
         // Mobile subcategories navigation
