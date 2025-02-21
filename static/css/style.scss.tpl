@@ -2160,3 +2160,7 @@ label {
     flex-direction: column; /* Stack items vertically on mobile */
   }
 }
+
+.container-fluid{
+  padding-right: 0px!important
+}
