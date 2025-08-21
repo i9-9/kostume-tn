@@ -4,6 +4,9 @@
 {% set show_help = not has_products %}
 {% set help_url = has_products ? '/admin/products/feature/' : '/admin/products/new/' %}
 
+{# VIP Protection for specific categories #}
+{% snipplet "vip-protection.tpl" %}
+
 {% if show_help %}
     {% include 'snipplets/defaults/show_help_category.tpl' %}
 {% else %}

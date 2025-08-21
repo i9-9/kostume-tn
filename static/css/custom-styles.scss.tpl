@@ -1538,11 +1538,6 @@ a:focus{
 
     {# /* // Nav mobile */ #}
 
-    .navbar-header {
-        background-color: $foreground-btn;
-        color: $primary-color;
-    }
-
     .mobile-nav{
         .mobile-page-title{
             font-family: $logo-font;
@@ -1574,14 +1569,14 @@ a:focus{
     .mobile-nav-fixed-bottom {
         background: $main-background;
     }
-    
+
     .mobile-nav-categories-container{
         background-color: $main-background;
         box-shadow: 2px 0px 1px 1px rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
     }
 
-    
-    
+
+
     .hamburger-panel{
         background-color:$main-background;
         color:$main-foreground;
@@ -1597,6 +1592,8 @@ a:focus{
             border-bottom: 1px solid rgba($main-foreground, .2);
         }
     }
+
+
 
     {# /* //// Product grid */ #}
 

@@ -25,7 +25,7 @@
 
         <a {% if categories %}href="#"{% else %}href="{{ store.products_url }}"{% endif %} id="mobile-categories-btn" class="mobile-nav-tab {% if categories %} js-toggle-mobile-categories {% endif %} {% if store.is_catalog %} mobile-nav-tab-half {% endif %} {% if template == 'category' or template == 'product' %} selected js-current-page {% endif %}">
             <span class="mobile-nav-tab-text">{{ 'Productos' | translate }} {% include "snipplets/svg/angle-down-regular.tpl" with {fa_custom_class: "svg-inline--fa d-inline-block m-left-quarter"} %}</span>
-        </a>     
+        </a>
     </div>
 </div>
 

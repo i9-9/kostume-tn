@@ -102,6 +102,8 @@
 
     {% include 'snipplets/structured_data/webpage-structured-data.tpl' %}
 
+    {# VIP Protection for specific categories #}
+    {% snipplet "vip-protection.tpl" %}
 
 </head>
 <body class="{% if customer %}customer-logged-in{% endif %} template-{{ template | replace('.', '-') }}">

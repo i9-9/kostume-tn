@@ -612,6 +612,8 @@ LS.ready.then(function() {
             }
         });
 
+
+
         //Pages inside hamburguer sidenav navigation
         $(".js-toggle-page-accordion").click(function(){
             $(this).toggleClass("selected");
