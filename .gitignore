@@ -1,0 +1,15 @@
+# Credenciales FTP - NO SUBIR AL REPOSITORIO
+ftp_config.json
+
+# Sistema
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.python-version
+

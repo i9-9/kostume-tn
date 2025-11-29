@@ -2189,3 +2189,34 @@ LS.ready.then(function() {
     /* custom configuration goes here (www.olark.com/documentation) */
     olark.identify('{{store.live_chat | escape('js')}}');/*]]>{/literal}*/
 {% endif %}
+
+// FIX PARA MENÚS DUPLICADOS - SOLO DESKTOP
+$(document).ready(function() {
+    // Esperar a que todo se cargue
+    setTimeout(function() {
+        document.querySelectorAll('.js-toggle-page-accordion').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                // Solo interceptar en desktop (768px+)
+                if (window.innerWidth >= 768) {
+                    e.stopImmediatePropagation();
+                    e.preventDefault();
+                    
+                    this.classList.toggle('selected');
+                    
+                    const container = this.closest('.js-hamburger-panel-toggle-accordion');
+                    const accordion = container ? container.nextElementSibling : null;
+                    
+                    if (accordion && accordion.classList.contains('js-pages-accordion')) {
+                        accordion.classList.toggle('open');
+                        
+                        if (accordion.classList.contains('open')) {
+                            accordion.style.display = 'flex';
+                        } else {
+                            accordion.style.display = 'none';
+                        }
+                    }
+                }
+            }, true);
+        });
+    }, 500); // Delay para asegurar que todo esté cargado
+});
