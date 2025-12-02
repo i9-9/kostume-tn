@@ -14,7 +14,7 @@
     {% endif %}
 
     
-    <footer class="footer" data-store="footer">
+    <footer class="footer" data-store="footer" style="margin-top: auto; flex-shrink: 0; width: 100%;">
     <div class="container" style="
         background: #171717;
         color: white;
@@ -185,7 +185,7 @@
         <div class="footer-legal font-small-extra">
             <div class="container p-top-half p-bottom-half visible-when-content-ready" style="margin: 0; padding:14px; width: 100%; font-size: 7px;">
                 <div class="row">
-                    <div class="copyright-container col-sm-8 m-top-half m-bottom-half">© KOSTÜME 2022</div>
+                    <div class="copyright-container col-sm-8 m-top-half m-bottom-half">© KOSTÜME {{ "now" | date('Y') }}</div>
 
                     <div class="powered-by col-sm-4 text-right m-top-half m-bottom-half">
                         {#

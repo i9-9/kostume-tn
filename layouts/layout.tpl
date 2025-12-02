@@ -141,6 +141,7 @@
     <div class="js-modal-overlay site-overlay visible-phone"></div>
 
     {#  **** Store Main Container ****  #}
+    <div class="js-page-wrapper">
         {# Marquee #}
         {% if template == 'home' %}
             {# {% include 'snipplets/marquee.tpl' %} #}
@@ -150,13 +151,14 @@
         {% if template == 'product' %}
 		    {% snipplet "navigation/breadcrumbs.tpl" %}
 	    {% endif %}
-        <div style="background-color: #070707; padding-top: 0px;" class="js-main-content  main-content {% if template == 'product' %}no-margin{% endif %} {% if store.has_accounts or languages | length > 1 %} with-top-bar{% endif %} {% if status_page_url %}with-notification-bar{% endif %}">
+        <div style="background-color: #070707; padding-top: 0px; flex: 0 0 auto;" class="js-main-content  main-content {% if template == 'product' %}no-margin{% endif %} {% if store.has_accounts or languages | length > 1 %} with-top-bar{% endif %} {% if status_page_url %}with-notification-bar{% endif %}">
             {% template_content %}
 
             {# Quickshop modal #}
             {% snipplet "product-grid/quick-shop.tpl" %}
         </div>
         {% snipplet "footer.tpl" %}
+    </div>
 
         {# Our themes do not support IE versions lower than IE8 #}
         <!--[if lt IE 8]>

@@ -75,3 +75,5 @@ python3 deploy.py static/css/custom-styles.scss.tpl
 
 **Nota:** Este script usa FTP estándar. Si tu servidor requiere SFTP, avísame y creo una versión con SFTP.
 
+
+

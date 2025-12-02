@@ -64,6 +64,34 @@
 ==============================================================================*/#}
 
 {#/*============================================================================
+  #Sticky Footer Fix
+==============================================================================*/ #}
+
+(function() {
+    // Fix: Move footer outside of mainContent for sticky footer to work
+    var footer = document.querySelector('.footer');
+    var mainContent = document.querySelector('.js-main-content');
+    var wrapper = document.querySelector('.js-page-wrapper');
+    
+    if (footer && mainContent && wrapper && mainContent.contains(footer)) {
+        wrapper.appendChild(footer);
+    }
+})();
+
+{#/*============================================================================
+  #Product Grid Fix - Equal padding for all items
+==============================================================================*/ #}
+
+(function() {
+    // Fix: Ensure all grid items have equal padding using cssText for !important
+    var items = document.querySelectorAll('.item-container');
+    items.forEach(function(item) {
+        item.style.setProperty('padding-left', '4px', 'important');
+        item.style.setProperty('padding-right', '4px', 'important');
+    });
+})();
+
+{#/*============================================================================
   #Lazy load
 ==============================================================================*/ #}
 

@@ -1,7 +1,6 @@
 <div class="container m-bottom">
     {#  **** Page header ****  #}
     {% snipplet "page-header.tpl" with page_header_title =  "Crear cuenta" | translate  %}
-     <p class="m-bottom-double">{{ 'Comprá más rápido y llevá el control de tus pedidos, <strong>¡en un solo lugar!</strong>'| translate }}</p>
 
 {# Account validation #}
     {% if account_validation == 'pending' %}

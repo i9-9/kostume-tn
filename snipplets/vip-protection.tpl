@@ -1,4 +1,47 @@
 <script>
+// Ocultar productos de Private Sale en búsqueda
+(function(){
+    function hidePrivateSaleProducts() {
+        // Buscar por clase y data-attribute
+        var products = document.querySelectorAll('.js-private-sale-product, [data-private-sale="true"]');
+        products.forEach(function(p) {
+            p.style.display = 'none';
+            p.remove(); // Remover completamente del DOM
+        });
+        
+        // También buscar productos que tengan links a /private-sale
+        var allProducts = document.querySelectorAll('.js-item-product, [data-product-id]');
+        allProducts.forEach(function(p) {
+            var links = p.querySelectorAll('a[href*="private-sale"]');
+            if(links.length > 0) {
+                p.style.display = 'none';
+                p.remove();
+            }
+        });
+    }
+    
+    // Ejecutar en búsqueda
+    if(window.location.pathname.toLowerCase().indexOf('/search') !== -1 || window.location.search.indexOf('q=') !== -1) {
+        // Ejecutar inmediatamente
+        hidePrivateSaleProducts();
+        
+        // Ejecutar cuando el DOM esté listo
+        if(document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', hidePrivateSaleProducts);
+        }
+        
+        // Observar cambios en el DOM (para scroll infinito)
+        var observer = new MutationObserver(hidePrivateSaleProducts);
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+        
+        // También ejecutar periódicamente por si acaso
+        setInterval(hidePrivateSaleProducts, 1000);
+    }
+})();
+
 // Private Sale Protection - KOSTUMEPVT
 (function(){
     // Solo ejecutar en /private-sale

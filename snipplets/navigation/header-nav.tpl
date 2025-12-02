@@ -99,7 +99,7 @@
         </div>
 
 
-        <div class="col-xs-4 col-sm-3 col-lg-4 hidden-xs">
+        <div class="col-xs-4 col-sm-3 col-lg-4 hidden-xs" style="padding-left: 15px;">
             {% if template == 'home' %}
                 <div 
                     style="

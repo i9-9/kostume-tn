@@ -15,7 +15,7 @@
                     {% include "snipplets/product-grid/sidebar-filters.tpl" with {'applied_filters': true} %}
                 </div>
                 {# ** the following if rule adds a full width class in case there is no sidebar that contains properties to filter or categories ** #}
-                <div class="col-xs-12 col-sm-10 {% if show_filters %}col-lg-10 col-md-10 p-none{% else %}col-lg-12 col-md-12{% endif %} p-left-quarter-xs p-right-quarter-xs" data-store="category-grid-{{ category.id }}"">
+                <div class="col-xs-12 col-sm-10 {% if show_filters %}col-lg-10 col-md-10 p-none{% else %}col-lg-12 col-md-12{% endif %} p-left-quarter-xs p-right-quarter-xs category-grid-container" style="padding-left: 15px; padding-right: 15px;" data-store="category-grid-{{ category.id }}"">
                     {% if show_filter_error %}
                         <div class="text-center m-bottom">
                             <h4 class="text-uppercase">{{ "No tenemos productos para mostrarte :(" | translate }}</h4>
@@ -23,7 +23,7 @@
                         </div>
                     {% endif %}   
                     {% if products %}
-                        <div class="{% if settings.infinite_scrolling and not pages.is_last and products%} js-infinite-grid {% endif %} js-masonry-grid">
+                        <div class="{% if settings.infinite_scrolling and not pages.is_last and products%} js-infinite-grid {% endif %} js-masonry-grid category-products-grid">
                             {% snipplet "product_grid.tpl" %}
                         </div>
                         {% snipplet "product-grid/pagination.tpl" %}
