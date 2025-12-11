@@ -43,7 +43,9 @@
 })();
 
 // Private Sale Protection - KOSTUMEPVT
+// DESACTIVADO - Login de Private Sale deshabilitado
 (function(){
+    return; // Desactivado temporalmente
     // Solo ejecutar en /private-sale
     if(window.location.pathname.toLowerCase().indexOf('private-sale') === -1) return;
     

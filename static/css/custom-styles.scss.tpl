@@ -105,18 +105,8 @@ body,
   font-size: 10px;
 }
 
-html {
-    height: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-
 body {
     background-color: #070707;
-    flex: 1 1 auto !important;
-    display: flex !important;
-    flex-direction: column !important;
-    min-height: 100vh !important;
 }
 
 
@@ -201,27 +191,6 @@ body{
     {% else %}
         background-color: #070707;
     {% endif %}
-    display: flex !important;
-    flex-direction: column !important;
-    min-height: 100vh !important;
-}
-
-.js-page-wrapper {
-    display: flex !important;
-    flex-direction: column !important;
-    flex: 1 1 auto !important;
-    min-height: 100% !important;
-}
-
-.main-content,
-.js-main-content {
-    flex: 0 0 auto !important;
-}
-
-.footer {
-    margin-top: auto !important;
-    flex-shrink: 0 !important;
-    width: 100% !important;
 }
 .box-title {
   float: left;
@@ -1207,9 +1176,6 @@ a:focus{
 .footer{
    background-color: #070707;
    color: #FFFFFF;
-   margin-top: auto !important;
-   flex-shrink: 0 !important;
-   width: 100% !important;
     a{
         color:#FFFFFF;
         text-transform: uppercase;
@@ -1572,6 +1538,11 @@ a:focus{
 
     {# /* // Nav mobile */ #}
 
+    .navbar-header {
+        background-color: $foreground-btn;
+        color: $primary-color;
+    }
+
     .mobile-nav{
         .mobile-page-title{
             font-family: $logo-font;
@@ -1603,14 +1574,14 @@ a:focus{
     .mobile-nav-fixed-bottom {
         background: $main-background;
     }
-
+    
     .mobile-nav-categories-container{
         background-color: $main-background;
         box-shadow: 2px 0px 1px 1px rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
     }
 
-
-
+    
+    
     .hamburger-panel{
         background-color:$main-background;
         color:$main-foreground;
@@ -1626,8 +1597,6 @@ a:focus{
             border-bottom: 1px solid rgba($main-foreground, .2);
         }
     }
-
-
 
     {# /* //// Product grid */ #}
 
@@ -1653,4 +1622,5 @@ a:focus{
             border: 0; 
         }
     }
+ 
 }

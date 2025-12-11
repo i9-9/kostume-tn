@@ -64,34 +64,6 @@
 ==============================================================================*/#}
 
 {#/*============================================================================
-  #Sticky Footer Fix
-==============================================================================*/ #}
-
-(function() {
-    // Fix: Move footer outside of mainContent for sticky footer to work
-    var footer = document.querySelector('.footer');
-    var mainContent = document.querySelector('.js-main-content');
-    var wrapper = document.querySelector('.js-page-wrapper');
-    
-    if (footer && mainContent && wrapper && mainContent.contains(footer)) {
-        wrapper.appendChild(footer);
-    }
-})();
-
-{#/*============================================================================
-  #Product Grid Fix - Equal padding for all items
-==============================================================================*/ #}
-
-(function() {
-    // Fix: Ensure all grid items have equal padding using cssText for !important
-    var items = document.querySelectorAll('.item-container');
-    items.forEach(function(item) {
-        item.style.setProperty('padding-left', '4px', 'important');
-        item.style.setProperty('padding-right', '4px', 'important');
-    });
-})();
-
-{#/*============================================================================
   #Lazy load
 ==============================================================================*/ #}
 
@@ -640,14 +612,10 @@ LS.ready.then(function() {
             }
         });
 
-
-
         //Pages inside hamburguer sidenav navigation
         $(".js-toggle-page-accordion").click(function(){
-            $(this).toggleClass("selected");
-            $(".js-pages-accordion").toggleClass("open").stop(true, true).slideToggle(300);
+            $(this).toggleClass("selected").closest(".js-hamburger-panel-toggle-accordion").next(".js-pages-accordion").slideToggle(300);
         });
-
         
         // Mobile subcategories navigation
         $(".js-open-mobile-subcategory").click(function(e){
@@ -2217,34 +2185,3 @@ LS.ready.then(function() {
     /* custom configuration goes here (www.olark.com/documentation) */
     olark.identify('{{store.live_chat | escape('js')}}');/*]]>{/literal}*/
 {% endif %}
-
-// FIX PARA MENÚS DUPLICADOS - SOLO DESKTOP
-$(document).ready(function() {
-    // Esperar a que todo se cargue
-    setTimeout(function() {
-        document.querySelectorAll('.js-toggle-page-accordion').forEach(function(btn) {
-            btn.addEventListener('click', function(e) {
-                // Solo interceptar en desktop (768px+)
-                if (window.innerWidth >= 768) {
-                    e.stopImmediatePropagation();
-                    e.preventDefault();
-                    
-                    this.classList.toggle('selected');
-                    
-                    const container = this.closest('.js-hamburger-panel-toggle-accordion');
-                    const accordion = container ? container.nextElementSibling : null;
-                    
-                    if (accordion && accordion.classList.contains('js-pages-accordion')) {
-                        accordion.classList.toggle('open');
-                        
-                        if (accordion.classList.contains('open')) {
-                            accordion.style.display = 'flex';
-                        } else {
-                            accordion.style.display = 'none';
-                        }
-                    }
-                }
-            }, true);
-        });
-    }, 500); // Delay para asegurar que todo esté cargado
-});
