@@ -67,6 +67,205 @@
         {% snipplet 'css/critical-css.tpl' %}
     </style>
 
+    {# ============================================
+       INVERSIÓN DE TEMA - KOSTÜME
+       Activa tema claro: fondos blancos, textos negros
+       Las imágenes, fotos y logos NO se invierten
+       ============================================ #}
+    <style>
+        /* 1. INVERTIR TODO EL SITIO */
+        html {
+            -webkit-filter: invert(1) !important;
+            filter: invert(1) !important;
+        }
+
+        /* Fix Safari: asegurar que menú sea clickeable */
+        .js-modal-open,
+        .js-modal-close,
+        .mobile-nav-first-row-icon,
+        #nav-hamburger {
+            pointer-events: auto !important;
+            -webkit-transform: translateZ(0) !important;
+            transform: translateZ(0) !important;
+        }
+
+        /* CENTRAR TODO el menú hamburger (items principales Y subitems) */
+        .hamburger-panel .list-items,
+        .hamburger-panel .list-items li,
+        .hamburger-panel .list-items .hamburger-panel-link,
+        .hamburger-panel-link,
+        .list-items .hamburger-panel-link,
+        .item-with-subitems {
+            text-align: center !important;
+        }
+
+        .hamburger-panel .list-items .list-subitems,
+        .hamburger-panel .list-items .list-subitems li,
+        .list-subitems,
+        .hamburger-panel-item {
+            text-align: center !important;
+        }
+
+        .js-hamburger-panel-toggle-accordion {
+            text-align: center !important;
+        }
+
+        .js-pages-accordion.hamburger-panel-accordion,
+        .hamburger-panel-accordion {
+            text-align: center !important;
+        }
+
+        .hamburger-panel-accordion li {
+            text-align: center !important;
+        }
+
+        .hamburger-panel .js-hamburger-panel-toggle-accordion .hamburger-panel-link {
+            padding-left: 20px !important;
+            padding-right: 20px !important;
+        }
+
+        .hamburger-panel .list-subitems {
+            padding-left: 0 !important;
+            margin-left: 0 !important;
+        }
+
+        /* 2. RE-INVERTIR: Todas las imágenes (genérico) */
+        img,
+        picture,
+        video,
+        img.lazyload,
+        img.lazyloading,
+        img.lazyloaded {
+            -webkit-filter: invert(1) !important;
+            filter: invert(1) !important;
+            will-change: filter !important;
+            -webkit-backface-visibility: hidden !important;
+            backface-visibility: hidden !important;
+        }
+
+        /* Fix específico Safari: imágenes de producto cortadas */
+        .item-image,
+        .js-item-image {
+            -webkit-filter: invert(1) !important;
+            filter: invert(1) !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            height: auto !important;
+            will-change: filter !important;
+            -webkit-backface-visibility: hidden !important;
+            backface-visibility: hidden !important;
+        }
+
+        /* 3. RE-INVERTIR: Imágenes de producto en grid de categoría (específico) */
+        .category-products-grid img,
+        .category-products-grid .item-image,
+        .category-products-grid .js-item-image,
+        .category-products-grid .item-image-container img,
+        .js-masonry-grid img,
+        .js-masonry-grid .item-image,
+        .js-masonry-grid .js-item-image,
+        .js-masonry-item img,
+        .js-masonry-item .item-image,
+        .js-masonry-item .js-item-image {
+            -webkit-filter: invert(1) !important;
+            filter: invert(1) !important;
+        }
+
+        /* 4. RE-INVERTIR: Productos relacionados */
+        .horizontal-products-container img,
+        .horizontal-products-container .item-image,
+        .horizontal-products-container .js-item-image,
+        #related-products img {
+            -webkit-filter: invert(1) !important;
+            filter: invert(1) !important;
+        }
+
+        /* 5. RE-INVERTIR: Productos destacados en home */
+        .primary-products-grid img,
+        .products-grid img {
+            -webkit-filter: invert(1) !important;
+            filter: invert(1) !important;
+        }
+
+        /* 6. RE-INVERTIR: Imágenes en detalle de producto */
+        .product-image img,
+        .js-product-slide-img,
+        .product-slider img,
+        .product-detail img {
+            -webkit-filter: invert(1) !important;
+            filter: invert(1) !important;
+        }
+
+        /* 7. RE-INVERTIR: Logo y SVG de marca */
+        #logo,
+        #logo img,
+        #logo svg,
+        .logo-img-container,
+        .logo-img-container svg,
+        .logo-img {
+            -webkit-filter: invert(1) !important;
+            filter: invert(1) !important;
+            -webkit-transform: translateZ(0) !important;
+            transform: translateZ(0) !important;
+            isolation: isolate !important;
+        }
+
+        /* 8. RE-INVERTIR: Banners y sliders */
+        .banner-image,
+        .banner img,
+        .swiper-slide img,
+        .textbanner-image-background,
+        .category-banner img,
+        .home-slider img {
+            -webkit-filter: invert(1) !important;
+            filter: invert(1) !important;
+        }
+
+        /* 9. RE-INVERTIR: Imágenes de pagos, envíos, sellos */
+        .card-img,
+        .footer-payship-img,
+        .card-img-square,
+        .payment-new-logo,
+        img[data-src*="payment"],
+        img[data-src*="shipping"],
+        .payment-method-logo,
+        .shipping-method-logo {
+            -webkit-filter: invert(1) !important;
+            filter: invert(1) !important;
+        }
+
+        /* 10. RE-INVERTIR: Modales, quickshop, cart */
+        .modal img,
+        .quick-shop img,
+        .quickshop-img,
+        .js-quickshop-img,
+        .ajax-cart-container img,
+        .ajax-cart-item-image-col img,
+        .cart-item img {
+            -webkit-filter: invert(1) !important;
+            filter: invert(1) !important;
+        }
+
+        /* 11. RE-INVERTIR: Placeholders y preloaders */
+        .embed-responsive img,
+        .product-thumb img,
+        .placeholder-icon {
+            -webkit-filter: invert(1) !important;
+            filter: invert(1) !important;
+        }
+
+        /* 12. RE-INVERTIR: Zoom de producto (CloudZoom) */
+        .cloud-zoom-big,
+        #cloud-zoom-big,
+        .cloud-zoom-lens,
+        .zoomWindow,
+        .zoomContainer,
+        .zoomWindowContainer,
+        .zoomLens {
+            -webkit-filter: invert(1) !important;
+            filter: invert(1) !important;
+        }
+    </style>
 
     {# Load async styling not mandatory for first meaningfull paint #}
 
@@ -151,7 +350,7 @@
         {% if template == 'product' %}
 		    {% snipplet "navigation/breadcrumbs.tpl" %}
 	    {% endif %}
-        <div style="background-color: #070707; padding-top: 0px; flex: 0 0 auto;" class="js-main-content  main-content {% if template == 'product' %}no-margin{% endif %} {% if store.has_accounts or languages | length > 1 %} with-top-bar{% endif %} {% if status_page_url %}with-notification-bar{% endif %}">
+        <div style="background-color: #070707; padding-top: 0px;" class="js-main-content  main-content {% if template == 'product' %}no-margin{% endif %} {% if store.has_accounts or languages | length > 1 %} with-top-bar{% endif %} {% if status_page_url %}with-notification-bar{% endif %}">
             {% template_content %}
 
             {# Quickshop modal #}
@@ -206,7 +405,8 @@
 {% endif %}
 
 {# Private Sale Password Protection - Al final del body #}
-{% snipplet "vip-protection.tpl" %}
+{# DESACTIVADO TEMPORALMENTE #}
+{# {% snipplet "vip-protection.tpl" %} #}
 
 </body>
 </html>

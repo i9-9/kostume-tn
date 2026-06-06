@@ -81,7 +81,7 @@ body {
   display: flex !important;
   flex-direction: column !important;
   flex: 1 !important;
-  min-height: 0 !important;
+  min-height: 100vh !important;
 }
 
 .main-content,
@@ -733,9 +733,145 @@ body {
 	padding-right: 4px;
 }
 
+.locations-bar {
+	display: block;
+	width: 100%;
+	background: #070707;
+	color: #fff;
+	border-bottom: 1px solid #2a2a2a;
+}
+
+.locations-bar-inner {
+	width: 100%;
+	max-width: 100%;
+	padding: 6px 10px;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+.locations-bar-list {
+	display: flex !important;
+	flex-wrap: nowrap !important;
+	flex-direction: row !important;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 0;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: none;
+	font-size: 9px;
+	line-height: 1.3;
+	text-transform: uppercase;
+	white-space: nowrap;
+	list-style: none;
+}
+
+.locations-bar-list::-webkit-scrollbar {
+	display: none;
+}
+
+.locations-bar-list .flag-item {
+	display: inline-block !important;
+	flex: 0 0 auto;
+	float: none !important;
+	padding: 0;
+	margin: 0;
+}
+
+.locations-bar-link {
+	display: inline-block;
+	padding: 3px 6px;
+	color: #fff;
+	text-decoration: none;
+	letter-spacing: 0.04em;
+}
+
+.locations-bar-link:hover,
+.locations-bar-link:focus {
+	color: #fff;
+	text-decoration: none;
+	opacity: 0.85;
+}
+
+@media (min-width: 768px) {
+	.locations-bar-inner {
+		padding-right: 15px;
+	}
+
+	.locations-bar-list {
+		justify-content: flex-end;
+	}
+}
+
 .nav-top-link:hover {
 	color: #171717;
 }
+
+.desktop-menu-accordion {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 100%;
+	z-index: 999;
+	width: 100%;
+	margin: 0;
+	padding: 24px 20px;
+	list-style: none;
+	background: rgba(7, 7, 7, 0.92);
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 16px 48px;
+}
+
+.desktop-menu-accordion.open {
+	display: flex !important;
+}
+
+.desktop-menu-accordion > .desktop-nav-item {
+	float: none !important;
+	display: block !important;
+	vertical-align: top;
+	text-align: center;
+	min-width: 110px;
+	max-width: 170px;
+}
+
+.desktop-menu-accordion .desktop-nav-list {
+	display: block !important;
+	position: static !important;
+	top: auto !important;
+	left: auto !important;
+	margin: 8px 0 0 !important;
+	padding: 0 !important;
+	max-height: none;
+	overflow: visible;
+}
+
+.desktop-menu-accordion .desktop-nav-list .desktop-nav-link {
+	font-weight: 400 !important;
+	font-size: 10px !important;
+	line-height: 1.6 !important;
+	display: block;
+	padding: 2px 0;
+	opacity: 0.85;
+}
+
+.desktop-menu-accordion .desktop-nav-list .desktop-nav-link:hover {
+	opacity: 1;
+}
+
+.desktop-menu-toggle {
+	position: static;
+}
+
+.navbar-header.mobile-nav-first-row {
+	position: relative;
+}
+
 .navbar {
 	border: none; 
 	border-radius: 0;
@@ -1811,9 +1947,11 @@ body {
 		letter-spacing: 1px;
 		font-weight: 400;
 		border-bottom: 0;
+		text-align: center;
 	}
 	.hamburger-panel .list-items .list-subitems {
 		padding: 0;
+		text-align: center;
 	}
 	.hamburger-panel .hamburger-panel-arrow {
 		font-size: 12px;
