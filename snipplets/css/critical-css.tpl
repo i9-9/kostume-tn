@@ -1749,7 +1749,7 @@ body {
 
 	.modal-xs-right.modal.fade,
 	.modal-xs-right-out{
-		transition: all 1.5s cubic-bezier(.16,.68,.43,.99);
+		transition: transform 0.4s cubic-bezier(.25,.1,.25,1);
 		-webkit-transform: translate3d(200%,0,0);
 		-moz-transform: translate3d(200%,0,0);
 		-ms-transform: translate3d(200%,0,0);
@@ -1776,7 +1776,7 @@ body {
 		height: 100%;
 		-webkit-overflow-scrolling: touch;
 		overflow-y: auto;
-		transition: all 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99);
+		transition: left 0.35s cubic-bezier(.25,.1,.25,1);
 		z-index: 4200;
 	}
 	.new-modal.modal-full {
@@ -1923,11 +1923,9 @@ body {
 		bottom: 0;
 		left: 0;
 		z-index: 4100;
-		background-color: rgba(0,0,0,.5);
-		-webkit-animation: fade .5s;
-		-moz-animation: fade .5s;
-		-o-animation: fade .5s;
-		animation: fade .5s;
+		background-color: rgba(0,0,0,.3);
+		opacity: 1;
+		transition: opacity 0.3s ease;
 	}
 
 	.hamburger-panel {
@@ -1955,6 +1953,7 @@ body {
 	}
 	.hamburger-panel .hamburger-panel-arrow {
 		font-size: 12px;
+		transition: transform 0.25s ease;
 	}
 	.hamburger-panel .hamburger-panel-link.selected .hamburger-panel-arrow {
 		transform: rotate(90deg);

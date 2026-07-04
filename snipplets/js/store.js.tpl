@@ -107,28 +107,45 @@ LS.ready.then(function() {
             var $modal_close = $('.js-modal-close');
             var $modal_open = $('.js-modal-open');
             var $modal_overlay = $('.js-modal-overlay');
+            var menuTransitionMs = 350;
+
+            function openHamburgerModal($modal) {
+                $("body").addClass("overflow-none modal-active");
+                $modal.show();
+                requestAnimationFrame(function() {
+                    requestAnimationFrame(function() {
+                        $modal.addClass("modal-show");
+                    });
+                });
+            }
+
+            function closeHamburgerModal($modal) {
+                $modal.removeClass("modal-show");
+                setTimeout(function() {
+                    $modal.hide();
+                    $("body").removeClass("overflow-none modal-active");
+                }, menuTransitionMs);
+            }
 
             $modal_open.click(function (e) {
                 e.preventDefault(); 
                 var $modal_id = $(this).data('toggle');
-                $("body").toggleClass("overflow-none modal-active");
-                if ($($modal_id).hasClass("modal-show")) {
-                    $($modal_id).removeClass("modal-show").delay(0).hide(0);
+                var $modal = $($modal_id);
+                if ($modal.hasClass("modal-show")) {
+                    closeHamburgerModal($modal);
                 } else {
-                    $($modal_id).show(0).addClass("modal-show");
+                    openHamburgerModal($modal);
                 }             
             });
 
             $modal_close.click(function (e) {
                 e.preventDefault();  
-                $("body").toggleClass("overflow-none modal-active");
-                $(this).closest(".js-modal").removeClass("modal-show").delay(0).hide(0);      
+                closeHamburgerModal($(this).closest(".js-modal"));
             });
 
             $modal_overlay.click(function (e) {
                 e.preventDefault();  
-                $("body").toggleClass("overflow-none modal-active");
-                $(".js-modal").removeClass("modal-show").delay(0).hide(0);      
+                closeHamburgerModal($(".js-modal.modal-show"));
             });
 
             {# Modals backdrop close on mobile for small popups #}
@@ -614,7 +631,7 @@ LS.ready.then(function() {
 
         //Pages inside hamburguer sidenav navigation
         $(".js-toggle-page-accordion").click(function(){
-            $(this).toggleClass("selected").closest(".js-hamburger-panel-toggle-accordion").next(".js-pages-accordion").slideToggle(300);
+            $(this).toggleClass("selected").closest(".js-hamburger-panel-toggle-accordion").next(".js-pages-accordion").slideToggle(200);
         });
         
         // Mobile subcategories navigation
