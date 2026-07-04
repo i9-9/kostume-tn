@@ -189,7 +189,7 @@ def get_files_to_upload(files_arg=None):
 
 def upload_file_curl(local_path, config):
     """Sube un archivo usando curl FTPS (más confiable en entornos cloud)."""
-    remote_url = f"ftps://{config['host']}/{str(local_path).replace(chr(92), '/')}"
+    remote_url = f"ftp://{config['host']}/{str(local_path).replace(chr(92), '/')}"
     auth = f"{config['username']}:{config['password']}"
     cmd = [
         'curl', '-sS',
