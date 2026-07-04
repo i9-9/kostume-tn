@@ -4,7 +4,6 @@
     </li>
     {% for crumb in breadcrumbs %}
         <li>
-            <span class="breadcrumb-divider">/</span>
             {% if crumb.last %}
                 <span class="breadcrumb-crumb active" style="font-weight: bold;">{{ crumb.name }}</span>
             {% else %}
