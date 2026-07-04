@@ -129,6 +129,12 @@
             margin-left: 0 !important;
         }
 
+        /* Breadcrumb de producto: alinear con el contenido y contraste con invert */
+        .js-main-content .product-breadcrumb {
+            padding: 12px 15px 0;
+            margin: 0;
+        }
+
         /* 2. RE-INVERTIR: Todas las imágenes (genérico) */
         img,
         picture,
@@ -347,10 +353,10 @@
         {% endif %}
         {% snipplet "navigation/header-nav.tpl" %}
         {# template_content renders the template file #}
-        {% if template == 'product' %}
-		    {% snipplet "navigation/breadcrumbs.tpl" %}
-	    {% endif %}
         <div style="background-color: #070707; padding-top: 0px;" class="js-main-content  main-content {% if template == 'product' %}no-margin{% endif %} {% if store.has_accounts or languages | length > 1 %} with-top-bar{% endif %} {% if status_page_url %}with-notification-bar{% endif %}">
+            {% if template == 'product' %}
+                {% snipplet "navigation/breadcrumbs.tpl" %}
+            {% endif %}
             {% template_content %}
 
             {# Quickshop modal #}
