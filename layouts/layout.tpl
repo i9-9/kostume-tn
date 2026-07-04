@@ -129,6 +129,26 @@
             margin-left: 0 !important;
         }
 
+        /* Breadcrumb de producto: alinear con el contenido y contraste con invert */
+        .js-main-content .product-breadcrumb {
+            padding: 12px 15px 0;
+            margin: 0;
+        }
+
+        /* Productos relacionados: fondo y texto coherentes con invert */
+        #related-products {
+            background-color: #070707;
+            padding: 15px 0;
+            overflow: hidden;
+        }
+
+        #related-products .related-products-header h5,
+        #related-products .item-name,
+        #related-products .item-price,
+        #related-products .item-price-compare {
+            color: #ffffff;
+        }
+
         /* 2. RE-INVERTIR: Todas las imágenes (genérico) */
         img,
         picture,
@@ -172,10 +192,40 @@
         }
 
         /* 4. RE-INVERTIR: Productos relacionados */
+        #related-products img,
+        #related-products picture,
+        #related-products video,
+        #related-products .lazyload,
+        #related-products .lazyloading,
+        #related-products .lazyloaded,
+        #related-products .item-image,
+        #related-products .js-item-image,
+        #related-products .item-image-container img,
+        #related-products .item-image-link img,
+        #related-products .js-item-image-padding img,
         .horizontal-products-container img,
+        .horizontal-products-container picture,
         .horizontal-products-container .item-image,
         .horizontal-products-container .js-item-image,
-        #related-products img {
+        .horizontal-products-container .item-image-container img,
+        .horizontal-products-scroller img,
+        .horizontal-products-scroller .js-item-image,
+        .horizontal-products-scroller .item-image-container img,
+        .item-container-related img,
+        .item-container-related .js-item-image,
+        .item-container-related .item-image,
+        .item-container-related .item-image-container img {
+            -webkit-filter: invert(1) !important;
+            filter: invert(1) !important;
+            will-change: filter !important;
+            -webkit-backface-visibility: hidden !important;
+            backface-visibility: hidden !important;
+        }
+
+        #related-products svg,
+        #related-products .placeholder-icon,
+        .horizontal-products-container svg,
+        .item-container-related svg {
             -webkit-filter: invert(1) !important;
             filter: invert(1) !important;
         }
@@ -347,10 +397,10 @@
         {% endif %}
         {% snipplet "navigation/header-nav.tpl" %}
         {# template_content renders the template file #}
-        {% if template == 'product' %}
-		    {% snipplet "navigation/breadcrumbs.tpl" %}
-	    {% endif %}
         <div style="background-color: #070707; padding-top: 0px;" class="js-main-content  main-content {% if template == 'product' %}no-margin{% endif %} {% if store.has_accounts or languages | length > 1 %} with-top-bar{% endif %} {% if status_page_url %}with-notification-bar{% endif %}">
+            {% if template == 'product' %}
+                {% snipplet "navigation/breadcrumbs.tpl" %}
+            {% endif %}
             {% template_content %}
 
             {# Quickshop modal #}
