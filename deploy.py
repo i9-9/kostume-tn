@@ -7,6 +7,7 @@ Uso: python3 deploy.py [archivos...]
 import os
 import sys
 import json
+import subprocess
 from ftplib import FTP, error_perm
 from pathlib import Path
 
@@ -186,6 +187,33 @@ def get_files_to_upload(files_arg=None):
         print_info("Usa: python3 deploy.py archivo1.tpl archivo2.tpl")
         sys.exit(0)
 
+def upload_file_curl(local_path, config):
+    """Sube un archivo usando curl FTPS (más confiable en entornos cloud)."""
+    remote_url = f"ftps://{config['host']}/{str(local_path).replace(chr(92), '/')}"
+    auth = f"{config['username']}:{config['password']}"
+    cmd = [
+        'curl', '-sS',
+        '--max-time', str(config.get('timeout', 300)),
+        '--ssl-reqd', '--disable-epsv', '--ftp-pasv', '--ftp-skip-pasv-ip',
+        '--ftp-method', 'nocwd', '--ftp-create-dirs',
+        '--retry', '5', '--retry-delay', '2', '--retry-all-errors',
+        '-T', str(local_path),
+        '-u', auth,
+        remote_url,
+        '-w', '%{http_code}',
+        '-o', os.devnull,
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    response_code = (result.stdout or '').strip()
+    if response_code == '226':
+        return True
+    if result.returncode != 0:
+        print_error(f"curl error: {result.stderr.strip() or result.returncode}")
+    else:
+        print_error(f"Respuesta FTP inesperada: {response_code or 'sin código'}")
+    return False
+
+
 def upload_file(ftp, local_path, remote_path):
     """Sube un archivo al servidor FTP"""
     try:
@@ -254,73 +282,77 @@ def main():
     else:
         print_info("Modo automático (--yes activado)")
     
-    # Conectar al servidor FTP
-    print_info(f"Conectando a {config['host']}...")
-    try:
-        use_tls = config.get('use_tls', True)
-        
-        if use_tls and FTPS_AVAILABLE:
-            ftp = FTP_TLS()
-            ftp.set_pasv(config.get('use_passive', True))
-            ftp.set_debuglevel(0)  # Cambiar a 2 para debug detallado
-            ftp.connect(config['host'], config.get('port', 21), timeout=config.get('timeout', 30))
-            
-            # Intentar login
-            try:
-                ftp.login(config['username'], config['password'])
-            except error_perm as e:
-                if '530' in str(e) or 'Authentication failed' in str(e):
-                    print_error("Error de autenticación. Verifica usuario y contraseña en ftp_config.json")
-                    print_info("Asegúrate de que las credenciales sean correctas")
-                raise
-            
-            # Proteger el canal de datos
-            try:
-                ftp.prot_p()
-            except:
-                pass  # Algunos servidores no requieren prot_p explícito
-            
-            print_success("Conexión FTPS (TLS) establecida")
-        else:
-            ftp = FTP()
-            ftp.set_pasv(config.get('use_passive', True))
-            ftp.connect(config['host'], config.get('port', 21), timeout=config.get('timeout', 30))
-            ftp.login(config['username'], config['password'])
-            print_success("Conexión FTP establecida")
-        
-        # Cambiar al directorio remoto
-        if config['remote_path'] != '/':
-            try:
-                ftp.cwd(config['remote_path'])
-                print_info(f"Directorio remoto: {config['remote_path']}")
-            except error_perm:
-                print_warning(f"No se pudo cambiar al directorio {config['remote_path']}, usando raíz")
-        
-        # Subir archivos
-        uploaded = 0
-        failed = 0
-        
+    # Conectar y subir archivos
+    use_curl = env_first('FTP_USE_CURL', default='1') != '0'
+    uploaded = 0
+    failed = 0
+
+    if use_curl:
+        print_info("Usando curl FTPS para subir archivos")
         for local_file in files_to_upload:
-            # Mantener la estructura de directorios relativa
-            remote_file = str(local_file).replace('\\', '/')
-            
             print_info(f"Subiendo {local_file}...")
-            if upload_file(ftp, local_file, remote_file):
+            if upload_file_curl(local_file, config):
                 print_success(f"✓ {local_file} subido correctamente")
                 uploaded += 1
             else:
                 failed += 1
-        
-        ftp.quit()
-        
-        # Resumen
-        print(f"\n{Colors.BOLD}Resumen:{Colors.END}")
-        print_success(f"Archivos subidos: {uploaded}")
-        if failed > 0:
-            print_error(f"Archivos fallidos: {failed}")
-        
-    except Exception as e:
-        print_error(f"Error de conexión: {str(e)}")
+    else:
+        print_info(f"Conectando a {config['host']}...")
+        try:
+            use_tls = config.get('use_tls', True)
+
+            if use_tls and FTPS_AVAILABLE:
+                ftp = FTP_TLS()
+                ftp.set_pasv(config.get('use_passive', True))
+                ftp.set_debuglevel(0)
+                ftp.connect(config['host'], config.get('port', 21), timeout=config.get('timeout', 30))
+
+                try:
+                    ftp.login(config['username'], config['password'])
+                except error_perm as e:
+                    if '530' in str(e) or 'Authentication failed' in str(e):
+                        print_error("Error de autenticación. Verifica usuario y contraseña")
+                    raise
+
+                try:
+                    ftp.prot_p()
+                except Exception:
+                    pass
+
+                print_success("Conexión FTPS (TLS) establecida")
+            else:
+                ftp = FTP()
+                ftp.set_pasv(config.get('use_passive', True))
+                ftp.connect(config['host'], config.get('port', 21), timeout=config.get('timeout', 30))
+                ftp.login(config['username'], config['password'])
+                print_success("Conexión FTP establecida")
+
+            if config['remote_path'] != '/':
+                try:
+                    ftp.cwd(config['remote_path'])
+                    print_info(f"Directorio remoto: {config['remote_path']}")
+                except error_perm:
+                    print_warning(f"No se pudo cambiar al directorio {config['remote_path']}, usando raíz")
+
+            for local_file in files_to_upload:
+                remote_file = str(local_file).replace('\\', '/')
+                print_info(f"Subiendo {local_file}...")
+                if upload_file(ftp, local_file, remote_file):
+                    print_success(f"✓ {local_file} subido correctamente")
+                    uploaded += 1
+                else:
+                    failed += 1
+
+            ftp.quit()
+        except Exception as e:
+            print_error(f"Error de conexión: {str(e)}")
+            sys.exit(1)
+
+    # Resumen
+    print(f"\n{Colors.BOLD}Resumen:{Colors.END}")
+    print_success(f"Archivos subidos: {uploaded}")
+    if failed > 0:
+        print_error(f"Archivos fallidos: {failed}")
         sys.exit(1)
 
 if __name__ == '__main__':
