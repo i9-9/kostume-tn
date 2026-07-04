@@ -38,19 +38,105 @@ def print_info(msg):
 def print_warning(msg):
     print(f"{Colors.YELLOW}⚠ {msg}{Colors.END}")
 
+def env_first(*names, default=None):
+    """Devuelve el primer valor de entorno disponible entre varios nombres."""
+    for name in names:
+        value = os.environ.get(name)
+        if value not in (None, ''):
+            return value
+    return default
+
+
+def env_bool(*names, default=True):
+    value = env_first(*names)
+    if value is None:
+        return default
+    return str(value).strip().lower() in ('1', 'true', 'yes', 'y', 'on')
+
+
+def env_int(*names, default=None):
+    value = env_first(*names)
+    if value is None:
+        return default
+    try:
+        return int(value)
+    except ValueError:
+        return default
+
+
+def config_from_env():
+    """Construye la config FTP desde variables de entorno."""
+    host = env_first(
+        'FTP_HOST', 'FTP_HOSTNAME', 'TN_FTP_HOST', 'TIENDA_NUBE_FTP_HOST',
+        'NUVEMSHOP_FTP_HOST', 'KOSTUME_FTP_HOST', 'HOST'
+    )
+    username = env_first(
+        'FTP_USERNAME', 'FTP_USER', 'TN_FTP_USERNAME', 'TN_FTP_USER',
+        'TIENDA_NUBE_FTP_USERNAME', 'NUVEMSHOP_FTP_USERNAME', 'KOSTUME_FTP_USERNAME',
+        'USERNAME', 'USER'
+    )
+    password = env_first(
+        'FTP_PASSWORD', 'FTP_PASS', 'TN_FTP_PASSWORD', 'TIENDA_NUBE_FTP_PASSWORD',
+        'NUVEMSHOP_FTP_PASSWORD', 'KOSTUME_FTP_PASSWORD', 'PASSWORD', 'PASS'
+    )
+
+    if not host or not username or not password:
+        return None
+
+    return {
+        'host': host,
+        'port': env_int('FTP_PORT', 'TN_FTP_PORT', default=21),
+        'username': username,
+        'password': password,
+        'remote_path': env_first(
+            'FTP_REMOTE_PATH', 'FTP_PATH', 'TN_FTP_REMOTE_PATH', 'TN_FTP_PATH',
+            'TIENDA_NUBE_FTP_REMOTE_PATH', default='/'
+        ),
+        'use_passive': env_bool('FTP_USE_PASSIVE', 'TN_FTP_USE_PASSIVE', default=True),
+        'use_tls': env_bool('FTP_USE_TLS', 'TN_FTP_USE_TLS', default=True),
+        'timeout': env_int('FTP_TIMEOUT', 'TN_FTP_TIMEOUT', default=30),
+    }
+
+
+def is_placeholder_config(config):
+    placeholders = {
+        'host': {'tu-servidor-ftp.com'},
+        'username': {'tu-usuario'},
+        'password': {'tu-contraseña', 'tu-contrasena'},
+    }
+    return (
+        config.get('host') in placeholders['host']
+        or config.get('username') in placeholders['username']
+        or config.get('password') in placeholders['password']
+    )
+
+
 def load_config():
-    """Carga la configuración FTP desde ftp_config.json"""
+    """Carga la configuración FTP desde env o ftp_config.json."""
+    env_config = config_from_env()
+    if env_config:
+        print_info("Usando credenciales FTP desde variables de entorno")
+        return env_config
+
     config_file = Path(__file__).parent / 'ftp_config.json'
-    
+
+    if config_file.exists():
+        with open(config_file, 'r') as f:
+            file_config = json.load(f)
+        if not is_placeholder_config(file_config):
+            print_info("Usando credenciales FTP desde ftp_config.json")
+            return file_config
+        print_warning("ftp_config.json tiene valores placeholder")
+
+    print_error("No se encontraron credenciales FTP válidas")
+    print_info("Configurá variables de entorno del Cloud Agent:")
+    print("  FTP_HOST, FTP_USERNAME, FTP_PASSWORD, FTP_REMOTE_PATH")
+    print_info("O completá ftp_config.json en la raíz del proyecto")
+
     if not config_file.exists():
-        print_error("No se encontró ftp_config.json")
-        print_info("Creando archivo de configuración...")
         create_config_template(config_file)
-        print_warning("Por favor, completa ftp_config.json con tus credenciales FTP")
-        sys.exit(1)
-    
-    with open(config_file, 'r') as f:
-        return json.load(f)
+
+    sys.exit(1)
 
 def create_config_template(config_file):
     """Crea un template de configuración"""
