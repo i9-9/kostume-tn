@@ -1648,6 +1648,9 @@ a:focus{
             padding-top: 12px !important;
             padding-bottom: 12px !important;
             line-height: 1.2;
+            & + .mobile-nav-tab {
+                border-left: 1px solid #2a2a2a;
+            }
             &.selected {
                 border-bottom: none;
             }
@@ -1664,7 +1667,7 @@ a:focus{
         flex-direction: column !important;
         align-items: stretch !important;
         padding: 14px 15px 0 !important;
-        margin-bottom: 6px !important;
+        margin-bottom: 10px !important;
         gap: 12px;
 
         .breadcrumb-product {

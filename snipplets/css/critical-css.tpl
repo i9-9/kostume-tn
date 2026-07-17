@@ -2121,42 +2121,131 @@ body {
 	}
 	
 	.mobile-nav-first-row .nav-icon {
-		width: 30px;
-		height: 30px;
-		padding: 1px;
+		width: auto;
+		height: auto;
+		padding: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	/* Tres columnas: MENU | logo | search — logo centrado, ítems alineados al medio */
+	.mobile-nav-first-row {
+		display: flex !important;
+		align-items: center !important;
+		justify-content: space-between !important;
+		flex-wrap: wrap !important;
+		min-height: 48px;
+		height: auto;
+		padding: 0 15px !important;
+		box-sizing: border-box;
+		width: 100%;
 	}
 	.mobile-nav-first-row .mobile-btn-hamburger-container {
-		display: inline-block !important;
-		width: 24%;
-		padding: 0px 10px;
-		vertical-align: middle;
+		display: flex !important;
+		align-items: center;
+		justify-content: flex-start;
+		flex: 0 0 28%;
+		max-width: 28%;
+		width: 28%;
+		padding: 0;
+		height: 48px;
+		box-sizing: border-box;
 	}
 	.mobile-nav-first-row .mobile-btn-hamburger-container .btn-hamburger {
-		height: 36px;
-		width: 36px;
-		padding: 3px;
-		border-radius: 50%;
+		height: auto !important;
+		width: auto !important;
+		padding: 0 !important;
+		border-radius: 0 !important;
+		background: transparent !important;
+		display: flex;
+		align-items: center;
+		float: none !important;
 	}
 	.mobile-nav-first-row .mobile-btn-hamburger-container .btn-hamburger .nav-icon {
-		width: 30px;
-		height: 30px;
-		padding: 4px;
+		width: auto;
+		height: auto;
+		padding: 0;
+	}
+	.mobile-nav-first-row .mobile-nav-menu-label {
+		margin: 0 !important;
+		padding: 0;
+		font-size: 10px;
+		line-height: 1;
+		font-weight: normal;
+		text-transform: uppercase;
 	}
 	.mobile-nav-first-row .logo-container {
-		display: inline-block !important;
-		width: 48%;
-		vertical-align: middle;
+		display: flex !important;
+		align-items: center;
+		justify-content: center;
+		flex: 0 0 44%;
+		max-width: 44%;
+		width: 44%;
+		margin: 0 !important;
+		padding: 0 !important;
+		height: 48px;
+		text-align: center;
+		box-sizing: border-box;
+	}
+	.mobile-nav-first-row .logo-container #logo,
+	.mobile-nav-first-row .logo-container .mobile-logo-home,
+	.mobile-nav-first-row .logo-container a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0;
+		padding: 0;
+		height: auto;
+	}
+	.mobile-nav-first-row .logo-container svg {
+		display: block;
+		max-height: 22px;
+		width: auto;
 	}
 	.mobile-nav-first-row .nav-icons {
-		display: inline-block;
-		width: 24%;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		width: auto;
 		float: none;
-		vertical-align: middle;
 		margin: 0 !important;
-		padding: 0 5px !important;
+		padding: 0 !important;
 	}
-	.mobile-nav-first-row .nav-icons a {
-		vertical-align: middle;
+	.mobile-nav-first-row > .toggle-search {
+		display: flex !important;
+		align-items: center;
+		justify-content: flex-end;
+		flex: 0 0 28%;
+		max-width: 28%;
+		width: 28%;
+		height: 48px;
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	.mobile-nav-first-row > .toggle-search .nav-icon {
+		width: 22px;
+		height: 22px;
+		padding: 0 !important;
+	}
+	/* El form de search no debe empujar MENU/logo: fuera del flujo hasta que se abra */
+	.mobile-nav-first-row .js-search-form-container {
+		flex: 0 0 100%;
+		width: 100%;
+		order: 10;
+		max-height: 0;
+		overflow: hidden;
+		padding: 0 !important;
+		margin: 0;
+	}
+	.mobile-nav-first-row .js-search-form-container form {
+		margin: 0;
+	}
+	.mobile-nav-first-row.head-search-open .js-search-form-container,
+	.mobile-nav-first-row .js-search-form-container:has(form[style*="display: block"]) {
+		max-height: 56px;
+		padding: 8px 0 !important;
+		overflow: visible;
 	}
 	.mobile-nav-first-row .head-cart,
 	.mobile-nav-first-row .toggle-search {
@@ -2176,8 +2265,8 @@ body {
 		top: 0;
 	}
 	.mobile-nav-first-row {
-		max-height: 85px;
-		min-height: 45px;
+		max-height: none;
+		min-height: 48px;
 	}
 	.mobile-nav-title-container {
 		display: block;
@@ -2206,7 +2295,7 @@ body {
 	}
 	.mobile-nav-tab {
 		position: relative;
-		padding: 12px 0 !important;
+		padding: 14px 0 !important;
 		text-align: center;
 		text-transform: uppercase;
 		font-size: 10px;
@@ -2214,6 +2303,9 @@ body {
 		text-decoration: none;
 		outline: 0;
 		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 	.mobile-nav-tab-text {
 		line-height: 1.2;
@@ -2230,6 +2322,9 @@ body {
 	.mobile-nav-tabs-container .mobile-nav-tab {
 		border: none;
 	}
+	.mobile-nav-tabs-container .mobile-nav-tab + .mobile-nav-tab {
+		border-left: 1px solid #2a2a2a;
+	}
 	.mobile-nav-tabs-container .mobile-nav-tab.selected {
 		border-bottom: none;
 	}
@@ -2245,7 +2340,7 @@ body {
 		align-items: stretch;
 		justify-content: flex-start;
 		padding: 14px 15px 0 !important;
-		margin-bottom: 6px !important;
+		margin-bottom: 10px !important;
 		gap: 12px;
 	}
 	.category-title-row .breadcrumb-product {

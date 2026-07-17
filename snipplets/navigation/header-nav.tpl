@@ -57,17 +57,7 @@
             </div>
         </div>
     {% endif %} #}
-    <div class="{% if settings.head_fix %}js-head-fixed {% endif %}navbar-header mobile-nav-first-row full-width" style="
-    background: #070707;
-    color: white;
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    min-width: 100%;
-    padding: 0;
-    align-content: stretch;
-    align-items: center;
-    flex-direction: row;">
+    <div class="{% if settings.head_fix %}js-head-fixed {% endif %}navbar-header mobile-nav-first-row full-width" style="background: #070707; color: white;">
     {# Desktop nav #}
         {#<ul class="js-desktop-nav-links nav navbar-nav desktop-nav hidden-xs col-sm-10 col-md-11 col-lg-11" data-store="navigation">
             {% snipplet "navigation/navigation.tpl" %}
@@ -75,12 +65,12 @@
         <div class="js-mobile-nav-title-container mobile-btn-hamburger-container visible-xs" style="cursor: pointer;">
             <div class="js-modal-open btn-hamburger pull-left" data-toggle="#nav-hamburger" aria-label="{{ "Menú" | translate }}">
                 <div class="nav-icon">
-                    <h4 class="text-center" style="margin-top: 4px; font-size:10px;align-self:end;">MENU</h4>
+                    <h4 class="mobile-nav-menu-label text-center">MENU</h4>
                 </div>
             </div>
         </div>
 
-        <div class="logo-container visible-xs" style="padding: 0; text-align: -webkit-center; margin-right: 15%;">
+        <div class="logo-container visible-xs">
             {% if template == 'home' %}
                 <div class="mobile-logo-home m-none text-center-xs">
             {% endif %}
@@ -186,8 +176,8 @@
         </div>
 
         {# Search #}
-        <a id="show-search" class="js-toggle-search toggle-search d-inline-block visible-xs" style="display: inline-block;" href="#" aria-label="{{ "Buscar" | translate }}">
-            <span class="nav-icon" style="width: 25px; height: 25px; padding-top: 5px;">
+        <a id="show-search" class="js-toggle-search toggle-search d-inline-block visible-xs" href="#" aria-label="{{ "Buscar" | translate }}">
+            <span class="nav-icon">
                 {% include "snipplets/svg/search.tpl" %}
             </span>
         </a>  
