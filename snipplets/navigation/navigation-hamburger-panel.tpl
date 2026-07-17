@@ -8,32 +8,6 @@
                 {% snipplet "navigation/navigation-hamburger-list.tpl" %}
             </ul>
         </div>
-            {% if languages | length > 1 %}
-            <div class="languages" style="padding: 0 15px;">
-                <div class="row" style="display: flex;
-                                        flex-direction: row;
-                                        align-items: baseline;
-                                        padding-left: 15px;">
-                <ul class="language list-style-none m-bottom-none text-right" style="font-size: 12px;">
-                        {% for language in languages %}
-                        {% set class = language.active ? "" : "opacity-50" %}
-                            <li class="flag-item" {% if language.active %} style="font-weight: bold; "{% endif %}>
-                                <a href="{{  language.url }}" class="{{class}} m-left-quarter" aria-label="{{ language.name }}">
-                                <p class="ladyload">
-                                {% if language.country == 'US' %} 
-                                    WORLDWIDE 
-                                {% elseif language.country == 'AR' %}
-                                    ARGENTINA
-                                {% else %} 
-                                    {{language.country}} 
-                                {%endif%} </p>
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        {% endif %}
     </div>
     <div class="hamburger-panel-first-row">
         <ul class="mobile-nav-fixed-bottom clear-both">

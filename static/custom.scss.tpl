@@ -1120,7 +1120,7 @@ input.input-shipping {
         background-color: $nav-background;
     }
     &-tab.selected{
-        border-bottom: 2px solid $nav-hover-foreground;
+        border-bottom: none;
     }
     &-tab-text{
         color: $nav-foreground;

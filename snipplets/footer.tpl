@@ -15,11 +15,11 @@
 
     
     <footer class="footer" data-store="footer" style="margin-top: auto; flex-shrink: 0; width: 100%;">
-    <div class="container" style="
+    <div class="container footer-bar" style="
         background: #171717;
         color: white;
         font-weight: bold;
-        padding: 10px 13px 10px 13px;
+        padding: 10px 0;
         margin: 0;
         width: 100%;">
         <div class="row">
@@ -27,7 +27,7 @@
             </div>
     </div>
         {# Common Footer: contains navigation, social networks, newsletter, payment and shipping Logos, contact information and seals #}
-        <div class="container p-top-half visible-when-content-ready col-lg-12" style="margin: 0; padding: 14px; font-size: 10px;">
+        <div class="container footer-main p-top-half visible-when-content-ready" style="margin: 0; padding: 10px 0; font-size: 10px; width: 100%;">
             <div class="row">
                 <div class="footer-nav col-sm-2 col-md-2 col-lg-2 m-bottom">
                     <h4 class="footer-title">CONTACT</h4>
@@ -136,7 +136,7 @@
 
                     </div>
 
-            <div id="footer-store-contact" class="footer-contact m-bottom col-xs-12 col-sm-4 col-md-4 col-lg-4" style="padding-right: 20px;">
+            <div id="footer-store-contact" class="footer-contact m-bottom col-xs-12 col-sm-4 col-md-4 col-lg-4">
                      {% include 'snipplets/newsletter.tpl' %}
             </div>
 
@@ -183,7 +183,7 @@
         </div>
         {#  Legal Footer: contains store´s legal information #}
         <div class="footer-legal font-small-extra">
-            <div class="container p-top-half p-bottom-half visible-when-content-ready" style="margin: 0; padding:14px; width: 100%; font-size: 7px;">
+            <div class="container footer-legal-inner p-top-half p-bottom-half visible-when-content-ready" style="margin: 0; padding: 10px 0; width: 100%; font-size: 7px;">
                 <div class="row">
                     <div class="copyright-container col-sm-8 m-top-half m-bottom-half">© KOSTÜME {{ "now" | date('Y') }}</div>
 

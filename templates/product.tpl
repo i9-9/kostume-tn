@@ -8,7 +8,7 @@
             {# Product Image and thumbnails #}
             {% include 'snipplets/product/product-image.tpl' %}
             {#  Product detail, variants, description and social widgets #}
-            <div class="product-form-container col-xs-12 {% if settings.show_description_bottom %} text-center text-left-xs container-fluid clear-both {% else %} text-left col-xs-12 col-sm-4 col-md-4 col-lg-4 {% endif %} m-bottom" data-store="product-info-{{ product.id }}" style="padding-left: 30px;">
+            <div class="product-form-container col-xs-12 {% if settings.show_description_bottom %} text-center text-left-xs container-fluid clear-both {% else %} text-left col-xs-12 col-sm-4 col-md-4 col-lg-4 {% endif %} m-bottom" data-store="product-info-{{ product.id }}">
                 {% if settings.show_description_bottom %}
                 <div class="row">
                 {% endif %}
@@ -88,13 +88,13 @@
                             {% endif %}
                         </div>
                                                 {# Product Installments button and info #}
-                        <div class="m-bottom-half container-fluid display-when-content-ready">
+                        <div class="m-bottom-half display-when-content-ready">
                             <div class="row">
                                 {% if product.show_installments and product.display_price %}
                                     {% set installments_info_base_variant = product.installments_info %}
                                     {% set installments_info = product.installments_info_from_any_variant %}
                                     {% if installments_info %}
-                                        <a href="#installments-modal" data-toggle="modal" data-modal-url="modal-fullscreen-payments" class="js-fullscreen-modal-open js-product-payments-container js-refresh-installment-data link-module {% if settings.show_description_bottom %} text-center text-left-xs {% else %} text-left {% endif %}" {% if (not product.get_max_installments) and (not product.get_max_installments(false)) %}style="display: none;"{% endif %} style="margin-left: 14px;">
+                                        <a href="#installments-modal" data-toggle="modal" data-modal-url="modal-fullscreen-payments" class="js-fullscreen-modal-open js-product-payments-container js-refresh-installment-data link-module {% if settings.show_description_bottom %} text-center text-left-xs {% else %} text-left {% endif %}" {% if (not product.get_max_installments) and (not product.get_max_installments(false)) %}style="display: none;"{% endif %}>
                                             {% set has_payment_logos = settings.payments %}
                                             {% if has_payment_logos %}
                                                 <div hclass="m-left-none m-bottom-quarter">
@@ -180,7 +180,9 @@
     {% endif %}
 
                     {% snipplet 'placeholders/product-detail-form-placeholder.tpl' %}
+                {% if settings.show_description_bottom %}
                 </div>
+                {% endif %}
             </div>
             {% if settings.show_product_fb_comment_box %}
                 {# facebook-comments-user-description-container class is used for external app JS #}

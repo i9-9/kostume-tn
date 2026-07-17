@@ -68,15 +68,93 @@
     </style>
 
     {# ============================================
+       STICKY FOOTER - KOSTÜME
+       Footer siempre pegado al fondo de la pantalla
+       ============================================ #}
+    <style>
+        .js-page-wrapper {
+            display: flex !important;
+            flex-direction: column !important;
+            min-height: 100vh !important;
+        }
+        .js-main-content,
+        .main-content {
+            flex: 1 1 auto !important;
+        }
+        /* Animación de apertura del menú - easy ease */
+        .new-modal {
+            transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1) !important;
+        }
+    </style>
+
+    {# ============================================
        INVERSIÓN DE TEMA - KOSTÜME
        Activa tema claro: fondos blancos, textos negros
        Las imágenes, fotos y logos NO se invierten
        ============================================ #}
     <style>
         /* 1. INVERTIR TODO EL SITIO */
-        html {
+        /* Aplicado en body (no html) para no romper 100vh en Safari */
+        body {
             -webkit-filter: invert(1) !important;
             filter: invert(1) !important;
+        }
+
+        /* Sombra del navbar se invierte a un gris/blanco distinto → línea bajo el menú */
+        .navbar,
+        .nav-main,
+        .js-main-navbar {
+            box-shadow: none !important;
+        }
+
+        /* Breadcrumbs: fondo del tema (#070707) → blanco con invert.
+           Sin margins (crean huecos negros fuera del filter).
+           Producto: gutter 15px en el propio bar (full-bleed).
+           Categoría: el gutter lo da el title-container; sin padding extra. */
+        .breadcrumb,
+        .product-breadcrumb {
+            background: #070707 !important;
+            background-color: #070707 !important;
+            border-radius: 0 !important;
+            margin: 0 !important;
+            box-sizing: border-box !important;
+        }
+        .product-breadcrumb.breadcrumb {
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 10px 15px !important;
+        }
+        .title-container .breadcrumb,
+        .breadcrumb-product .breadcrumb {
+            width: auto !important;
+            max-width: none !important;
+            padding: 0 !important;
+            background: transparent !important;
+            background-color: transparent !important;
+        }
+        .product-breadcrumb,
+        .product-breadcrumb .breadcrumb-crumb,
+        .product-breadcrumb .breadcrumb-crumb.active,
+        .product-breadcrumb .breadcrumb-divider,
+        .product-breadcrumb a {
+            color: #ffffff !important;
+            text-shadow: none !important;
+        }
+
+        /* Productos relacionados / cards de grilla: mismos fondos del tema.
+           Fondos #000/#fff o white de Bootstrap quedan negros al invertir. */
+        #related-products,
+        .item-image-container,
+        .item-info-container,
+        .product-single-image {
+            background: #070707 !important;
+            background-color: #070707 !important;
+        }
+        #related-products,
+        #related-products h5,
+        #related-products .item-name,
+        #related-products .item-price {
+            color: #ffffff !important;
         }
 
         /* Fix Safari: asegurar que menú sea clickeable */
@@ -265,6 +343,30 @@
             -webkit-filter: invert(1) !important;
             filter: invert(1) !important;
         }
+
+        /* 13. RE-INVERTIR: UI de terceros de Tienda Nube (wallet / login modal).
+           El invert del body los deja con contraste roto (fondo negro, marca amarilla).
+           Re-invertir el contenedor restaura colores originales; imgs internas
+           no deben llevar el invert genérico o quedarían invertidas de nuevo. */
+        [class*="wallet-lib-auth"],
+        [class*="wallet-lib-storefront"],
+        [data-rsbs-root],
+        [data-rsbs-overlay],
+        [data-rsbs-backdrop],
+        #walletAuthProxyIframe,
+        iframe[src*="nuvempay"],
+        iframe[src*="services-wallet"] {
+            -webkit-filter: invert(1) !important;
+            filter: invert(1) !important;
+        }
+
+        [class*="wallet-lib-auth"] img,
+        [class*="wallet-lib-storefront"] img,
+        [data-rsbs-root] img,
+        [data-rsbs-overlay] img {
+            -webkit-filter: none !important;
+            filter: none !important;
+        }
     </style>
 
     {# Load async styling not mandatory for first meaningfull paint #}
@@ -350,7 +452,7 @@
         {% if template == 'product' %}
 		    {% snipplet "navigation/breadcrumbs.tpl" %}
 	    {% endif %}
-        <div style="background-color: #070707; padding-top: 0px;" class="js-main-content  main-content {% if template == 'product' %}no-margin{% endif %} {% if store.has_accounts or languages | length > 1 %} with-top-bar{% endif %} {% if status_page_url %}with-notification-bar{% endif %}">
+        <div style="background-color: #070707; padding-top: 0px;" class="js-main-content main-content {% if template == 'product' %}no-margin{% endif %} {% if store.has_accounts or languages | length > 1 %} with-top-bar{% endif %} {% if status_page_url %}with-notification-bar{% endif %}">
             {% template_content %}
 
             {# Quickshop modal #}

@@ -106,7 +106,7 @@ body,
 }
 
 body {
-    background-color: #070707;
+    background-color: $main-background;
 }
 
 
@@ -184,13 +184,18 @@ small{
 {# /* // Wrappers */ #}
 
 body{
-    color: white;
+    color: $main-foreground;
     font-family: $body-font;
     {% if settings.background_pattern %}
         background-image: url( "{{ ("images/patterns/" ~ settings.background_pattern ~ ".png") | static_url }}" );
     {% else %}
-        background-color: #070707;
+        background-color: $main-background;
     {% endif %}
+}
+
+.main-content {
+    background-color: $main-background;
+    color: $main-foreground;
 }
 .box-title {
   float: left;
@@ -347,22 +352,44 @@ body{
 {# /* // Breadcrumbs */ #}
 
 .breadcrumb{
-    background: transparent;
-    width: 100%;
-    padding: 10px 0;
-    margin-left: 15px;
-    margin-top: 20px;
+    background: #070707 !important;
+    background-color: #070707 !important;
+    border-radius: 0;
+    margin: 0;
+    color: $main-foreground;
   &-crumb{
-    color: white;
+    color: $main-foreground;
     &.active{
-        color: white;
+        color: $main-foreground;
     }
   }
+  &-divider{
+    color: rgba($main-foreground, 0.45);
+  }
+}
+
+.product-breadcrumb,
+.product-breadcrumb.breadcrumb {
+    background: #070707 !important;
+    background-color: #070707 !important;
+    margin: 0 !important;
+    width: 100%;
+    padding: 10px 15px;
+    box-sizing: border-box;
+}
+
+.title-container .breadcrumb,
+.breadcrumb-product .breadcrumb {
+    width: auto;
+    padding: 0;
+    background: transparent !important;
+    background-color: transparent !important;
 }
 
 .product-breadcrumb .breadcrumb-crumb,
 .product-breadcrumb .breadcrumb-crumb.current {
-    color:white; /* Necesary for contrast with background image */
+    color: $main-foreground;
+    text-shadow: none;
 }
 
 {# /* // Buttons */ #}
@@ -627,6 +654,41 @@ a:focus{
            color: $primary-color;
         }
     }
+}
+
+.category-controls > .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+.category-controls .sort-by-container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.sort-by-container .sort-by.form-control,
+.select-container .sort-by {
+    border: 1px solid #2a2a2a;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    transition: background-color .15s ease;
+    &:hover {
+        background-color: #121212;
+    }
+    &:focus {
+        border: 1px solid #2a2a2a;
+        background-color: #121212;
+        outline: none;
+        box-shadow: none;
+    }
+}
+.sort-by-container .sort-by-arrow {
+    right: 8px;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    pointer-events: none;
 }
 .search-input{
     color:$primary-color;
@@ -1018,14 +1080,14 @@ a:focus{
 
 .item{
     &-image-container{
-        background-color:darken($main-background, 2%);
+        background-color: #070707;
     }
     &-price,
     &-price-compare{
          color:$primary-color;
      }
     &-info-container{
-        background-color: $main-background;
+        background-color: #070707;
        
         &-name{
             @include link-default();
@@ -1049,6 +1111,12 @@ a:focus{
             border: 2px solid $main-foreground;
         }
     }
+}
+
+/* Colecciones: info más cerca de la foto; sin aire extra antes de la siguiente fila */
+.category-products-grid .item-info-container {
+    padding-top: 2px !important;
+    padding-bottom: 0 !important;
 }
 
 {# /* // Labels */ #}
@@ -1176,6 +1244,16 @@ a:focus{
 .footer{
    background-color: #070707;
    color: #FFFFFF;
+    /* Sin padding horizontal en el container: el gutter de 15px lo dan
+       las cols Bootstrap (igual que antes entre columnas). Así solo
+       se mueve el borde exterior al margen del sitio. */
+    > .container,
+    .footer-legal > .container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 100%;
+        max-width: none;
+    }
     a{
         color:#FFFFFF;
         text-transform: uppercase;
@@ -1548,12 +1626,66 @@ a:focus{
             font-family: $logo-font;
         }
         &-tab.selected{
-            border-bottom: 3px solid $main-background;
+            border-bottom: none;
         }
         &-tab-text,
         &-tab-icon{
             color:$foreground-btn;
             color:$foreground-btn;
+        }
+    }
+    .mobile-nav-tabs-container {
+        border-top: 1px solid #2a2a2a;
+        border-bottom: 1px solid #2a2a2a;
+        border-left: none;
+        border-right: none;
+        box-sizing: border-box;
+        overflow: hidden;
+        width: 100%;
+        .mobile-nav-tab {
+            border: none;
+            box-sizing: border-box;
+            padding-top: 12px !important;
+            padding-bottom: 12px !important;
+            line-height: 1.2;
+            &.selected {
+                border-bottom: none;
+            }
+        }
+    }
+
+    .nav-main.mobile-nav,
+    .js-main-navbar.nav-main {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    .category-title-row {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        padding: 14px 15px 0 !important;
+        margin-bottom: 6px !important;
+        gap: 12px;
+
+        .breadcrumb-product {
+            display: block;
+            width: 100%;
+        }
+        .breadcrumb {
+            margin: 0 !important;
+            padding: 0 !important;
+            float: none;
+        }
+        .category-controls {
+            width: 100% !important;
+            float: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            text-align: left;
+        }
+        .sort-by-container,
+        .sort-by {
+            width: 100%;
         }
     }
     .mobile-nav-first-row {

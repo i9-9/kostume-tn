@@ -1,18 +1,17 @@
 <script>
-// Ocultar productos de Private Sale en búsqueda
+// Ocultar productos de categorías protegidas en búsqueda (Private Sale, VER #51AW26)
 (function(){
-    function hidePrivateSaleProducts() {
-        // Buscar por clase y data-attribute
+    function hideProtectedCategoryProducts() {
+        // Private Sale: clase, data-attribute y links
         var products = document.querySelectorAll('.js-private-sale-product, [data-private-sale="true"]');
         products.forEach(function(p) {
             p.style.display = 'none';
-            p.remove(); // Remover completamente del DOM
+            p.remove();
         });
-        
-        // También buscar productos que tengan links a /private-sale
+        // VER #51AW26: productos con links a 51aw26
         var allProducts = document.querySelectorAll('.js-item-product, [data-product-id]');
         allProducts.forEach(function(p) {
-            var links = p.querySelectorAll('a[href*="private-sale"]');
+            var links = p.querySelectorAll('a[href*="private-sale"], a[href*="51aw26"]');
             if(links.length > 0) {
                 p.style.display = 'none';
                 p.remove();
@@ -23,34 +22,32 @@
     // Ejecutar en búsqueda
     if(window.location.pathname.toLowerCase().indexOf('/search') !== -1 || window.location.search.indexOf('q=') !== -1) {
         // Ejecutar inmediatamente
-        hidePrivateSaleProducts();
+        hideProtectedCategoryProducts();
         
         // Ejecutar cuando el DOM esté listo
         if(document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', hidePrivateSaleProducts);
+            document.addEventListener('DOMContentLoaded', hideProtectedCategoryProducts);
         }
         
         // Observar cambios en el DOM (para scroll infinito)
-        var observer = new MutationObserver(hidePrivateSaleProducts);
+        var observer = new MutationObserver(hideProtectedCategoryProducts);
         observer.observe(document.body, {
             childList: true,
             subtree: true
         });
         
         // También ejecutar periódicamente por si acaso
-        setInterval(hidePrivateSaleProducts, 1000);
+        setInterval(hideProtectedCategoryProducts, 1000);
     }
 })();
 
-// Private Sale Protection - KOSTUMEPVT
-// DESACTIVADO - Login de Private Sale deshabilitado
+// Protección por contraseña para VER #51AW26 (51aw26/ver-51aw26)
 (function(){
-    return; // Desactivado temporalmente
-    // Solo ejecutar en /private-sale
-    if(window.location.pathname.toLowerCase().indexOf('private-sale') === -1) return;
+    var path = window.location.pathname.toLowerCase();
+    if(path.indexOf('51aw26') === -1) return;
     
-    var pwd = 'KOSTUMEPVT';
-    var key = 'ps_ok';
+    var pwd = '25years';
+    var key = 'ps_51aw26_ok';
     
     // Ya autenticado?
     try {
@@ -61,7 +58,7 @@
     // Crear overlay
     var overlay = document.createElement('div');
     overlay.id = 'ps-overlay';
-    overlay.innerHTML = '<div id="ps-box"><h2>PRIVATE SALE</h2><p>Ingresá la contraseña para acceder</p><input type="password" id="ps-pwd" placeholder="Contraseña"><div id="ps-error" style="display:none">Contraseña incorrecta</div><button id="ps-submit">INGRESAR</button></div>';
+    overlay.innerHTML = '<div id="ps-box"><h2>VER #51AW26</h2><p>Ingresá la contraseña para acceder</p><input type="password" id="ps-pwd" placeholder="Contraseña"><div id="ps-error" style="display:none">Contraseña incorrecta</div><button id="ps-submit">INGRESAR</button></div>';
     
     // Estilos
     var style = document.createElement('style');
@@ -76,7 +73,7 @@
     var err = document.getElementById('ps-error');
     
     function check(){
-        var val = (input.value || '').trim().toUpperCase();
+        var val = (input.value || '').trim();
         if(val === pwd){
             localStorage.setItem(key, JSON.stringify({ok:true, t:Date.now()+86400000}));
             overlay.remove();

@@ -21,6 +21,12 @@ $accent-brand-color: {{ settings.accent_brand_color | default('rgb(77, 190, 207)
 $foreground-color: {{ settings.text_color | default('rgb(102, 102, 102)' | raw ) }};
 $background-color: {{ settings.background_color | default('rgb(252, 252, 252)' | raw ) }};
 
+{# Kostume: checkout en modo claro (temporal, alineado con el storefront invertido) #}
+$background-color: #ffffff;
+$foreground-color: #111111;
+$primary-brand-color: #000000;
+$accent-brand-color: #000000;
+
 {# /* // Font */ #}
 
 $heading-font: {{ settings.font_headings | default('Roboto') | raw }};
@@ -84,7 +90,7 @@ $xl: 1200px;
 body {
   font-family: $body-font;
   color: $foreground-color;
-  background-color: darken($background-color, 2%);
+  background-color: #ffffff;
 }
 a {
   color: darken($accent-brand-color, 5%);
@@ -150,6 +156,8 @@ a {
 .headbar-logo-img {
   max-width: 100%;
   max-height: 80px;
+  filter: invert(1);
+  -webkit-filter: invert(1);
 }
 
 .headbar-logo-text {
@@ -258,13 +266,13 @@ a {
 {# /* // Buttons */ #}
 
 .btn-primary {
-  color: $background-color;
+  color: #ffffff;
   background: $accent-brand-color;
 
   &:hover,
   &:focus,
   &:active {
-    color: $background-color;
+    color: #ffffff;
     background: $accent-brand-color;
     opacity: 0.9;
   }
@@ -998,7 +1006,7 @@ a {
 .alert-info {
   background-color: transparent;
   border-color: transparent;
-  color: white;
+  color: $foreground-color;
 
   .alert-icon {
     fill: desaturate(darken($accent-brand-color, 10%), 20%);
@@ -1141,6 +1149,133 @@ a {
     background: $background-color;
   }
 
+}
+
+{# Kostume: overrides finales para checkout claro (v2/v3) #}
+:root {
+  --main-background: #ffffff;
+  --main-foreground: #111111;
+  --accent-color: #000000;
+  --primary-color: #000000;
+  --background-color: #ffffff;
+  --foreground-color: #111111;
+}
+
+html,
+body {
+  background-color: #ffffff !important;
+  color: #111111 !important;
+}
+
+.headbar,
+.header,
+.summary-container,
+.summary-details,
+.panel,
+.panel-header,
+.panel-header-sticky,
+.panel-footer,
+.panel-footer-wa,
+.accordion,
+.form-control,
+.radio-content,
+.payment-option,
+.payment-option-content,
+.modal-dialog,
+.tabs-wrapper,
+.list-picker li,
+.list-picker-content,
+.orderstatus,
+.signup,
+.status,
+.review-block-detailed,
+.loading-skeleton,
+.shipping-options-ship,
+.shipping-options-pickup {
+  background-color: #ffffff !important;
+  color: #111111 !important;
+}
+
+.summary-container,
+.summary-details,
+.panel.summary-details,
+.panel-footer,
+.panel-footer-form .input-group-addon {
+  background-color: #f7f7f7 !important;
+}
+
+.form-control {
+  background: #ffffff !important;
+  border-bottom-color: #cccccc !important;
+  color: #111111 !important;
+}
+
+.headbar,
+.header {
+  border-color: #e5e5e5 !important;
+}
+
+.title,
+.panel-header,
+.summary-title,
+.security-seal,
+.input-label,
+.breadcrumb li .breadcrumb-step,
+.form-options-content,
+.login-info,
+.btn-transparent,
+.summary-title,
+.destination,
+.table-subtotal td {
+  color: #111111 !important;
+}
+
+a,
+.btn-link {
+  color: #111111 !important;
+}
+
+.btn-primary {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: #000000 !important;
+}
+
+.btn-secondary {
+  background: #ffffff !important;
+  color: #111111 !important;
+  border-color: #cccccc !important;
+}
+
+.summary-total,
+.table-footer,
+.tab-item.active,
+.radio-group.radio-group-accordion .radio.active,
+.shipping-option.active .shipping-method-item-price,
+.shipping-option.active .shipping-method-item-desc,
+.payment-item-discount,
+.history-item-done .history-item-title,
+.history-item-progress-icon-success svg,
+.status-icon svg,
+.destination-icon svg,
+.user-detail-icon svg,
+.signup-icon svg {
+  color: #000000 !important;
+}
+
+.headbar-logo-text,
+.headbar-logo-text:hover {
+  color: #000000 !important;
+}
+
+{# Logo blanco del tema: invertir para fondo claro del checkout #}
+.headbar-logo-img,
+.headbar-logo-img img,
+.headbar .headbar-logo-img,
+.headbar a img,
+.header-logo img {
+  filter: invert(1) !important;
+  -webkit-filter: invert(1) !important;
 }
 
 {% endif %}

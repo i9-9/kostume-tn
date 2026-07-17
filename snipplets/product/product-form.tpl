@@ -6,10 +6,10 @@
     {% endif %}
     {% if product.available and product.display_price %}
         <div class="row product-quantity {% if product.show_installments and not product.variations %} border-none-xs p-top-none-xs {% endif %}">
-            <div class="col-xs-12 {% if settings.show_description_bottom %}col-sm-4 col-sm-offset-4 col-md-2 col-md-offset-5 col-lg-2 col-lg-offset-5 {% else %}col-sm-4 col-md-3 col-lg-3{% endif %}">
+            <div class="col-xs-12">
                 <div class="quantity form-group">
-                    <input class="js-product-quantity js-quantity-input quantity-input form-control col-xs-6" value="1" type="number" name="quantity{{ item.id }}" value="{{ item.quantity }}" aria-label="{{ "Cantidad" | translate }}" style="padding: 0; border-bottom: 2px solid #fff;">
-                    <label class="quantity-label" style="text-transform: uppercase; margin-top: 10px;">
+                    <input class="js-product-quantity js-quantity-input quantity-input form-control" value="1" type="number" name="quantity{{ item.id }}" value="{{ item.quantity }}" aria-label="{{ "Cantidad" | translate }}" style="padding: 0; border-bottom: 2px solid #fff; max-width: 80px;">
+                    <label class="quantity-label" style="text-transform: uppercase; margin-top: 10px; display: block;">
                         {{ "Cantidad" | translate }}
                     </label>
 
@@ -53,7 +53,7 @@
     <div class="{% if not settings.show_description_bottom %}row{% endif %} m-bottom display-when-content-ready">
         {# Shipping calculator and branch link #}
 
-        <div class="col-xs-12 col-sm-12 {% if settings.show_description_bottom %} col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 {% endif %}">
+        <div class="col-xs-12{% if settings.show_description_bottom %} col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4{% endif %}">
             <div id="product-shipping-container" class="m-bottom m-top-half" {% if not product.display_price or not product.has_stock %}style="display:none;"{% endif %} data-shipping-url="{{ store.shipping_calculator_url }}">
 
                 {# Shipping Calculator #}

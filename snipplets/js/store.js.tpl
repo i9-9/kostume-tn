@@ -160,6 +160,20 @@ LS.ready.then(function() {
                 cleanURLHash();
             }
 
+            {# Logout → landing www.kostumeweb.net (TN siempre redirige al eshop) #}
+            $(document).on("click", 'a[href*="/account/logout"]', function(e) {
+                e.preventDefault();
+                var logoutUrl = this.href.split("#")[0];
+                var landingUrl = "https://www.kostumeweb.net/";
+                fetch(logoutUrl, {
+                    credentials: "same-origin",
+                    redirect: "manual",
+                    cache: "no-store"
+                }).catch(function() {}).then(function() {
+                    window.location.replace(landingUrl);
+                });
+            });
+
             {# Open full screen modal and url hash #}
 
             $(document).on("click", ".js-fullscreen-modal-open", function(e) {
@@ -614,7 +628,7 @@ LS.ready.then(function() {
 
         //Pages inside hamburguer sidenav navigation
         $(".js-toggle-page-accordion").click(function(){
-            $(this).toggleClass("selected").closest(".js-hamburger-panel-toggle-accordion").next(".js-pages-accordion").slideToggle(300);
+            $(this).toggleClass("selected").closest(".js-hamburger-panel-toggle-accordion").next(".js-pages-accordion").slideToggle(300).toggleClass("open");
         });
         
         // Mobile subcategories navigation

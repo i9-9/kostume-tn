@@ -1,3 +1,4 @@
+{% snipplet "navigation/locations-bar.tpl" %}
 <div class="nav-main navbar js-main-navbar js-search-container mobile-nav" data-store="head" style="min-height: auto; padding-bottom: 5px; padding-top: 5px;">
     {# Top nav links: account and languages #}
 
@@ -16,13 +17,11 @@
                                         <li class="nav-top-item">
                                             <a href="{{ language.url }}" class="{{class}} m-left-quarter" aria-label="{{ language.name }}"><img class="lazyload" src="{{ 'images/empty-placeholder.png' | static_url }}" data-src="{{ language.country | flag_url }}" alt="{{ language.name }}" />
                                             <p class="ladyload">
-                                                {% if language.country == 'US' %} 
-                                                    WORLDWIDE 
-                                                {% elseif language.country == 'AR' %}
+                                                {% if language.country == 'AR' %}
                                                     ARGENTINA
-                                                {% else %} 
-                                                    {{language.country}} 
-                                                {%endif%} </p>
+                                                {% else %}
+                                                    {{ language.country }}
+                                                {% endif %} </p>
                                             </a>
                                         </li>
                                     {% endfor %}
@@ -86,7 +85,7 @@
                 <div class="mobile-logo-home m-none text-center-xs">
             {% endif %}
                 <div id="logo" class="mobile-logo-home logo-img-container {% if not has_logo %}hidden{% endif %}">
-                    <a href="https://kostumeweb.net/">
+                    <a href="https://www.kostumeweb.net/">
                         {% include "snipplets/svg/logo.tpl" %}
                     </a>
                 </div>
@@ -107,7 +106,7 @@
                         display: inline-block;">
             {% endif %}
                 <div id="logo"  style="padding-top: 10px;">
-                    <a href="https://kostumeweb.net">
+                    <a href="https://www.kostumeweb.net/">
                         {% include "snipplets/svg/logo.tpl" %}
                     </a>
                 </div>
@@ -119,13 +118,13 @@
             {% endif %}
         </div> 
 
-        <div class="js-hamburger-panel-toggle-accordion col-xs-12 col-sm-3 col-md-3 col-lg-3 text-center hidden-xs" style="padding-top: 5px; padding-left: 92px;">
+        <div class="js-hamburger-panel-toggle-accordion col-xs-12 col-sm-3 col-md-3 col-lg-3 text-center hidden-xs desktop-menu-toggle" style="padding-top: 5px; padding-left: 92px;">
             <a class="js-toggle-page-accordion hamburger-panel-link p-left-double p-right-double"
             style="text-decoration: none; cursor: pointer; font-size: 12px;">
                 <span class="transition-soft text-center">MENU</span>
             </a>
         </div>
-        <ul class="js-pages-accordion hamburger-panel-accordion hidden-xs" style="display:none; position: absolute; margin-top: 490px; list-style: none; background: rgba(7, 7, 7, 0.9); width: 100%; padding: 20px 15px;">
+        <ul class="js-pages-accordion hamburger-panel-accordion desktop-menu-accordion hidden-xs" style="display:none;">
             {% snipplet "navigation/navigation.tpl" %}
         </ul>
 
@@ -184,31 +183,6 @@
 
             </div>
 
-            {% if languages | length > 1 %}
-            <div class="languages hidden-xs" style="padding-left: 20px; padding-right: 15px;">
-                <div class="row" style="display: flex;
-                                        flex-direction: row;
-                                        align-items: baseline;">
-                <ul class="language list-style-none m-bottom-none text-right" style="font-size: 9px; padding: 1px;">
-                        {% for language in languages %}
-                        {% set class = language.active ? "" : "opacity-50" %}
-                            <li class="flag-item" {% if language.active %} style="font-weight: bold; "{% endif %}>
-                                <a href="{{  language.url }}" class="{{class}} m-left-quarter" aria-label="{{ language.name }}">
-                                <p class="ladyload">
-                                {% if language.country == 'US' %} 
-                                    WORLDWIDE 
-                                {% elseif language.country == 'AR' %}
-                                    ARGENTINA
-                                {% else %} 
-                                    {{language.country}} 
-                                {%endif%} </p>
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        {% endif %}
         </div>
 
         {# Search #}

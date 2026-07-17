@@ -13,19 +13,13 @@
 {% endif %}
 
 		<div class="title-container{% if category.images is empty %} row{% endif %} p-relative" data-store="page-title">
-			<div class="col-xs-12" style="text-transform: uppercase; display: flex;
-					justify-content: space-between;
-					align-items: center;
-					padding: 0 15px;
-					margin-bottom: 10px;">
+			<div class="col-xs-12 category-title-row">
 			{% if template == 'category' %}
-				<div class="breadcrumb-product" 
-				style="display: inline-block; 
-					width: fit-content;">
+				<div class="breadcrumb-product">
 					{% snipplet 'navigation/breadcrumbs.tpl' %}
 				</div>
 			{% endif %}
-				<div class="category-controls visible-when-content-ready pull-none-xs col-xs-12 col-sm-2 col-md-2 col-lg-2 pull-right text-right" style="margin: 0; padding: 0;">
+				<div class="category-controls visible-when-content-ready pull-none-xs col-xs-12 col-sm-2 col-md-2 col-lg-2 pull-right text-right">
                 {% if template == 'category' %}
 					{% snipplet 'sort-by.tpl' %}
 				{% endif %}

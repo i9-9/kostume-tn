@@ -28,7 +28,7 @@
   {% for variation in product.variations %}
     <div class="js-mobile-variations-container variant-container {% if variation.name in ['Color', 'Cor', 'Talle', 'Tamanho', 'Size']%} m-none {% endif %}">
       <div class="desktop-product-variation row {% if not quickshop %}hidden-xs{% endif %}" {% if variation.name in ['Color', 'Cor', 'Talle', 'Tamanho', 'Size']%} style="display: none" {% endif %}>
-        <div class="js-product-variants-group {% if variation.name in ['Color', 'Cor'] %}js-color-variants-container{% endif %} form-group select-container m-bottom-none {% if not quickshop %}m-bottom-xs{% endif %} col-xs-12 col-sm-12 {% if quickshop or not settings.show_description_bottom %}col-md-8 col-lg-8{% else %}col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3{% endif %}">
+        <div class="js-product-variants-group {% if variation.name in ['Color', 'Cor'] %}js-color-variants-container{% endif %} form-group select-container m-bottom-none {% if not quickshop %}m-bottom-xs{% endif %} col-xs-12 {% if not quickshop and settings.show_description_bottom %}col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3{% endif %}">
           <label class="variant-label" for="variation_{{loop.index}}">
               {{variation.name}}
           </label>

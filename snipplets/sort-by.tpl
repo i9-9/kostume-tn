@@ -11,7 +11,7 @@
 {% set has_filters = insta_colors|length > 0 or other_colors|length > 0 or size_properties_values|length > 0 or variants_properties|length > 0 %}
 
 <div class="row">
-    <div class="{% if has_filters or show_filters %}col-sm-12 col-xs-6{% else %}col-sm-12{% endif %} form-group select-container sort-by-container m-bottom-half-xs" style="margin-bottom: 0!important;">
+    <div class="{% if has_filters or show_filters %}col-sm-12 col-xs-6{% else %}col-sm-12{% endif %} form-group select-container sort-by-container m-bottom-half-xs">
         {% include "snipplets/svg/arrow-down.tpl" %}
         <select id="sort" class="js-sort-by sort-by form-control select" style="text-transform: uppercase; height: 40px;">
             {% for sort_method in sort_methods %}
