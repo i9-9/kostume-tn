@@ -5,9 +5,9 @@
             {% for language in languages %}
             {% set class = language.active ? "" : "opacity-50" %}
                 <li class="flag-item"{% if language.active %} style="font-weight: bold;"{% endif %}>
-                    <a href="{{ language.url }}" class="{{ class }} locations-bar-link" aria-label="{{ language.name }}">
-                        {% if language.country == 'AR' %}
-                            ARGENTINA
+                    <a href="{{ language.url }}" class="{{ class }} locations-bar-link" aria-label="{{ language.country_name }}">
+                        {% if language.active %}
+                            {{ language.country_name }}
                         {% else %}
                             {{ language.country }}
                         {% endif %}

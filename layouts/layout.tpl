@@ -107,6 +107,16 @@
             box-shadow: none !important;
         }
 
+        /* filter:invert en body crea containing block: position:fixed no pega al
+           viewport. Forzar flujo normal evita huecos/solapes del sticky roto. */
+        .navbar.head-fix,
+        .mobile-nav.head-fix,
+        .js-main-navbar.head-fix {
+            position: relative !important;
+            top: auto !important;
+            width: 100% !important;
+        }
+
         /* Breadcrumbs: fondo del tema (#070707) → blanco con invert.
            Sin margins (crean huecos negros fuera del filter).
            Producto: gutter 15px en el propio bar (full-bleed).
@@ -123,6 +133,11 @@
             width: 100% !important;
             max-width: 100% !important;
             padding: 10px 15px !important;
+        }
+        @media (max-width: 767px) {
+            .product-breadcrumb.breadcrumb {
+                padding-top: 16px !important;
+            }
         }
         .title-container .breadcrumb,
         .breadcrumb-product .breadcrumb {

@@ -446,6 +446,70 @@ body {
 	padding: 0;
 }
 
+/* Search: empty state editorial, gutter 15px */
+.search-page {
+	width: 100%;
+	max-width: 100%;
+	padding: 24px 15px 80px;
+	margin: 0;
+	box-sizing: border-box;
+}
+.search-page-header {
+	margin: 0 0 40px;
+	padding: 0;
+}
+.search-page-title {
+	margin: 0;
+	padding: 0;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	line-height: 1.4;
+	text-transform: uppercase;
+}
+.search-page-query {
+	margin: 10px 0 0;
+	padding: 0;
+	font-size: 13px;
+	font-weight: 400;
+	letter-spacing: 0.04em;
+	line-height: 1.5;
+	opacity: 0.55;
+}
+.search-empty {
+	margin: 0;
+	padding: 24px 0 0;
+}
+.search-empty-message {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+	font-weight: 400;
+	letter-spacing: 0.18em;
+	line-height: 1.7;
+	text-transform: uppercase;
+}
+.search-empty-link {
+	display: inline-block;
+	margin-top: 28px;
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	text-decoration: none;
+	border-bottom: 1px solid currentColor;
+	padding-bottom: 2px;
+}
+.search-empty-link:hover,
+.search-empty-link:focus {
+	text-decoration: none;
+	opacity: 0.7;
+}
+.search-page-grid {
+	margin-left: 0;
+	margin-right: 0;
+}
+
 {# /* // Forms */ #}
 
 .form-toggle-eye {
@@ -1175,22 +1239,127 @@ body {
   z-index: 100;
 }
 
-/* Related: gutter 15px con padding (no margin: con invert deja huecos negros).
-   El .product-row/.row tiene margin negativo que cancela el padding del container. */
-#related-products {
-	padding-left: 15px;
-	padding-right: 15px;
-	box-sizing: border-box;
+/* Product form: talles + cantidad en la misma hilera, 50/50 */
+.product-size-qty-row {
+	display: block;
+	width: 100%;
+	margin-bottom: 10px;
 }
-#related-products .product-row,
-#related-products .horizontal-products-container {
+.product-size-qty-row.has-quantity {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 16px;
+	align-items: start;
+}
+.product-size-qty-row.has-quantity > .product-quantity-inline:only-child {
+	grid-column: 1 / -1;
+}
+.product-size-qty-row .product-variants {
+	float: none !important;
+	width: 100% !important;
+	max-width: none !important;
+	margin-bottom: 0;
+}
+.product-size-qty-row .product-variants .variant-container.btn-variant-container {
+	margin-bottom: 0;
+}
+.product-size-qty-row .js-mobile-variations-container {
+	margin: 0;
+}
+.product-size-qty-row .desktop-product-variation.row {
 	margin-left: 0 !important;
 	margin-right: 0 !important;
+}
+.product-size-qty-row .js-product-variants-group,
+.product-size-qty-row .select-container {
+	float: none !important;
+	width: 100% !important;
+	max-width: none !important;
+	margin: 0 !important;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+.product-size-qty-row .variant-label,
+.product-size-qty-row .quantity-label {
+	display: block;
+	float: none;
+	margin: 0 0 6px;
+	padding: 0;
+	font-size: 14px;
+	line-height: 1.2;
+	font-weight: normal;
+	text-transform: uppercase;
+}
+.product-size-qty-row .product-quantity-inline {
+	display: block;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+/* .quantity es inline-block en el tema → se encoge; forzar bloque full-width */
+.product-size-qty-row .product-quantity-inline .quantity {
+	display: block !important;
+	float: none !important;
+	width: 100% !important;
+	max-width: none !important;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+.product-size-qty-row .form-control.select,
+.product-size-qty-row .product-quantity-inline .quantity-input {
+	display: block !important;
+	float: none !important;
+	box-sizing: border-box;
+	width: 100% !important;
+	max-width: none !important;
+	height: 32px;
+	margin: 0;
+	padding: 0 22px 0 0;
+	border: 0 !important;
+	border-bottom: 2px solid #fff !important;
+	border-radius: 0;
+	box-shadow: none;
+	background: transparent;
+	line-height: 30px;
+	text-align: left;
+}
+.product-size-qty-row .product-quantity-inline .quantity-input {
+	padding-right: 0;
+	-moz-appearance: textfield;
+}
+.product-size-qty-row .product-quantity-inline .quantity-input::-webkit-outer-spin-button,
+.product-size-qty-row .product-quantity-inline .quantity-input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Related products — misma grilla que colecciones (.category-grid-container +
+   .category-products-grid + .item-container). Solo spacing/header propios.
+   Sin margin exterior (con invert deja huecos negros). */
+#related-products.category-grid-container {
+	margin: 0 !important;
+	padding-top: 20px !important;
+	padding-bottom: 20px !important;
+	/* padding-left/right: 11px heredado de .category-grid-container */
+	box-sizing: border-box;
+	overflow: hidden;
 	width: 100%;
 	max-width: 100%;
 }
-#related-products .overide-container-width-xs {
-	width: 100% !important;
+#related-products .related-products-header {
+	margin: 0 0 16px;
+	padding: 0 4px; /* alinea con padding de .item-container */
+}
+#related-products .related-products-header h5 {
+	margin: 0;
+	padding: 0;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+#related-products .category-products-grid .product-row {
+	margin-left: 0;
+	margin-right: 0;
 }
 
 {# /* // Grid item */ #}
@@ -1643,6 +1812,34 @@ body {
 	margin-left: 0;
 	margin-right: 0;
 }
+
+.product-shipping-calculator .js-shipping-zipcode-help {
+	font-size: 10px !important;
+	line-height: 1.3;
+}
+
+/* Ver medios de pago: chico, debajo del CTA */
+.product-payments-link {
+	margin-top: 4px;
+	margin-bottom: 12px;
+	text-align: left;
+}
+.product-payments-link-anchor,
+.product-payments-link #btn-installments,
+.product-payments-link .btn-link,
+.product-payments-link-text {
+	font-size: 11px !important;
+	line-height: 1.3;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+/* Precio: no partir moneda (USD, etc.) en otra línea */
+.product-form-container .product-price-container .product-price,
+.product-form-container .product-price-container .price-compare {
+	white-space: nowrap;
+}
+
 .product-form-container.text-left [class*="col-"],
 .product-form-container.text-left .container-fluid {
 	padding-left: 0;
@@ -1663,6 +1860,27 @@ body {
 }
 .product-form-container.text-left .js-shipping-calculator-form .col-xs-12 {
 	clear: both;
+}
+
+/* "Entregas para el CP": row-flex trae margin -15px y se sale de la columna */
+.product-form-container.text-left .js-shipping-calculator-with-zipcode,
+.product-form-container.text-left .js-shipping-calculator-with-zipcode .row,
+.product-form-container.text-left .js-shipping-calculator-with-zipcode .row-flex {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	box-sizing: border-box;
+}
+.product-form-container.text-left .js-shipping-calculator-with-zipcode .col {
+	min-width: 0;
+	overflow: hidden;
+}
+.product-form-container.text-left .js-shipping-calculator-with-zipcode .d-table {
+	display: block !important;
+	max-width: 100%;
+	overflow-wrap: anywhere;
+	word-break: break-word;
 }
 
 {#/*============================================================================
@@ -2222,30 +2440,60 @@ body {
 		margin: 0;
 		padding: 0;
 		box-sizing: border-box;
+		color: #ffffff;
+		fill: #ffffff;
+		opacity: 1;
+		visibility: visible;
+		z-index: 5;
 	}
 	.mobile-nav-first-row > .toggle-search .nav-icon {
-		width: 22px;
-		height: 22px;
+		width: 22px !important;
+		height: 22px !important;
 		padding: 0 !important;
+		display: flex !important;
+		align-items: center;
+		justify-content: center;
+		color: #ffffff;
+		fill: #ffffff;
 	}
-	/* El form de search no debe empujar MENU/logo: fuera del flujo hasta que se abra */
+	.mobile-nav-first-row > .toggle-search .nav-icon svg,
+	.mobile-nav-first-row > .toggle-search .svg-search-icon {
+		width: 22px !important;
+		height: 22px !important;
+		display: block !important;
+		overflow: visible;
+	}
+	.mobile-nav-first-row > .toggle-search .svg-search-icon path:first-child {
+		fill: #ffffff !important;
+	}
+	.mobile-nav-first-row > .toggle-search .svg-search-icon path[fill="none"] {
+		fill: none !important;
+	}
+	/* Form de search: se muestra con display del JS; sin clip raro */
 	.mobile-nav-first-row .js-search-form-container {
 		flex: 0 0 100%;
 		width: 100%;
 		order: 10;
-		max-height: 0;
-		overflow: hidden;
-		padding: 0 !important;
+		padding: 0 15px !important;
 		margin: 0;
-	}
-	.mobile-nav-first-row .js-search-form-container form {
-		margin: 0;
-	}
-	.mobile-nav-first-row.head-search-open .js-search-form-container,
-	.mobile-nav-first-row .js-search-form-container:has(form[style*="display: block"]) {
-		max-height: 56px;
-		padding: 8px 0 !important;
+		background: #070707 !important;
+		max-height: none;
 		overflow: visible;
+	}
+	.mobile-nav-first-row .js-search-form-container.inverse {
+		/* Con filter invert, background:white se vuelve negro → texto ilegible */
+		background: #070707 !important;
+	}
+	.mobile-nav-first-row .js-search-form-container .js-search-form {
+		margin: 0;
+		padding: 8px 0;
+	}
+	.mobile-nav-first-row .js-search-form-container .search-input {
+		color: #ffffff !important;
+		background: transparent !important;
+		border-color: #2a2a2a !important;
+		/* iOS zooms inputs with font-size < 16px on focus */
+		font-size: 16px !important;
 	}
 	.mobile-nav-first-row .head-cart,
 	.mobile-nav-first-row .toggle-search {
@@ -2327,6 +2575,11 @@ body {
 	}
 	.mobile-nav-tabs-container .mobile-nav-tab.selected {
 		border-bottom: none;
+	}
+
+	/* Producto: un poco más de aire bajo Inicio/Carrito */
+	.product-breadcrumb.breadcrumb {
+		padding-top: 16px !important;
 	}
 	.mobile-nav-tab:hover,
 	.mobile-nav-tab:focus {

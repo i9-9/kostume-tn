@@ -12,10 +12,10 @@
                 {% if settings.show_description_bottom %}
                 <div class="row">
                 {% endif %}
-                    {# Product price #}
+                    {# Product name + price (layout original; col precio un poco más ancha para moneda) #}
                     <div class="row" style="margin-top: 0;">
-                            <h5 id="product-name" class="product-name col-lg-10" style="margin-top: 0; font-weight: bold;" itemprop="name" data-store="product-name-{{ product.id }}">{{ product.name }}</h5>
-                            <div class="product-price-container {% if not settings.show_description_bottom %} p-none-xs {% endif %} col-lg-2" data-store="product-price-{{ product.id }}">
+                            <h5 id="product-name" class="product-name col-xs-8 col-lg-8" style="margin-top: 0; font-weight: bold;" itemprop="name" data-store="product-name-{{ product.id }}">{{ product.name }}</h5>
+                            <div class="product-price-container {% if not settings.show_description_bottom %} p-none-xs {% endif %} col-xs-4 col-lg-4 text-right" data-store="product-price-{{ product.id }}">
                             {% if product.promotional_offer.script.is_percentage_off %}
                                 <input class="js-promotional-parameter" type="hidden" value="{{product.promotional_offer.parameters.percent}}">
                             {% endif %}
@@ -65,6 +65,7 @@
                                 <div class="product-label product-label-no-stock js-stock-label" {% if product.has_stock %}style="display:none;"{% endif %}>{{ "Sin stock" | translate }}</div>
                             </div>
                             <span class="hidden" data-store="stock-product-{{ product.id }}-{% if product.has_stock %}{% if product.stock %}{{ product.stock }}{% else %}infinite{% endif %}{% else %}0{% endif %}"></span>
+                            </div>
                     </div>
                     <div class="pull-left {% if settings.show_description_bottom %}col-xs-12 col-md-6 col-md-offset-3 {% else %} full-width {% endif %}">
                             {% if product.promotional_offer and not product.promotional_offer.script.is_percentage_off and product.display_price %}
@@ -87,72 +88,6 @@
                             </div>
                             {% endif %}
                         </div>
-                                                {# Product Installments button and info #}
-                        <div class="m-bottom-half display-when-content-ready">
-                            <div class="row">
-                                {% if product.show_installments and product.display_price %}
-                                    {% set installments_info_base_variant = product.installments_info %}
-                                    {% set installments_info = product.installments_info_from_any_variant %}
-                                    {% if installments_info %}
-                                        <a href="#installments-modal" data-toggle="modal" data-modal-url="modal-fullscreen-payments" class="js-fullscreen-modal-open js-product-payments-container js-refresh-installment-data link-module {% if settings.show_description_bottom %} text-center text-left-xs {% else %} text-left {% endif %}" {% if (not product.get_max_installments) and (not product.get_max_installments(false)) %}style="display: none;"{% endif %}>
-                                            {% set has_payment_logos = settings.payments %}
-                                            {% if has_payment_logos %}
-                                                <div hclass="m-left-none m-bottom-quarter">
-                                                    <ul class="list-style-none">
-                                                        {% for payment in settings.payments %}
-                                                            {# Payment methods flags #}
-                                                            {% if store.country == 'BR' %}
-                                                                {% if payment in ['visa', 'mastercard'] %}
-                                                                    <li class="d-inline-block">
-                                                                        <span class="js-product-detail-payment-logo">
-                                                                            <img src="{{ 'images/empty-placeholder.png' | static_url }}" data-src="{{ payment | payment_new_logo }}" class="lazyload product-payment-logos-img card-img" alt="{{ payment }}" />
-                                                                        </span>
-                                                                    </li>
-                                                                {% endif %}
-                                                            {% else %}
-                                                                {% if payment in ['visa', 'amex', 'mastercard'] %}
-                                                                    <li class="d-inline-block">
-                                                                        <span class="js-product-detail-payment-logo">
-                                                                            <img src="{{ 'images/empty-placeholder.png' | static_url }}" data-src="{{ payment | payment_new_logo }}" class="lazyload product-payment-logos-img card-img" alt="{{ payment }}" />
-                                                                        </span>
-                                                                    </li>
-                                                                {% endif %}
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                        <li class="d-inline-block">
-                                                            <span class="js-product-detail-payment-logo p-relative svg-icon-text opacity-80">
-                                                                {% include "snipplets/svg/credit-card.tpl" with { 'payment': true } %}
-                                                                {% include "snipplets/svg/add.tpl" with { 'payment': true } %}
-                                                            </span>
-                                                        </li>   
-                                                    </ul>
-                                                </div>
-                                            {% endif %}
-                                            {# Cash discount #}
-                                            {% if custom_payment.discount > 0 %}
-                                              <div class="span12 m-left-none m-bottom-half">
-                                                <span class="text-tertiary"><strong>{{ custom_payment.discount }}% {{'de descuento' | translate }}</strong> {{'pagando con' | translate }} {{ custom_payment.name }}</span>
-                                              </div>
-                                            {% endif %}
-                                            {% if product.show_installments and product.display_price %}
-                                                <div id="btn-installments" class="btn-link clear-both" {% if (not product.get_max_installments) and (not product.get_max_installments(false)) %}style="display: none;"{% endif %}>
-                                                    {% set store_set_for_new_installments_view = store.is_set_for_new_installments_view %}
-                                                    {% if store_set_for_new_installments_view %}
-                                                        {{ "Ver medios de pago" | translate }}
-                                                    {% else %}
-                                                        {{ "Ver el detalle de las cuotas" | translate }}
-                                                    {% endif %}
-                                                </div>
-                                                <div class="visible-xs link-module-icon-right">
-                                                    {% include "snipplets/svg/angle-right.tpl" %}
-                                                </div>
-                                            {% endif %}
-                                        </a>
-                                    {% endif %}
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
                     {#  **** Product submit form ****  #}
                     {% snipplet 'product/product-form.tpl' %}
                     {# Product Description #}

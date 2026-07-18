@@ -1,22 +1,25 @@
 <form class="js-product-form {% if settings.show_description_bottom %}col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 {% else %} full-width {% endif %} display-when-content-ready" method="post" action="{{ store.cart_url }}" data-store="product-form-{{ product.id }}">
     <input type="hidden" name="add_to_cart" value="{{product.id}}">
-    {# Product Variants #}
-    {% if product.variations %}
-        {% include "snipplets/product/variants.tpl" with {'quickshop': false} %}
-    {% endif %}
-    {% if product.available and product.display_price %}
-        <div class="row product-quantity {% if product.show_installments and not product.variations %} border-none-xs p-top-none-xs {% endif %}">
-            <div class="col-xs-12">
+
+    {% set show_product_quantity = product.available and product.display_price %}
+
+    <div class="product-size-qty-row{% if show_product_quantity %} has-quantity{% endif %}">
+        {# Product Variants #}
+        {% if product.variations %}
+            {% include "snipplets/product/variants.tpl" with {'quickshop': false} %}
+        {% endif %}
+
+        {% if show_product_quantity %}
+            <div class="product-quantity product-quantity-inline {% if product.show_installments and not product.variations %} border-none-xs p-top-none-xs {% endif %}">
                 <div class="quantity form-group">
-                    <input class="js-product-quantity js-quantity-input quantity-input form-control" value="1" type="number" name="quantity{{ item.id }}" value="{{ item.quantity }}" aria-label="{{ "Cantidad" | translate }}" style="padding: 0; border-bottom: 2px solid #fff; max-width: 80px;">
-                    <label class="quantity-label" style="text-transform: uppercase; margin-top: 10px; display: block;">
+                    <label class="quantity-label" for="product-quantity-input">
                         {{ "Cantidad" | translate }}
                     </label>
-
+                    <input id="product-quantity-input" class="js-product-quantity js-quantity-input quantity-input form-control" value="1" type="number" name="quantity{{ item.id }}" value="{{ item.quantity }}" aria-label="{{ "Cantidad" | translate }}">
                 </div>
             </div>
-        </div>
-    {% endif %}  
+        {% endif %}
+    </div>
 
     {# Product Add to Cart button #}
     <div class="row m-top">
@@ -42,6 +45,30 @@
             {% endif %}
         </div>
     </div>
+
+    {# Medios de pago: debajo de Agregar al carrito #}
+    {% if product.show_installments and product.display_price %}
+        {% set installments_info = product.installments_info_from_any_variant %}
+        {% if installments_info %}
+            <div class="product-payments-link display-when-content-ready m-bottom-half" {% if (not product.get_max_installments) and (not product.get_max_installments(false)) %}style="display: none;"{% endif %}>
+                {% if custom_payment.discount > 0 %}
+                    <div class="m-bottom-quarter">
+                        <span class="text-tertiary product-payments-link-text"><strong>{{ custom_payment.discount }}% {{'de descuento' | translate }}</strong> {{'pagando con' | translate }} {{ custom_payment.name }}</span>
+                    </div>
+                {% endif %}
+                <a href="#installments-modal" data-toggle="modal" data-modal-url="modal-fullscreen-payments" class="js-fullscreen-modal-open js-product-payments-container js-refresh-installment-data product-payments-link-anchor">
+                    <span id="btn-installments" class="btn-link">
+                        {% set store_set_for_new_installments_view = store.is_set_for_new_installments_view %}
+                        {% if store_set_for_new_installments_view %}
+                            {{ "Ver medios de pago" | translate }}
+                        {% else %}
+                            {{ "Ver el detalle de las cuotas" | translate }}
+                        {% endif %}
+                    </span>
+                </a>
+            </div>
+        {% endif %}
+    {% endif %}
 </form>
 
 {# Define contitions to show shipping calculator and store branches on product page #}

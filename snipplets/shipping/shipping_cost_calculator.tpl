@@ -21,7 +21,7 @@
 
 					{# Free shipping achieved label #}
 
-					<div class="js-free-shipping-title p-absolute transition-up full-width h4 m-none {% if cart.free_shipping.cart_has_free_shipping %}transition-up-active{% endif %}">
+					<div class="js-free-shipping-title p-absolute transition-up full-width m-none {% if cart.free_shipping.cart_has_free_shipping %}transition-up-active{% endif %}" style="text-transform: uppercase; font-size: 11px; line-height: 1.3;">
 						<span class="weight-strong">{{ "¡Genial! <strong class='text-primary'>Tenés envío gratis</strong>" | translate }}</span>
 					</div>
 
@@ -55,7 +55,7 @@
 				<span>
 					{# Free shipping achieved label #}
 
-					<span class="js-free-shipping-message" {% if not cart.free_shipping.cart_has_free_shipping %}style="display: none;"{% endif %}>
+					<span class="js-free-shipping-message" style="text-transform: uppercase; font-weight: bold; font-size: 11px; line-height: 1.3;{% if not cart.free_shipping.cart_has_free_shipping %} display: none;{% endif %}">
 						{{ "¡Genial! <strong class='text-primary'>Tenés envío gratis</strong>" | translate }}
 					</span>
 
@@ -67,7 +67,7 @@
 
 					{# Shipping default label #}
 
-					<span class="js-shipping-calculator-label-default" {% if cart.free_shipping.cart_has_free_shipping or cart.free_shipping.min_price_free_shipping.min_price %}style="display: none;"{% endif %}>
+					<span class="js-shipping-calculator-label-default" {% if cart.free_shipping.cart_has_free_shipping or cart.free_shipping.min_price_free_shipping.min_price %}style="display: none;"{% endif %} style="text-transform: uppercase; font-weight: bold;">
 
 						{# Regular shipping calculator label #}
 						
@@ -94,7 +94,7 @@
 					{% set zipcode_help_br = 'http://www.buscacep.correios.com.br/sistemas/buscacep/' %}
 					{% set zipcode_help_mx = 'https://www.correosdemexico.gob.mx/datosabiertos/gobmx/gobmx_Descarga.html' %}
 						<div class="col-xs-12 m-top-half">
-							<a class="btn-link font-small-extra" href="{% if store.country == 'AR' %}{{ zipcode_help_ar }}{% elseif store.country == 'BR' %}{{ zipcode_help_br }}{% elseif store.country == 'MX' %}{{ zipcode_help_mx }}{% endif %}" target="_blank">{{ "No sé mi código postal" | translate }}</a>
+							<a class="btn-link font-small-extra js-shipping-zipcode-help" href="{% if store.country == 'AR' %}{{ zipcode_help_ar }}{% elseif store.country == 'BR' %}{{ zipcode_help_br }}{% elseif store.country == 'MX' %}{{ zipcode_help_mx }}{% endif %}" target="_blank">{{ "No sé mi código postal" | translate }}</a>
 						</div>
 				{% endif %}
 				{% if shipping_calculator_variant %}

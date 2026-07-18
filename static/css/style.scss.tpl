@@ -579,7 +579,7 @@ label {
   .list-item{
     float: left;
     width: 100%;
-    margin-bottom: 50px;
+    margin-bottom: 12px;
     font-size: 13px;
     &:only-child,
     &:last-of-type{
@@ -596,7 +596,7 @@ label {
     padding-left: 0;
   }
   .shipping-extra-options .list-item:first-child{
-    margin-top: 50px;
+    margin-top: 12px;
   }
 }
 

@@ -176,7 +176,7 @@
         </div>
 
         {# Search #}
-        <a id="show-search" class="js-toggle-search toggle-search d-inline-block visible-xs" href="#" aria-label="{{ "Buscar" | translate }}">
+        <a id="show-search-mobile" class="js-toggle-search toggle-search visible-xs" href="#" aria-label="{{ "Buscar" | translate }}">
             <span class="nav-icon">
                 {% include "snipplets/svg/search.tpl" %}
             </span>

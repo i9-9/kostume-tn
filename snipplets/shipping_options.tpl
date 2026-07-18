@@ -53,12 +53,12 @@
 
     {% if has_featured_shipping %}
 
-        <div class="m-bottom-half full-width-container">
+        <div class="m-bottom-half full-width-container" style="text-transform: uppercase; font-weight: bold;">
             {% include "snipplets/svg/truck.tpl" with { 'shipping': true, 'fa_custom_class' : 'align-bottom m-right-half' } %}
             {{ "Envío a domicilio" | translate }}
         </div>
 
-        <ul class="box-container list-unstyled {% if has_featured_pickup %}m-bottom-double{% else %}m-bottom{% endif %}">
+        <ul class="box-container list-unstyled m-bottom">
 
             {# List only delivery featured options #}
 
@@ -98,7 +98,7 @@
 
     {% if has_featured_pickup %}
 
-        <div class="m-bottom-half full-width-container">
+        <div class="m-bottom-half full-width-container" style="text-transform: uppercase; font-weight: bold;">
             {% include "snipplets/svg/location-on.tpl" with {fa_custom_class: "svg-inline--fa fa-md  svg-icon-text align-sub"} %}
             {{ "Retirar por" | translate }}
         </div>

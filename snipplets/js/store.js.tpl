@@ -231,10 +231,20 @@ LS.ready.then(function() {
         {# Modals above all elements #}
 
         $(document).on("click", ".js-trigger-modal-zindex-top", function (e) {
-            e.preventDefault();
+            {# Stop label/parent from swallowing the click; let Bootstrap open the modal first #}
+            e.stopPropagation();
             var modal_id = $(this).attr("href");
-            $(modal_id).detach().insertAfter(".modal-backdrop");
-            $(".modal-backdrop").addClass("modal-backdrop-zindex-top");
+            var $modal = $(modal_id);
+            if (!$modal.length) {
+                return;
+            }
+            $modal.one("shown.bs.modal", function () {
+                var $backdrop = $(".modal-backdrop").last();
+                if ($backdrop.length) {
+                    $modal.detach().insertAfter($backdrop);
+                    $backdrop.addClass("modal-backdrop-zindex-top");
+                }
+            });
         });
 
         {#/*============================================================================
@@ -373,35 +383,18 @@ LS.ready.then(function() {
           #Header and nav
         ==============================================================================*/ #}
 
+        {#
+          Sticky head-fix is disabled while body uses filter:invert(1).
+          That filter creates a containing block, so position:fixed no longer
+          sticks to the viewport — but the scroll handler still toggled
+          .head-fix + padding-top, which left gaps/overlaps when scrolling up.
+          Keep the nav in normal document flow (same visual look).
+        #}
+        $(".js-main-navbar").removeClass("head-fix").css("top", "");
+        $(".js-main-content").css("padding-top", "");
+        $(".js-nav-top").show();
+
         if ($(window).width() < 767) {
-
-            {# /* // Header fixed */ #}
-
-            {% if settings.head_fix %} 
-                var top_head = $(".js-head-fixed").position().top;
-                var height_navbar = $(".js-main-navbar").height();
-                $(window).scroll(function(){  
-                    var position = $(window).scrollTop();
-                    var height_head = $(".js-head-fixed").height();
-                    var height_navbar = $(".js-main-navbar").height();
-                    var height_tophead = $(".js-nav-top").height();
-
-                    if(position > top_head){
-                        $(".js-nav-top").hide();
-                        $(".js-main-navbar").addClass('head-fix');
-                        $(".js-main-content").css("padding-top", height_navbar);
-                    } else {
-                        $(".js-nav-top").show();
-                        $(".js-main-navbar").removeClass('head-fix');
-                        $(".js-main-content").css("padding-top", "0");
-                    }
-
-
-                });
-
-                $(".js-categories-mobile").css("top", height_navbar );
-                $(".js-mobile-nav-subcategories-panel").css("top", height_navbar );
-            {% endif %}
 
             {# Show and hide mobile nav on scroll #}
 
@@ -424,13 +417,7 @@ LS.ready.then(function() {
             }, 250);
 
             function hasScrolled() {
-                var st = $(this).scrollTop();
-                var position = $(window).scrollTop();
-                var height_tophead = $(".js-nav-top").height();
-                {% if settings.head_fix %} 
-                    var top_head = $(".js-head-fixed").position().top;
-                    var height_head = $(".js-head-fixed").height();
-                {% endif %} 
+                var st = $(window).scrollTop();
                 
                 // Make sure they scroll more than delta
                 if(Math.abs(lastScrollTop - st) <= delta)
@@ -442,56 +429,16 @@ LS.ready.then(function() {
                     // Scroll Down
                     if(!$("body").hasClass("mobile-categories-visible")){
                         $top_nav.addClass("move-up").removeClass("move-down");
-
-                        {% if settings.tab_menu and settings.head_fix %}
-                            $top_nav.css("top", -height_head);
-                            $(".js-categories-mobile").css("top", height_navbar - (height_head + height_tophead));
-                            $(".js-mobile-nav-subcategories-panel").css("top", height_navbar - (height_head + height_tophead));
-                        {% endif %}
                     }
                 } else {
                     // Scroll Up
                     if(!$("body").hasClass("mobile-categories-visible")){
                         $top_nav.removeClass("move-up").addClass("move-down");
-                        {% if settings.tab_menu and settings.head_fix %}
-                            $top_nav.css("top", 0);
-                            if(position > top_head){
-                                $(".js-categories-mobile").css("top", height_navbar - height_tophead );
-                                $(".js-mobile-nav-subcategories-panel").css("top", height_navbar - height_tophead );
-                            } else {
-                                $(".js-categories-mobile").css("top", height_navbar );
-                                $(".js-mobile-nav-subcategories-panel").css("top", height_navbar );
-                            }
-                        {% endif %}
-                        
                     }
                 }
                 
                 lastScrollTop = st;
             }
-        }
-
-        if ($(window).width() > 768) {
-
-            {% if settings.head_fix %} 
-                var top_head = $(".js-head-fixed").position().top;
-                $(window).scroll(function(){  
-                    var position = $(window).scrollTop();
-                    var height_head = $(".js-head-fixed").height();
-                    var height_navbar = $(".js-main-navbar").height();
-                    var height_tophead = $(".js-nav-top").height();
-
-                    if(position > top_head){
-                        $(".js-nav-top").hide();
-                        $(".js-main-navbar").addClass('head-fix');
-                        $(".js-main-content").css("padding-top", height_head + 30);
-                    } else {
-                        $(".js-nav-top").show();
-                        $(".js-main-navbar").removeClass('head-fix');
-                        $(".js-main-content").css("padding-top", "0");
-                    }
-                });
-            {% endif %}
         }
 
         {# Search navbar animation #}
@@ -502,7 +449,7 @@ LS.ready.then(function() {
         $(".js-toggle-search").click(function(e){
             e.preventDefault();
             if ($(window).width() < 767) {
-                $(".js-mobile-nav-second-row, .js-mobile-nav-title-container").toggle(); 
+                $(".js-mobile-nav-second-row").toggle();
             }
             if(!$("body").hasClass("mobile-categories-visible")){
                 $("body").toggleClass("overflow-none");
@@ -510,7 +457,10 @@ LS.ready.then(function() {
                 $("body").removeClass("mobile-categories-visible");
             }
             $main_categories_mobile_container.hide();
-            $(".js-desktop-nav-links, .js-nav-icons, .js-search-backdrop , .js-search-form").toggle();
+            $(".js-desktop-nav-links, .js-search-backdrop , .js-search-form").toggle();
+            if ($(window).width() >= 767) {
+                $(".js-nav-icons").toggle();
+            }
             $top_nav.toggleClass("search-visible");
             $(".js-search-form-container").toggleClass("inverse");
             $search_input.focus().val('');  

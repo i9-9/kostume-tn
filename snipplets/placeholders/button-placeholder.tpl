@@ -1,4 +1,4 @@
-<div class="js-addtocart js-addtocart-placeholder btn btn-primary btn-transition btn-block m-none disabled {{ custom_class }}" style="display: none;">
+<div class="js-addtocart js-addtocart-placeholder btn btn-primary btn-transition btn-block m-none disabled {{ custom_class }}" style="display: none; border-radius: 0;">
     <div class="d-inline-block">
         <span class="js-addtocart-text btn-transition-start transition-container active">
             {{ 'Agregar al carrito' | translate }}
