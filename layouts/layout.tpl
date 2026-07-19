@@ -117,6 +117,120 @@
             width: 100% !important;
         }
 
+        /* Modales escapados a <html> (JS) → fixed al viewport, no al scroll del body.
+           Re-invert solo el panel para mantener colores del tema. Backdrop oscuro sin invert. */
+        html > .js-modal-viewport-fixed.modal,
+        html > .shipping-pickup-modal.modal,
+        html > .js-modal-shipping-suboptions.modal {
+            position: fixed !important;
+            top: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            max-width: none !important;
+            height: 100% !important;
+            max-height: none !important;
+            margin: 0 !important;
+            padding: 24px 16px !important;
+            overflow: hidden !important;
+            background: transparent !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            -webkit-transform: none !important;
+            -ms-transform: none !important;
+            transform: none !important;
+            -webkit-filter: invert(1) !important;
+            filter: invert(1) !important;
+            z-index: 10000 !important;
+        }
+        html > .js-modal-viewport-fixed.modal.in,
+        html > .js-modal-viewport-fixed.modal.fade.in,
+        html > .shipping-pickup-modal.modal.in,
+        html > .shipping-pickup-modal.modal.fade.in,
+        html > .js-modal-shipping-suboptions.modal.in,
+        html > .js-modal-shipping-suboptions.modal.fade.in {
+            display: -webkit-box !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            opacity: 1 !important;
+        }
+        html > .modal-backdrop.js-modal-viewport-backdrop,
+        html > .modal-backdrop.modal-backdrop-zindex-top {
+            position: fixed !important;
+            top: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            margin: 0 !important;
+            background-color: #000 !important;
+            opacity: 0.45 !important;
+            -webkit-filter: none !important;
+            filter: none !important;
+            z-index: 9999 !important;
+        }
+        html > .shipping-pickup-modal .shipping-pickup-modal-dialog,
+        html > .js-modal-shipping-suboptions .shipping-pickup-modal-dialog,
+        html > .shipping-pickup-modal .shipping-pickup-modal-content,
+        html > .js-modal-shipping-suboptions .shipping-pickup-modal-content {
+            max-height: 80vh !important;
+        }
+        html > .shipping-pickup-modal .shipping-pickup-modal-close svg,
+        html > .js-modal-shipping-suboptions .shipping-pickup-modal-close svg {
+            fill: #fff !important;
+            color: #fff !important;
+        }
+        @media (max-width: 767px) {
+            html > .js-modal-viewport-fixed.modal,
+            html > .shipping-pickup-modal.modal,
+            html > .js-modal-shipping-suboptions.modal {
+                padding: 16px 12px !important;
+            }
+        }
+
+        /* Panel de variantes mobile escapado a <html> (mismo bug de filter/fixed). */
+        html > .js-mobile-vars-panel.js-mobile-vars-viewport-fixed {
+            position: fixed !important;
+            top: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            max-width: none !important;
+            height: 100% !important;
+            max-height: 100vh !important;
+            margin: 0 !important;
+            overflow: hidden !important;
+            -webkit-filter: invert(1) !important;
+            filter: invert(1) !important;
+            z-index: 10000 !important;
+        }
+        html > .js-mobile-vars-panel.js-mobile-vars-viewport-fixed.modal-xs-right-in {
+            -webkit-transform: translate3d(0, 0, 0) !important;
+            -ms-transform: translate3d(0, 0, 0) !important;
+            transform: translate3d(0, 0, 0) !important;
+        }
+        html > .js-mobile-vars-panel.js-mobile-vars-viewport-fixed.modal-xs-right-out {
+            -webkit-transform: translate3d(100%, 0, 0) !important;
+            -ms-transform: translate3d(100%, 0, 0) !important;
+            transform: translate3d(100%, 0, 0) !important;
+        }
+        html > .js-mobile-vars-panel.js-mobile-vars-viewport-fixed .modal-xs-dialog {
+            height: 100% !important;
+            max-height: 100vh !important;
+            overflow: auto !important;
+            -webkit-overflow-scrolling: touch;
+        }
+
         /* Breadcrumbs: fondo del tema (#070707) → blanco con invert.
            Sin margins (crean huecos negros fuera del filter).
            Producto: gutter 15px en el propio bar (full-bleed).

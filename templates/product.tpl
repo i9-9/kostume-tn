@@ -130,12 +130,12 @@
     </div>
 </div>
 
+{# Payments modal: must render before related products (they overwrite `product` via include-with) #}
+{% set installments_info = product.installments_info_from_any_variant %}
+{% include 'snipplets/product/payments/payments.tpl' %}
+
 {# Related Products #}
 {% include 'snipplets/product-grid/related-products.tpl' %}
-
-{# Payments details #}
-
-{% include 'snipplets/product/payments/payments.tpl' %}
 
 {# Sharing mobile modal 
 <div class="modal modal-xs fade modal-xs-bottom" id="sharing-mobile" tabindex="-1" role="dialog" q-hidden="true">

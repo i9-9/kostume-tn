@@ -11,7 +11,7 @@
             <span>{{ 'Ver direcciones' | translate }}</span>
         </a>
 
-        <div id="{{ modal_id_val }}" class="js-modal-shipping-suboptions shipping-pickup-modal js-modal-xs-centered modal modal-xs modal-xs-centered fade modal-zindex-top" tabindex="-1" role="dialog" aria-hidden="true">
+        <div id="{{ modal_id_val }}" class="js-modal-shipping-suboptions shipping-pickup-modal modal fade modal-zindex-top" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog shipping-pickup-modal-dialog">
                 <div class="modal-content shipping-pickup-modal-content">
                     <div class="js-close-modal-zindex-top modal-header shipping-pickup-modal-header" data-dismiss="modal" aria-hidden="true">

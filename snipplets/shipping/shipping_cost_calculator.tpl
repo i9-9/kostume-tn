@@ -132,7 +132,7 @@
 	<div class="js-shipping-calculator-spinner full-width-container m-top m-bottom transition-soft text-center" style="display: none;">
 		{% include "snipplets/svg/spinner.tpl" with {multicolor: true} %}
 	</div>
-	<div class="js-shipping-calculator-response shipping-calculator-response {% if product_detail %}list-readonly{% endif %} m-top p-top-half" style="display: none;"></div>
+	<div class="js-shipping-calculator-response shipping-calculator-response {% if product_detail %}list-readonly{% endif %}" style="display: none; margin-top: 12px; padding-top: 0;"></div>
 </div>
 
 {# Shipping country modal #}

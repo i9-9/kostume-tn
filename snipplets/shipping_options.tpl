@@ -53,12 +53,12 @@
 
     {% if has_featured_shipping %}
 
-        <div class="m-bottom-half full-width-container" style="text-transform: uppercase; font-weight: bold;">
+        <div class="shipping-section-title full-width-container" style="float:left;clear:both;width:100%;margin:0 0 8px;padding:0;text-transform:uppercase;font-weight:bold;">
             {% include "snipplets/svg/truck.tpl" with { 'shipping': true, 'fa_custom_class' : 'align-bottom m-right-half' } %}
             {{ "Envío a domicilio" | translate }}
         </div>
 
-        <ul class="box-container list-unstyled m-bottom">
+        <ul class="box-container list-unstyled" style="float:left;clear:both;width:100%;margin:0 0 16px;padding:0;">
 
             {# List only delivery featured options #}
 
@@ -68,7 +68,7 @@
 
             {% if has_non_featured_shipping %}
 
-                <div class="js-other-shipping-options full-width-container shipping-extra-options" style="display: none;">
+                <div class="js-other-shipping-options full-width-container shipping-extra-options" style="display: none;float:left;clear:both;width:100%;">
 
                     {# List only delivery non featured options #}
 
@@ -77,7 +77,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="js-toggle-more-shipping-options js-show-more-shipping-options full-width-container text-center m-top-double">
+                <div class="js-toggle-more-shipping-options js-show-more-shipping-options full-width-container text-center" style="float:left;clear:both;width:100%;margin:8px 0 0;">
                     <a href="#" class="btn-link">
                         <span class="js-shipping-see-more">
                             {{ 'Ver más opciones de envío' | translate }}
@@ -98,12 +98,12 @@
 
     {% if has_featured_pickup %}
 
-        <div class="m-bottom-half full-width-container" style="text-transform: uppercase; font-weight: bold;">
+        <div class="shipping-section-title full-width-container" style="float:left;clear:both;width:100%;margin:16px 0 8px;padding:0;text-transform:uppercase;font-weight:bold;">
             {% include "snipplets/svg/location-on.tpl" with {fa_custom_class: "svg-inline--fa fa-md  svg-icon-text align-sub"} %}
             {{ "Retirar por" | translate }}
         </div>
 
-        <ul class="list-unstyled box-container m-bottom">
+        <ul class="list-unstyled box-container" style="float:left;clear:both;width:100%;margin:0 0 16px;padding:0;">
 
             {# List only pickup featured options #}
 
@@ -113,7 +113,7 @@
 
             {% if has_non_featured_pickup %}
 
-                <div class="js-other-pickup-options list-unstyled full-width-container shipping-extra-options" style="display: none;">
+                <div class="js-other-pickup-options list-unstyled full-width-container shipping-extra-options" style="display: none;float:left;clear:both;width:100%;">
 
                     {# List only pickup non featured options #}
 
@@ -122,7 +122,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="js-toggle-more-shipping-options js-show-other-pickup-options full-width-container text-center m-top-double">
+                <div class="js-toggle-more-shipping-options js-show-other-pickup-options full-width-container text-center" style="float:left;clear:both;width:100%;margin:8px 0 0;">
                     <a href="#" class="btn-link">
                         <span class="js-shipping-see-more">
                             {{ 'Ver más opciones de retiro' | translate }}
@@ -139,7 +139,7 @@
     {% endif %}
 
     {% if store.has_smart_dates and show_time %}
-        <div class="font-small m-bottom-half">{{"El tiempo de entrega <strong>no considera feriados</strong>." | translate}}</div>
+        <div class="shipping-smart-dates-note font-small" style="float:left;clear:both;width:100%;margin:12px 0 0;padding:0;">{{"El tiempo de entrega <strong>no considera feriados</strong>." | translate}}</div>
     {% endif %}
 
     <div style="clear: both;"></div>

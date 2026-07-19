@@ -1394,8 +1394,8 @@ body {
 	padding: 0 4px;
 }
 .item-container .item {
-	border-radius: 3px;
-	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1), 0 2px 3px 0 rgba(0, 0, 0, 0.2);
+	border-radius: 0;
+	box-shadow: none;
 }
 .item-image-container {
 	width: 100%;
@@ -1820,8 +1820,7 @@ body {
 
 /* Ver medios de pago: chico, debajo del CTA */
 .product-payments-link {
-	margin-top: 4px;
-	margin-bottom: 12px;
+	margin: 12px 0;
 	text-align: left;
 }
 .product-payments-link-anchor,

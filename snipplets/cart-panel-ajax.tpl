@@ -32,6 +32,7 @@
             <span class="cart-item-grid-header-product">{{ "Producto" | translate }}</span>
             <span class="cart-item-grid-header-qty">{{ "Cant." | translate }}</span>
             <span class="cart-item-grid-header-subtotal">{{ "Subtotal" | translate }}</span>
+            <span class="cart-item-grid-header-delete" aria-hidden="true"></span>
           </div>
 
           <div class="js-ajax-cart-list ajax-cart-table">
@@ -45,8 +46,8 @@
           </div>
 
           {# Cart panel empty #}
-          <div class="js-empty-ajax-cart alert alert-info m-top" {% if cart.items_count > 0 %}style="display:none;"{% endif %}>
-            {{ "El carrito de compras está vacío." | translate }}
+          <div class="js-empty-ajax-cart cart-empty-state" {% if cart.items_count > 0 %}style="display:none;"{% endif %}>
+            <p class="cart-empty-state-text">{{ "El carrito de compras está vacío." | translate }}</p>
           </div>
         </div>
 

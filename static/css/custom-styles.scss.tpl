@@ -517,6 +517,20 @@ html::-webkit-scrollbar-thumb:hover {
 .js-addtocart-placeholder {
     border-radius: 0 !important;
 }
+
+.added-to-cart-message,
+.js-added-to-cart-product-message {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    .btn-link {
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 700;
+    }
+}
 .btn-secondary{
     background-color: $primary-color;
     color:$main-background;
@@ -693,7 +707,7 @@ a:focus{
     border-bottom:1px solid rgba($main-foreground, 0.1);
 }
 
-{# /* Shipping pickup addresses modal */ #}
+{# /* Shipping pickup addresses modal — viewport-centered (also see layout.tpl html> rules) */ #}
 .shipping-pickup-modal.modal,
 .js-modal-shipping-suboptions.modal {
     position: fixed !important;
@@ -737,7 +751,7 @@ a:focus{
 .shipping-pickup-modal-dialog {
     width: 100% !important;
     max-width: 420px !important;
-    max-height: 70vh !important;
+    max-height: 80vh !important;
     margin: 0 !important;
     float: none !important;
 }
@@ -750,7 +764,7 @@ a:focus{
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    max-height: 70vh !important;
+    max-height: 80vh !important;
     overflow: hidden !important;
     border: 1px solid rgba($main-foreground, 0.12);
     border-radius: 0;
@@ -799,11 +813,20 @@ a:focus{
     width: 28px;
     height: 28px;
     flex: 0 0 auto;
-    opacity: 0.7;
+    opacity: 1;
+    color: $main-foreground;
+    fill: $main-foreground;
     transition: opacity 0.15s ease;
 
+    svg,
+    .svg-icon-text,
+    .svg-text-fill {
+        fill: $main-foreground !important;
+        color: $main-foreground !important;
+    }
+
     &:hover {
-        opacity: 1;
+        opacity: 0.7;
     }
 }
 
@@ -1015,94 +1038,143 @@ a.js-shipping-ver-direcciones:active,
     }
 }
 
-{# /* Product shipping calculator: compact option list, unified type */ #}
-.product-shipping-calculator {
+{# /*
+   Shipping calculator type scale (product + cart)
+   - Label / section: 11 / 700 / 0.08em
+   - Primary (name, price, form): 12 / 700 / 0.06em
+   - Secondary meta: 11 / 400 / 0.06em
+   - Micro action: 10 / 700 / 0.10em
+   All uppercase for a single editorial voice.
+*/ #}
+.product-shipping-calculator,
+.shipping-calculator {
     font-size: 12px;
     line-height: 1.45;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 
-    .radio-button-icons {
-        display: none;
-    }
-    .box-container {
-        padding: 0;
-        margin-bottom: 16px;
-        box-shadow: none;
-        border: 0;
-        font-size: 12px;
-    }
-    .list-readonly .list-item,
-    .list-item {
-        margin: 0;
-        padding: 12px 0;
-        border-bottom: 1px solid #2a2a2a;
-        font-size: 12px;
-        &:only-child,
-        &:last-of-type {
-            margin-bottom: 0;
-            border-bottom: 0;
-            padding-bottom: 0;
-        }
-        &:first-of-type {
-            padding-top: 4px;
-        }
-    }
-    .radio-button-label {
-        margin-top: 0;
-        padding-left: 0;
-    }
-    .shipping-option-row {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 12px;
-        width: 100%;
-    }
-    .shipping-option-info {
-        flex: 1 1 auto;
-        min-width: 0;
-    }
-    .shipping-option-name,
-    .shipping-option-extra {
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-        font-weight: 700;
-        opacity: 1;
-    }
-    .shipping-option-meta {
-        margin-top: 4px;
+    {# /* Label / section */ #}
+    .js-shipping-calculator-with-zipcode,
+    .js-shipping-calculator-with-zipcode .d-table,
+    .js-shipping-calculator-current-zip,
+    .js-product-shipping-label,
+    .shipping-smart-dates-note,
+    .js-free-shipping-title,
+    .js-free-shipping-title-min-cost,
+    .js-free-shipping-message,
+    .js-shipping-calculator-label,
+    .js-shipping-calculator-label-default,
+    .full-width-container {
         font-size: 11px;
-        font-weight: 400;
-        letter-spacing: 0.02em;
-        opacity: 0.65;
-        text-transform: none;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        line-height: 1.4;
+        text-transform: uppercase;
     }
-    .shipping-option-suboptions {
-        margin-top: 6px;
-        position: relative;
-        z-index: 2;
+
+    {# /* Spacing rhythm: 8 / 12 / 16 */ #}
+    .full-width-container {
+        float: left;
+        clear: both;
+        width: 100%;
+        margin: 0 0 8px;
+        padding: 0;
     }
-    .shipping-option-price {
-        flex: 0 0 auto;
-        min-width: 7.5em;
-        text-align: right;
-        white-space: nowrap;
+
+    .shipping-calculator-response {
+        clear: both;
+        margin-top: 12px !important;
+        padding-top: 0 !important;
+        font-size: 12px;
     }
+
+    .js-product-shipping-label {
+        display: block;
+        clear: both;
+        margin: 0 0 12px !important;
+        padding: 0 !important;
+    }
+
+    .shipping-smart-dates-note {
+        display: block;
+        float: left;
+        clear: both;
+        width: 100%;
+        margin: 12px 0 0 !important;
+        padding: 0 !important;
+    }
+
+    {# /* Primary */ #}
+    .shipping-option-name,
+    .shipping-option-extra,
+    .shipping-price,
+    .js-calculate-shipping,
+    .shipping-zipcode {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        line-height: 1.4;
+        text-transform: uppercase;
+    }
+
     .shipping-price {
         display: block;
         font-size: 12px !important;
-        font-weight: 700;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
         line-height: 1.3;
     }
+
+    {# /* Secondary meta */ #}
+    .shipping-option-meta,
+    .shipping-price-old,
+    .shipping-calculator-response > .font-small {
+        font-size: 11px !important;
+        font-weight: 400;
+        letter-spacing: 0.06em;
+        line-height: 1.4;
+        text-transform: uppercase;
+        opacity: 0.65;
+    }
+
+    .shipping-calculator-response > .font-small strong {
+        font-weight: 700;
+        opacity: 1;
+    }
+
+    .shipping-option-meta {
+        margin-top: 4px;
+    }
+
     .shipping-price-old {
         display: block;
-        margin-top: 2px;
-        font-size: 11px;
-        font-weight: 400;
+        margin-top: 4px;
         text-decoration: line-through;
         opacity: 0.45;
     }
+
+    .shipping-calculator-response > .font-small {
+        margin-top: 8px;
+    }
+
+    .js-toggle-more-shipping-options {
+        clear: both;
+        margin: 8px 0 0 !important;
+        padding: 0 !important;
+    }
+
+    {# /* Micro actions */ #}
+    .js-shipping-suboption .btn-link,
+    .shipping-suboption .btn-link,
+    .js-shipping-ver-direcciones,
+    .js-shipping-calculator-change-zipcode,
+    .js-shipping-zipcode-help,
+    .js-toggle-more-shipping-options .btn-link {
+        font-size: 10px !important;
+        font-weight: 700;
+        letter-spacing: 0.10em;
+        line-height: 1.3;
+        text-transform: uppercase;
+    }
+
     .js-shipping-suboption .btn-link,
     .shipping-suboption .btn-link,
     .js-shipping-ver-direcciones {
@@ -1110,10 +1182,6 @@ a.js-shipping-ver-direcciones:active,
         align-items: center;
         gap: 4px;
         margin-top: 2px;
-        font-size: 10px !important;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
         text-decoration: none !important;
         border-bottom: 0 !important;
         padding-bottom: 0;
@@ -1131,48 +1199,149 @@ a.js-shipping-ver-direcciones:active,
             opacity: 0.75;
         }
     }
+
     .js-shipping-calculator-change-zipcode {
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        font-size: 10px;
         border: 1px solid #2a2a2a;
         border-radius: 0;
         padding: 6px 10px;
     }
+
+    .radio-button-icons {
+        display: none;
+    }
+    .box-container {
+        float: left;
+        clear: both;
+        width: 100%;
+        padding: 0;
+        margin: 0 0 16px;
+        box-shadow: none;
+        border: 0;
+        font-size: 12px;
+
+        &.m-bottom {
+            margin-bottom: 16px !important;
+        }
+    }
+    .list-readonly .list-item,
+    .list-item {
+        margin: 0;
+        padding: 12px 0;
+        border-bottom: 1px solid #2a2a2a;
+        font-size: 12px;
+        &:only-child,
+        &:last-of-type {
+            margin-bottom: 0;
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+        &:first-of-type {
+            padding-top: 0;
+        }
+    }
+    .radio-button-label {
+        margin-top: 0;
+        padding-left: 0;
+    }
+    .shipping-option-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        width: 100%;
+    }
+    .shipping-option-info {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+    .shipping-option-suboptions {
+        margin-top: 8px;
+        position: relative;
+        z-index: 2;
+    }
+    .shipping-option-price {
+        flex: 0 0 auto;
+        min-width: 7.5em;
+        text-align: right;
+        white-space: nowrap;
+    }
     .radio-button-label,
     .radio-button-text,
-    .font-medium,
-    .font-small,
-    .btn-link,
     .btn-link-small,
     .h5 {
         font-size: 12px !important;
         line-height: 1.45;
-    }
-    .js-shipping-zipcode-help {
-        font-size: 10px !important;
-        line-height: 1.3;
-    }
-    .shipping-calculator-response {
-        font-size: 12px;
-    }
-    .full-width-container {
-        margin-bottom: 8px;
-        margin-top: 4px;
-        letter-spacing: 0.08em;
-        font-weight: 700;
+        letter-spacing: 0.06em;
         text-transform: uppercase;
     }
-    .shipping-calculator-response > .font-small {
-        margin-top: 8px;
-        font-size: 11px !important;
-        font-weight: 400;
-        opacity: 0.65;
-        letter-spacing: 0.02em;
+}
+
+{# /* Product form stack spacing (CTA → payments → shipping) */ #}
+.product-form-container {
+    .product-payments-link {
+        margin: 12px 0 !important;
+        padding: 0;
     }
-    .shipping-calculator-response > .font-small strong {
+
+    #product-shipping-container {
+        margin-top: 0 !important;
+        margin-bottom: 16px !important;
+    }
+}
+
+{# /* Payments modal spacing */ #}
+#installments-modal {
+    .modal-body,
+    .modal-xs-body {
+        padding: 15px !important;
+    }
+
+    .box-title {
+        margin: 0 0 8px;
+        padding: 0 0 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 11px;
         font-weight: 700;
-        opacity: 1;
+    }
+
+    .box-container {
+        margin: 0 0 16px;
+        padding: 12px 0;
+        box-shadow: none;
+        border: 0;
+        border-bottom: 1px solid #2a2a2a;
+
+        &:last-child {
+            margin-bottom: 0;
+            border-bottom: 0;
+        }
+    }
+
+    .divider {
+        margin: 12px 0 !important;
+    }
+
+    h4 {
+        margin: 0 0 8px;
+    }
+
+    .legal-info {
+        margin: 0 0 8px;
+        padding: 0 !important;
+    }
+
+    .installments-card {
+        margin: 0 8px 8px 0;
+    }
+
+    .nav-tabs-container {
+        margin: 0;
+        padding: 0 15px;
+    }
+
+    .modal-header.with-tabs {
+        padding: 0;
     }
 }
 
@@ -1538,6 +1707,12 @@ a.js-shipping-ver-direcciones:active,
 
 {# /* // Grid item */ #}
 
+.item-container .item,
+.item {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
 .item{
     &-image-container{
         background-color: #070707;
@@ -1791,14 +1966,45 @@ h1.product-name {
 }
 
 
+.cart-empty-state,
+.empty-cart-messages.cart-empty-state {
+    margin: 24px 0;
+    padding: 0;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    color: inherit !important;
+}
+
+.cart-empty-state-text {
+    margin: 0 0 12px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.45;
+    opacity: 0.55;
+}
+
+.cart-empty-state-link {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
+}
+
 {#/*============================================================================
   #Cart — grid layout (panel + page)
 ==============================================================================*/#}
 
-{# /* Shared item grid */ #}
+{# /* Shared item grid — fixed qty/subtotal tracks so header + rows align */ #}
 .cart-item-grid {
     display: grid;
-    grid-template-columns: 64px minmax(0, 1fr) auto auto 28px;
+    grid-template-columns: 64px minmax(0, 1fr) 100px 110px 28px;
     grid-template-areas: "thumb info qty subtotal delete";
     gap: 12px;
     align-items: start;
@@ -1816,7 +2022,8 @@ h1.product-name {
 
 .cart-item-grid-header {
     display: grid;
-    grid-template-columns: 64px minmax(0, 1fr) auto auto 28px;
+    grid-template-columns: 64px minmax(0, 1fr) 100px 110px 28px;
+    grid-template-areas: "product product qty subtotal delete";
     gap: 12px;
     align-items: end;
     padding: 0 0 10px;
@@ -1834,17 +2041,26 @@ h1.product-name {
 }
 
 .cart-item-grid-header-product {
-    grid-column: 1 / 3;
+    grid-area: product;
 }
 
 .cart-item-grid-header-qty {
-    text-align: left;
+    grid-area: qty;
     justify-self: start;
+    text-align: left;
+    width: 100%;
 }
 
 .cart-item-grid-header-subtotal,
 .cart-item-grid-header-price {
+    grid-area: subtotal;
+    justify-self: end;
     text-align: right;
+    width: 100%;
+}
+
+.cart-item-grid-header-delete {
+    grid-area: delete;
 }
 
 .cart-item-grid-thumb {
@@ -1909,6 +2125,7 @@ h1.product-name {
     grid-area: qty;
     display: inline-flex;
     align-items: center;
+    justify-self: start;
     gap: 0;
     float: none;
 }
@@ -2208,6 +2425,28 @@ h1.product-name {
         display: inline-block;
         width: auto;
         float: none;
+    }
+
+    {# Empty cart: no Bootstrap alert (invert turns alert-info into brown bar) #}
+    .cart-empty-state,
+    .js-empty-ajax-cart {
+        margin: 24px 0 8px;
+        padding: 0;
+        background: transparent !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        color: inherit !important;
+    }
+
+    .cart-empty-state-text {
+        margin: 0;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        line-height: 1.45;
+        opacity: 0.55;
     }
 }
 

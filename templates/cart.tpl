@@ -11,14 +11,16 @@
         {% snipplet 'cart/cart-form.tpl' %}
 	{% else %}
         {#  Empty cart  #}
-		<div class="alert alert-info empty-cart-messages">
+		<div class="cart-empty-state empty-cart-messages">
 			{% if error %}
-				{{ "¡Uy! No tenemos más stock de este producto para agregarlo al carrito. Si querés podés" | translate }}
-				<a href="{{ store.products_url }}" class="btn btn-link p-none">{{ "ver otros acá" | translate }}</a>
+				<p class="cart-empty-state-text">
+					{{ "¡Uy! No tenemos más stock de este producto para agregarlo al carrito. Si querés podés" | translate }}
+					<a href="{{ store.products_url }}" class="btn-link p-none">{{ "ver otros acá" | translate }}</a>
+				</p>
 			{% else %}
-				{{ "El carrito de compras está vacío." | translate }}
+				<p class="cart-empty-state-text">{{ "El carrito de compras está vacío." | translate }}</p>
+				<a href="{{ store.products_url }}" class="cart-empty-state-link">{{ "Ver más productos" | translate }}</a>
 			{% endif %}
-			{{ ("Ver más productos" | translate ~ " »") | a_tag(store.products_url) }}
 		</div>
 	{% endif %}
   	<div id="store-curr" class="hidden">{{ cart.currency }}</div>

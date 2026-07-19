@@ -228,23 +228,62 @@ LS.ready.then(function() {
         var $top_nav = $(".js-main-navbar");
         var $mobile_categories_btn = $(".js-toggle-mobile-categories");
 
-        {# Modals above all elements #}
+        {# Modals above all elements.
+           body { filter: invert(1) } creates a containing block, so position:fixed
+           follows scroll. Move modal + backdrop to <html> and re-apply invert only
+           on the modal panel (backdrop stays dark to dim the light inverted page). #}
 
         $(document).on("click", ".js-trigger-modal-zindex-top", function (e) {
-            {# Stop label/parent from swallowing the click; let Bootstrap open the modal first #}
+            e.preventDefault();
             e.stopPropagation();
+
             var modal_id = $(this).attr("href");
             var $modal = $(modal_id);
             if (!$modal.length) {
                 return;
             }
-            $modal.one("shown.bs.modal", function () {
-                var $backdrop = $(".modal-backdrop").last();
-                if ($backdrop.length) {
-                    $modal.detach().insertAfter($backdrop);
-                    $backdrop.addClass("modal-backdrop-zindex-top");
+
+            $modal.off(".viewportFixedModal");
+
+            $modal.one("show.bs.modal.viewportFixedModal", function () {
+                $modal.addClass("js-modal-viewport-fixed");
+                if ($modal.parent()[0] !== document.documentElement) {
+                    $("html").append($modal);
                 }
             });
+
+            $modal.one("shown.bs.modal.viewportFixedModal", function () {
+                var $backdrop = $(".modal-backdrop").last();
+                if ($backdrop.length) {
+                    $backdrop.addClass("modal-backdrop-zindex-top js-modal-viewport-backdrop");
+                    if ($backdrop.parent()[0] !== document.documentElement) {
+                        $("html").append($backdrop);
+                    }
+                }
+                $modal.css({
+                    display: "flex",
+                    top: "0",
+                    left: "0",
+                    right: "0",
+                    bottom: "0",
+                    transform: "none",
+                    webkitTransform: "none"
+                });
+            });
+
+            $modal.one("hidden.bs.modal.viewportFixedModal", function () {
+                $modal.removeClass("js-modal-viewport-fixed").css({
+                    display: "",
+                    top: "",
+                    left: "",
+                    right: "",
+                    bottom: "",
+                    transform: "",
+                    webkitTransform: ""
+                });
+            });
+
+            $modal.modal("show");
         });
 
         {#/*============================================================================
@@ -1342,41 +1381,73 @@ LS.ready.then(function() {
             current_image.attr('srcset', variant.image_url);
         });
 
-        {# /* // Product mobile variants */ #}
+        {# /* // Product mobile variants
+           body { filter: invert(1) } makes position:fixed follow scroll → blank panel.
+           Move panel to <html> while open so it sticks to the viewport. */ #}
+
+        function restoreMobileVarsPanel($panel) {
+            var $home = $panel.data("vars-home");
+            if ($home && $home.length && $panel.parent()[0] !== $home[0]) {
+                $home.append($panel);
+            }
+            $panel.removeClass("js-mobile-vars-viewport-fixed");
+        }
 
         $(document).on("click", ".js-mobile-vars-btn", function(e) {
-            $(this).next(".js-mobile-vars-panel").removeClass('js-var-panel modal-xs-right-out');
-            $(this).next(".js-mobile-vars-panel").addClass('js-var-panel modal-xs-right-in');
-            $(this).closest(".modal").animate({scrollTop:"0px"});
+            var $btn = $(this);
+            var $panel = $btn.next(".js-mobile-vars-panel");
+            if (!$panel.length && $btn.attr("id")) {
+                $panel = $('.js-mobile-vars-panel[data-custom="' + $btn.attr("id") + '"]');
+            }
+            if (!$panel.length) {
+                return;
+            }
+            if (!$panel.data("vars-home")) {
+                $panel.data("vars-home", $panel.parent());
+            }
+            if ($panel.parent()[0] !== document.documentElement) {
+                $("html").append($panel);
+            }
+            $panel.addClass("js-mobile-vars-viewport-fixed");
+            $panel.removeClass('js-var-panel modal-xs-right-out');
+            $panel.addClass('js-var-panel modal-xs-right-in');
+            $btn.closest(".modal").animate({scrollTop:"0px"});
             $("body").addClass("overflow-none");
         });
 
         function closeVarPanel() {
+            var $panel = $('.js-var-panel');
+            $panel.removeClass('modal-xs-right-in').addClass('modal-xs-right-out');
             setTimeout(function(){
-                $('.js-var-panel').removeClass('modal-xs-right-in').addClass('modal-xs-right-out')}, 300);
+                $panel.each(function() {
+                    restoreMobileVarsPanel($(this));
+                });
                 $("body").removeClass("overflow-none");
-            };
+            }, 300);
+        };
         $(document).on("click", ".js-close-panel", function(e) {
             e.preventDefault();
             closeVarPanel();
         });
 
-        $(".js-mobile-vars-property").on( "click", function() {   
-          var selectedoption = $(this).data("option");
-          var varname = $(this).closest(".js-mobile-vars-panel").data("custom");
-          $(this).closest(".js-mobile-vars").find(".js-mobile-vars-selected-label").html(selectedoption);
-          $(this).closest(".js-product-container").scrollTop($(this).closest(".js-mobile-vars").find(".js-mobile-vars-btn").offset().top);
-          closeVarPanel();
-        });
-
         $(document).on("click", ".js-mobile-vars-property", function(e) {
             e.preventDefault();
-            $this = $(this);
+            var $this = $(this);
+            var option_id = $this.data('option');
+            var option_label = $this.find(".modal-xs-radio-text").text().trim() || option_id;
+            var $panel = $this.closest(".js-mobile-vars-panel");
+            var $home = $panel.data("vars-home");
+            var $vars = $home && $home.length ? $home.closest(".js-mobile-vars") : $panel.closest(".js-mobile-vars");
+            var $container = $home && $home.length ? $home.closest(".js-mobile-variations-container") : $this.closest(".js-mobile-variations-container");
+
             $this.siblings().removeClass("selected");
             $this.addClass("selected");
-            var option_id = $this.data('option');
-            $selected_option = $this.closest('.js-mobile-variations-container').find('.js-variation-option option[value="'+option_id+'"]');
+            if ($vars.length) {
+                $vars.find(".js-mobile-vars-selected-label").html(option_label);
+            }
+            var $selected_option = $container.find('.js-variation-option option[value="'+option_id+'"]');
             $selected_option.prop('selected', true).trigger('change');
+            closeVarPanel();
         });
 
         {# /* // Product quantity input */ #}

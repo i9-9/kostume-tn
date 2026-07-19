@@ -1,16 +1,19 @@
 <div class="js-product-variants {% if quickshop %}js-product-quickshop-variants{% else %}product-variants{% endif %} pull-left full-width">
-  {# Color and size variants #}
-  {% for variation in product.variations if variation.name in ['Color', 'Cor', 'Talle', 'Tamanho', 'Size'] %}
-      <div data-variant="{{ variation.name }}" class="variation_{{loop.index}} {% if settings.product_color_variants and variation.name in ['Color', 'Cor'] %}js-color-variant-bullet{% endif %} {% if not quickshop and settings.show_description_bottom %} text-center text-left-xs {% else %} text-left {% endif %} variant-container btn-variant-container">
+  {# Color and size variants (instant buttons). Include plural/common aliases used in the catalog. #}
+  {% for variation in product.variations %}
+    {% set variation_name_lower = variation.name|lower %}
+    {% set is_instant_variant = variation_name_lower in ['color', 'cor', 'talle', 'talles', 'talla', 'tamanho', 'size'] %}
+    {% if is_instant_variant %}
+      <div data-variant="{{ variation.name }}" class="variation_{{loop.index}} {% if settings.product_color_variants and variation_name_lower in ['color', 'cor'] %}js-color-variant-bullet{% endif %} {% if not quickshop and settings.show_description_bottom %} text-center text-left-xs {% else %} text-left {% endif %} variant-container btn-variant-container">
         <label class="variant-label" for="variation_{{loop.index}}">
             <span>{{variation.name}}</span>
           <strong class="js-insta-variation-label">{{ product.default_options[variation.id] }}</strong>
         </label>
         <div class="full-width">
           {% for option in variation.options if option.custom_data %}
-              <a data-option="{{ option.id }}" class="js-insta-variant btn-variant{% if not(variation.name in ['Color', 'Cor']) %} btn-variant-custom{% endif %} insta-variations {{ variation.name }} {% if product.default_options[variation.id] == option.id %} selected {% endif %}">
-                <span class="btn-variant-content"{% if variation.name in ['Color', 'Cor'] %} style="background: {{ option.custom_data }}"{% endif %} data-name="{{ option.name }}">
-                  {% if not(variation.name in ['Color', 'Cor']) %}
+              <a data-option="{{ option.id }}" class="js-insta-variant btn-variant{% if not(variation_name_lower in ['color', 'cor']) %} btn-variant-custom{% endif %} insta-variations {{ variation.name }} {% if product.default_options[variation.id] == option.id %} selected {% endif %}">
+                <span class="btn-variant-content"{% if variation_name_lower in ['color', 'cor'] %} style="background: {{ option.custom_data }}"{% endif %} data-name="{{ option.name }}">
+                  {% if not(variation_name_lower in ['color', 'cor']) %}
                     {{ option.name }}
                   {% endif %}
                 </span>
@@ -23,12 +26,15 @@
           {% endfor %}
         </div>
       </div>
+    {% endif %}
   {% endfor %}
   {# Custom variants #}
   {% for variation in product.variations %}
-    <div class="js-mobile-variations-container variant-container {% if variation.name in ['Color', 'Cor', 'Talle', 'Tamanho', 'Size']%} m-none {% endif %}">
-      <div class="desktop-product-variation row {% if not quickshop %}hidden-xs{% endif %}" {% if variation.name in ['Color', 'Cor', 'Talle', 'Tamanho', 'Size']%} style="display: none" {% endif %}>
-        <div class="js-product-variants-group {% if variation.name in ['Color', 'Cor'] %}js-color-variants-container{% endif %} form-group select-container m-bottom-none {% if not quickshop %}m-bottom-xs{% endif %} col-xs-12 {% if not quickshop and settings.show_description_bottom %}col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3{% endif %}">
+    {% set variation_name_lower = variation.name|lower %}
+    {% set is_instant_variant = variation_name_lower in ['color', 'cor', 'talle', 'talles', 'talla', 'tamanho', 'size'] %}
+    <div class="js-mobile-variations-container variant-container {% if is_instant_variant %} m-none {% endif %}">
+      <div class="desktop-product-variation row {% if not quickshop %}hidden-xs{% endif %}" {% if is_instant_variant %} style="display: none" {% endif %}>
+        <div class="js-product-variants-group {% if variation_name_lower in ['color', 'cor'] %}js-color-variants-container{% endif %} form-group select-container m-bottom-none {% if not quickshop %}m-bottom-xs{% endif %} col-xs-12 {% if not quickshop and settings.show_description_bottom %}col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3{% endif %}">
           <label class="variant-label" for="variation_{{loop.index}}">
               {{variation.name}}
           </label>
@@ -42,16 +48,16 @@
           </div>
         </div>
       </div>
-      {% if not(variation.name in ['Color', 'Cor', 'Talle', 'Tamanho', 'Size']) and not quickshop %}
+      {% if not is_instant_variant and not quickshop %}
         <div class="js-mobile-vars mobile-vars visible-xs">
-          <a href="javascript:void(0)" class="js-mobile-vars-btn btn-module {% if quickshop %} js-quickshop-vars {% endif %}" id="{{variation.name}}" style="{% if variation.name in ['Color', 'Cor', 'Talle', 'Tamanho', 'Size']%}display:none;{% endif %}">
+          <a href="javascript:void(0)" class="js-mobile-vars-btn btn-module {% if quickshop %} js-quickshop-vars {% endif %}" id="{{variation.name}}">
               <p class="text-wrap m-none">{{variation.name}}</p>
               <span class="js-mobile-vars-selected-label text-primary text-wrap">{{ product.default_options[variation.id] }}</span>
               <div class="btn-module-icon-right link-module-icon m-right-none">
                 {% include "snipplets/svg/angle-right.tpl" %}
               </div>  
           </a>
-          <div class="js-mobile-vars-panel modal-xs modal-xs-right panel-mobile-variant modal-xs-right-out" data-custom="{{variation.name}}" style="{% if variation.name in ['Color', 'Cor', 'Talle', 'Tamanho', 'Size']%}display:none;{% endif %}">
+          <div class="js-mobile-vars-panel modal-xs modal-xs-right panel-mobile-variant modal-xs-right-out" data-custom="{{variation.name}}">
             <div class="modal-xs-dialog">
 
               <a href="javascript:void(0)" class="js-close-panel modal-xs-header">

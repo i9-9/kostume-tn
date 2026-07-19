@@ -1,3 +1,4 @@
+{% set installments_info = product.installments_info_from_any_variant %}
 {% if installments_info %}
 {% set gateways = installments_info | length %}
 {% set store_set_for_new_installments_view = store.is_set_for_new_installments_view %}
