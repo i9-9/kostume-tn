@@ -132,7 +132,7 @@
             height: 100% !important;
             max-height: none !important;
             margin: 0 !important;
-            padding: 24px 16px !important;
+            padding: 15px !important;
             overflow: hidden !important;
             background: transparent !important;
             border: 0 !important;
@@ -183,17 +183,125 @@
         html > .shipping-pickup-modal .shipping-pickup-modal-content,
         html > .js-modal-shipping-suboptions .shipping-pickup-modal-content {
             max-height: 80vh !important;
+            width: 100% !important;
+            max-width: 420px !important;
+            margin: 0 auto !important;
+            box-sizing: border-box !important;
+        }
+        html > .shipping-pickup-modal .shipping-pickup-modal-content,
+        html > .js-modal-shipping-suboptions .shipping-pickup-modal-content {
+            background: #070707 !important;
+            color: #fff !important;
+            border: 1px solid #2a2a2a !important;
+            overflow: hidden !important;
+            max-height: 70vh !important;
+        }
+        html > .shipping-pickup-modal .shipping-pickup-modal-header,
+        html > .js-modal-shipping-suboptions .shipping-pickup-modal-header {
+            position: relative !important;
+            margin: 0 !important;
+            padding: 15px 48px 15px 15px !important;
+            border-bottom: 1px solid #2a2a2a !important;
+            box-sizing: border-box !important;
+            background: #070707 !important;
+        }
+        html > .shipping-pickup-modal .shipping-pickup-modal-header:before,
+        html > .shipping-pickup-modal .shipping-pickup-modal-header:after,
+        html > .js-modal-shipping-suboptions .shipping-pickup-modal-header:before,
+        html > .js-modal-shipping-suboptions .shipping-pickup-modal-header:after {
+            display: none !important;
+            content: none !important;
+        }
+        html > .shipping-pickup-modal .shipping-pickup-modal-title,
+        html > .js-modal-shipping-suboptions .shipping-pickup-modal-title {
+            margin: 0 !important;
+            padding: 0 !important;
+            font-size: 12px !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.1em !important;
+            text-transform: uppercase !important;
+            text-align: left !important;
+            color: #fff !important;
+        }
+        html > .shipping-pickup-modal .shipping-pickup-modal-close,
+        html > .js-modal-shipping-suboptions .shipping-pickup-modal-close {
+            position: absolute !important;
+            top: 12px !important;
+            right: 12px !important;
+            width: 32px !important;
+            height: 32px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            display: -webkit-inline-box !important;
+            display: -ms-inline-flexbox !important;
+            display: inline-flex !important;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
         }
         html > .shipping-pickup-modal .shipping-pickup-modal-close svg,
         html > .js-modal-shipping-suboptions .shipping-pickup-modal-close svg {
+            width: 14px !important;
+            height: 14px !important;
             fill: #fff !important;
             color: #fff !important;
+        }
+        html > .shipping-pickup-modal .shipping-pickup-item,
+        html > .js-modal-shipping-suboptions .shipping-pickup-item {
+            padding: 12px 15px !important;
+            margin: 0 !important;
+            background: #070707 !important;
+        }
+        html > .shipping-pickup-modal .shipping-pickup-modal-body,
+        html > .js-modal-shipping-suboptions .shipping-pickup-modal-body {
+            background: #070707 !important;
+        }
+        html > .shipping-pickup-modal .shipping-pickup-modal-footer,
+        html > .js-modal-shipping-suboptions .shipping-pickup-modal-footer {
+            padding: 12px 15px 14px !important;
+            background: #0d0d0d !important;
+        }
+        html > .js-modal-viewport-fixed.modal .modal-header:before,
+        html > .js-modal-viewport-fixed.modal .modal-header:after {
+            display: none !important;
+            content: none !important;
+        }
+        html > .js-modal-viewport-fixed.modal .modal-header {
+            position: relative !important;
+            padding: 15px 48px 15px 15px !important;
+            box-sizing: border-box !important;
+        }
+        html > .js-modal-viewport-fixed.modal .modal-header h3 {
+            margin: 0 !important;
+            font-size: 12px !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.1em !important;
+            text-transform: uppercase !important;
+            text-align: left !important;
+        }
+        html > .js-modal-viewport-fixed.modal .modal-header .btn-floating {
+            position: absolute !important;
+            top: 10px !important;
+            right: 10px !important;
+            width: 32px !important;
+            height: 32px !important;
+            margin: 0 !important;
+            float: none !important;
+        }
+        html > .js-modal-viewport-fixed.modal .modal-body {
+            padding: 15px !important;
+        }
+        html > .js-modal-viewport-fixed.modal .modal-footer {
+            padding: 12px 15px 14px !important;
         }
         @media (max-width: 767px) {
             html > .js-modal-viewport-fixed.modal,
             html > .shipping-pickup-modal.modal,
             html > .js-modal-shipping-suboptions.modal {
-                padding: 16px 12px !important;
+                padding: 15px !important;
             }
         }
 
@@ -229,6 +337,58 @@
             max-height: 100vh !important;
             overflow: auto !important;
             -webkit-overflow-scrolling: touch;
+        }
+
+        /* Ajax cart + medios de pago: mismo escape a <html> (VER CARRITO en PDP, etc.) */
+        html > .js-ajax-cart-panel.js-ajax-cart-viewport-fixed,
+        html > #installments-modal.js-installments-viewport-fixed {
+            position: fixed !important;
+            top: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            max-width: none !important;
+            height: 100% !important;
+            max-height: 100vh !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: auto !important;
+            -webkit-overflow-scrolling: touch;
+            -webkit-filter: invert(1) !important;
+            filter: invert(1) !important;
+            z-index: 10000 !important;
+            background: #070707 !important;
+            color: #fff !important;
+        }
+        html > .js-ajax-cart-panel.js-ajax-cart-viewport-fixed.modal-xs-right-in,
+        html > #installments-modal.js-installments-viewport-fixed.modal-xs-right-in,
+        html > #installments-modal.js-installments-viewport-fixed.in {
+            -webkit-transform: translate3d(0, 0, 0) !important;
+            -ms-transform: translate3d(0, 0, 0) !important;
+            transform: translate3d(0, 0, 0) !important;
+            display: block !important;
+            opacity: 1 !important;
+        }
+        html > .js-ajax-cart-panel.js-ajax-cart-viewport-fixed.modal-xs-right-out,
+        html > #installments-modal.js-installments-viewport-fixed.modal-xs-right-out {
+            -webkit-transform: translate3d(100%, 0, 0) !important;
+            -ms-transform: translate3d(100%, 0, 0) !important;
+            transform: translate3d(100%, 0, 0) !important;
+        }
+        html > #installments-modal.js-installments-viewport-fixed .modal-dialog,
+        html > #installments-modal.js-installments-viewport-fixed .modal-xs-dialog,
+        html > #installments-modal.js-installments-viewport-fixed .modal-content {
+            width: 100% !important;
+            max-width: none !important;
+            height: 100% !important;
+            max-height: 100vh !important;
+            margin: 0 !important;
+            background: #070707 !important;
+            color: #fff !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
         }
 
         /* Breadcrumbs: fondo del tema (#070707) → blanco con invert.

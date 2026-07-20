@@ -17,7 +17,7 @@
 
 				{# Free shipping labels when calcualtor is hidden #}
 
-				<div class="free-shipping-title {% if template == 'cart' or product_detail %}text-left text-center-xs{% else %}text-center{% endif %} transition-soft row">
+				<div class="free-shipping-title {% if template == 'cart' or product_detail %}text-left{% else %}text-center{% endif %} transition-soft row">
 
 					{# Free shipping achieved label #}
 

@@ -524,11 +524,16 @@ html::-webkit-scrollbar-thumb:hover {
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
+    line-height: 1.4;
 
-    .btn-link {
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
+    .btn-link,
+    a {
+        font-size: 11px !important;
         font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        line-height: 1.4;
+        vertical-align: baseline;
     }
 }
 .btn-secondary{
@@ -705,6 +710,84 @@ a:focus{
 
 .modal-header {
     border-bottom:1px solid rgba($main-foreground, 0.1);
+
+    {# Bootstrap clearfix pseudo-elements break flex headers (title/X spacing) #}
+    &:before,
+    &:after {
+        display: none !important;
+        content: none !important;
+    }
+}
+
+{# /* País de entrega / small centered modals */ #}
+.js-modal-shipping-country.modal,
+.js-modal-viewport-fixed.modal {
+    .modal-dialog {
+        width: 100% !important;
+        max-width: 420px !important;
+        margin: 0 auto !important;
+        float: none !important;
+        box-sizing: border-box !important;
+    }
+
+    .modal-content {
+        margin: 0 !important;
+        border-radius: 0;
+        box-sizing: border-box !important;
+    }
+
+    .modal-header {
+        position: relative;
+        margin: 0;
+        padding: 14px 44px 14px 15px !important;
+        border-bottom: 1px solid rgba($main-foreground, 0.1);
+
+        h3 {
+            margin: 0 !important;
+            padding: 0 !important;
+            font-size: 12px !important;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            line-height: 1.3;
+            text-align: left !important;
+        }
+
+        .btn-floating {
+            position: absolute !important;
+            top: 10px;
+            right: 10px;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 32px;
+            height: 32px;
+            display: -webkit-inline-box;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            float: none !important;
+
+            svg {
+                width: 14px;
+                height: 14px;
+            }
+        }
+    }
+
+    .modal-body {
+        padding: 15px !important;
+    }
+
+    .modal-footer {
+        padding: 12px 15px 14px !important;
+        text-align: left;
+        border-top: 1px solid rgba($main-foreground, 0.1);
+    }
 }
 
 {# /* Shipping pickup addresses modal — viewport-centered (also see layout.tpl html> rules) */ #}
@@ -720,7 +803,7 @@ a:focus{
     height: 100% !important;
     max-height: none !important;
     margin: 0 !important;
-    padding: 24px 16px !important;
+    padding: 15px !important;
     overflow: hidden !important;
     background: transparent !important;
     border: 0 !important;
@@ -752,8 +835,10 @@ a:focus{
     width: 100% !important;
     max-width: 420px !important;
     max-height: 80vh !important;
-    margin: 0 !important;
+    margin: 0 auto !important;
     float: none !important;
+    -webkit-box-sizing: border-box !important;
+    box-sizing: border-box !important;
 }
 
 .shipping-pickup-modal-content {
@@ -764,6 +849,7 @@ a:focus{
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
+    width: 100% !important;
     max-height: 80vh !important;
     overflow: hidden !important;
     border: 1px solid rgba($main-foreground, 0.12);
@@ -771,36 +857,54 @@ a:focus{
     background: $main-background !important;
     color: $main-foreground !important;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    -webkit-box-sizing: border-box !important;
+    box-sizing: border-box !important;
 }
 
 .shipping-pickup-modal-header {
+    position: relative;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
     gap: 12px;
     flex: 0 0 auto;
+    width: 100% !important;
     margin: 0;
-    padding: 16px 18px !important;
+    padding: 15px 48px 15px 15px !important;
     border-bottom: 1px solid rgba($main-foreground, 0.1);
     cursor: pointer;
+    -webkit-box-sizing: border-box !important;
+    box-sizing: border-box !important;
+
+    {# Bootstrap clearfix ::before/::after become flex items and wreck alignment #}
+    &:before,
+    &:after {
+        display: none !important;
+        content: none !important;
+    }
 }
 
 .shipping-pickup-modal-title {
     margin: 0 !important;
-    font-size: 13px !important;
+    padding: 0 !important;
+    font-size: 12px !important;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     line-height: 1.3;
+    text-align: left !important;
 }
 
 .shipping-pickup-modal-close {
+    position: absolute !important;
+    top: 12px;
+    right: 12px;
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
     display: inline-flex;
@@ -810,9 +914,11 @@ a:focus{
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
-    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+    margin: 0 !important;
+    padding: 0 !important;
+    float: none !important;
     opacity: 1;
     color: $main-foreground;
     fill: $main-foreground;
@@ -821,6 +927,8 @@ a:focus{
     svg,
     .svg-icon-text,
     .svg-text-fill {
+        width: 14px;
+        height: 14px;
         fill: $main-foreground !important;
         color: $main-foreground !important;
     }
@@ -845,7 +953,7 @@ a:focus{
 
 .shipping-pickup-list {
     margin: 0;
-    padding: 4px 0;
+    padding: 0;
 }
 
 .shipping-pickup-item {
@@ -857,7 +965,7 @@ a:focus{
     align-items: flex-start;
     gap: 10px;
     margin: 0 !important;
-    padding: 12px 18px;
+    padding: 12px 15px;
     border-bottom: 1px solid rgba($main-foreground, 0.08);
     text-transform: none !important;
     line-height: 1.45;
@@ -886,7 +994,7 @@ a:focus{
 
 .shipping-pickup-modal-footer {
     flex: 0 0 auto;
-    padding: 12px 18px 14px;
+    padding: 12px 15px 14px;
     border-top: 1px solid rgba($main-foreground, 0.1);
     background: rgba($main-foreground, 0.03);
 }
@@ -936,7 +1044,7 @@ a.js-shipping-ver-direcciones:active,
 @media (max-width: 767px) {
     .shipping-pickup-modal.modal,
     .js-modal-shipping-suboptions.modal {
-        padding: 16px 12px !important;
+        padding: 15px !important;
 
         &.modal-xs-centered,
         &.modal-xs-centered.fade.in {
@@ -1039,6 +1147,21 @@ a.js-shipping-ver-direcciones:active,
 }
 
 {# /*
+   Spacing scale (product + shipping)
+   x = 8px. Use only multiples / halves of x.
+   0.5x=4 · 1x=8 · 1.5x=12 · 2x=16 · 3x=24 · 4x=32 · 5x=40 · 6x=48
+*/ #}
+$space-x: 8px;
+$space-05: $space-x * 0.5;
+$space-1: $space-x;
+$space-15: $space-x * 1.5;
+$space-2: $space-x * 2;
+$space-3: $space-x * 3;
+$space-4: $space-x * 4;
+$space-5: $space-x * 5;
+$space-6: $space-x * 6;
+
+{# /*
    Shipping calculator type scale (product + cart)
    - Label / section: 11 / 700 / 0.08em
    - Primary (name, price, form): 12 / 700 / 0.06em
@@ -1072,18 +1195,24 @@ a.js-shipping-ver-direcciones:active,
         text-transform: uppercase;
     }
 
-    {# /* Spacing rhythm: 8 / 12 / 16 */ #}
+    .free-shipping-title.text-left,
+    .free-shipping-title.text-left .js-free-shipping-title,
+    .free-shipping-title.text-left .js-free-shipping-title-min-cost {
+        text-align: left !important;
+    }
+
+    {# /* Spacing rhythm: 1x / 1.5x / 2x */ #}
     .full-width-container {
         float: left;
         clear: both;
         width: 100%;
-        margin: 0 0 8px;
+        margin: 0 0 $space-1;
         padding: 0;
     }
 
     .shipping-calculator-response {
         clear: both;
-        margin-top: 12px !important;
+        margin-top: $space-15 !important;
         padding-top: 0 !important;
         font-size: 12px;
     }
@@ -1091,7 +1220,7 @@ a.js-shipping-ver-direcciones:active,
     .js-product-shipping-label {
         display: block;
         clear: both;
-        margin: 0 0 12px !important;
+        margin: 0 0 $space-15 !important;
         padding: 0 !important;
     }
 
@@ -1100,7 +1229,7 @@ a.js-shipping-ver-direcciones:active,
         float: left;
         clear: both;
         width: 100%;
-        margin: 12px 0 0 !important;
+        margin: $space-15 0 0 !important;
         padding: 0 !important;
     }
 
@@ -1141,23 +1270,23 @@ a.js-shipping-ver-direcciones:active,
     }
 
     .shipping-option-meta {
-        margin-top: 4px;
+        margin-top: $space-05;
     }
 
     .shipping-price-old {
         display: block;
-        margin-top: 4px;
+        margin-top: $space-05;
         text-decoration: line-through;
         opacity: 0.45;
     }
 
     .shipping-calculator-response > .font-small {
-        margin-top: 8px;
+        margin-top: $space-1;
     }
 
     .js-toggle-more-shipping-options {
         clear: both;
-        margin: 8px 0 0 !important;
+        margin: $space-1 0 0 !important;
         padding: 0 !important;
     }
 
@@ -1214,19 +1343,19 @@ a.js-shipping-ver-direcciones:active,
         clear: both;
         width: 100%;
         padding: 0;
-        margin: 0 0 16px;
+        margin: 0 0 $space-2;
         box-shadow: none;
         border: 0;
         font-size: 12px;
 
         &.m-bottom {
-            margin-bottom: 16px !important;
+            margin-bottom: $space-2 !important;
         }
     }
     .list-readonly .list-item,
     .list-item {
         margin: 0;
-        padding: 12px 0;
+        padding: $space-15 0;
         border-bottom: 1px solid #2a2a2a;
         font-size: 12px;
         &:only-child,
@@ -1276,24 +1405,130 @@ a.js-shipping-ver-direcciones:active,
     }
 }
 
-{# /* Product form stack spacing (CTA → payments → shipping) */ #}
+{# /* Product form stack spacing — hierarchy via multiples of x */ #}
 .product-form-container {
+    {# 6x: title/price as hero block #}
+    .product-title-price-row {
+        margin-bottom: $space-6 !important;
+    }
+
+    {# 1x under CTA, 4x before shipping block #}
     .product-payments-link {
-        margin: 12px 0 !important;
+        margin: $space-1 0 $space-4 !important;
         padding: 0;
     }
 
     #product-shipping-container {
         margin-top: 0 !important;
-        margin-bottom: 16px !important;
+        margin-bottom: $space-1 !important;
+    }
+
+    {# CTA + payments as one block: 4x air above #}
+    .add-to-cart.m-bottom {
+        margin-top: $space-4 !important;
+        margin-bottom: 0 !important;
+    }
+
+    .js-product-form > .row.m-top {
+        margin-top: $space-15 !important;
+    }
+}
+
+{# /* Product shipping: kill fixed heights that leave empty air around free-shipping label */ #}
+.product-shipping-calculator {
+    .shipping-calculator-head {
+        margin-top: 0 !important;
+        margin-bottom: $space-3 !important; {# 3x below zip / free-shipping block #}
+    }
+
+    .shipping-calculator-head.with-zip,
+    .shipping-calculator-head.with-zip.with-free-shipping,
+    .shipping-calculator-head.with-form,
+    .shipping-calculator-head.with-error {
+        height: auto !important;
+    }
+
+    {# Keep the active panel in flow so height:auto actually wraps content #}
+    .js-shipping-calculator-with-zipcode.transition-up-active,
+    .js-shipping-calculator-form.transition-up-active {
+        position: relative !important;
+        top: 0 !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    .free-shipping-title {
+        position: relative;
+        height: auto !important;
+        min-height: 0 !important;
+        margin: 0 0 $space-1 !important;
+        padding: 0 !important;
+    }
+
+    {# Absolute free-shipping labels leave a 50px hole; pin them in normal flow when active #}
+    .free-shipping-title .js-free-shipping-title,
+    .free-shipping-title .js-free-shipping-title-min-cost {
+        position: static !important;
+        display: none;
+        width: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        top: auto !important;
+        -webkit-transform: none !important;
+        -ms-transform: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    .free-shipping-title .js-free-shipping-title.transition-up-active,
+    .free-shipping-title .js-free-shipping-title-min-cost.transition-up-active {
+        display: block !important;
+    }
+}
+
+.product-form-container > .display-when-content-ready {
+    margin-bottom: $space-1 !important;
+}
+
+{# /* Mobile PDP gutters: 15px content, gallery full-bleed (no stack with .container 10px) */ #}
+@media (max-width: 767px) {
+    .js-product-container.container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .js-product-image-container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .product-form-container.text-left {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
     }
 }
 
 {# /* Payments modal spacing */ #}
 #installments-modal {
+    .modal-xs-header {
+        padding: 15px !important;
+        box-sizing: border-box;
+
+        &:before,
+        &:after {
+            display: none !important;
+            content: none !important;
+        }
+    }
+
     .modal-body,
     .modal-xs-body {
         padding: 15px !important;
+    }
+
+    .nav-tabs-container {
+        margin: 0;
+        padding: 0 15px;
+        box-sizing: border-box;
     }
 
     .box-title {
@@ -1333,11 +1568,6 @@ a.js-shipping-ver-direcciones:active,
 
     .installments-card {
         margin: 0 8px 8px 0;
-    }
-
-    .nav-tabs-container {
-        margin: 0;
-        padding: 0 15px;
     }
 
     .modal-header.with-tabs {
@@ -2833,6 +3063,205 @@ h1.product-name {
     background-color:darken($main-background, .5%);
 }
 
+{# /* Cart add-to-cart toast — same voice as cart panel / shipping */ #}
+.cart-toast.notification-floating {
+    width: 320px;
+    max-width: calc(100vw - 24px);
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.cart-toast-card.notification,
+.cart-toast-card {
+    float: none !important;
+    width: 100%;
+    padding: 0 !important;
+    text-align: left !important;
+    border: 1px solid #2a2a2a !important;
+    border-radius: 0 !important;
+    background: #070707 !important;
+    color: #fff !important;
+    fill: #fff !important;
+    box-shadow: none !important;
+}
+
+.cart-toast-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    fill: #fff;
+    opacity: 0.55;
+    cursor: pointer;
+
+    svg,
+    .svg-icon-text,
+    .svg-text-fill {
+        width: 12px;
+        height: 12px;
+        fill: #fff !important;
+        color: #fff !important;
+    }
+
+    &:hover,
+    &:focus {
+        opacity: 1;
+        outline: 0;
+    }
+}
+
+.cart-toast-status {
+    padding: 14px 40px 0 14px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1.3;
+    opacity: 0.55;
+}
+
+.cart-toast-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px 14px;
+}
+
+.cart-toast-img {
+    flex: 0 0 56px;
+    width: 56px;
+    overflow: hidden;
+    background: #070707;
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
+
+.cart-toast-info {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding-right: 4px;
+}
+
+.cart-toast-name {
+    margin-bottom: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.35;
+    word-break: break-word;
+    color: #fff;
+}
+
+.cart-toast-variant {
+    display: block;
+    margin-top: 2px;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.55;
+}
+
+.cart-toast-meta {
+    margin-top: 6px;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    opacity: 0.65;
+}
+
+.cart-toast-meta-sep {
+    margin: 0 2px;
+}
+
+.cart-toast-footer {
+    width: auto !important;
+    margin: 0 !important;
+    padding: 12px 14px 14px !important;
+    border-top: 1px solid #2a2a2a;
+    border-radius: 0 !important;
+    background: transparent !important;
+}
+
+.cart-toast-total {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.cart-toast-total-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.cart-toast-total-count {
+    margin-left: 4px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    opacity: 0.55;
+    text-transform: lowercase;
+}
+
+.cart-toast-total-price {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.cart-toast-cta.btn,
+.cart-toast-cta {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 10px 14px;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+    color: #1e1e1e !important;
+    font-size: 11px !important;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none !important;
+    line-height: 1.3;
+
+    &:hover,
+    &:focus,
+    &:active {
+        background: #1e1e1e !important;
+        color: #fff !important;
+        text-decoration: none !important;
+        outline: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .cart-toast.notification-floating {
+        width: calc(100% - 20px);
+    }
+}
+
 {#/*============================================================================
   #Utilities color classes
 ==============================================================================*/#}
@@ -3184,6 +3613,27 @@ h1.product-name {
             color:$main-foreground;
             border-bottom: 1px solid rgba($main-foreground, .2);
         }
+        .mobile-accounts,
+        .mobile-accounts a {
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            font-weight: 700 !important;
+        }
+    }
+
+    .account-links,
+    .account-links .nav-top-link,
+    .account-links .nav-top-item > a {
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        font-weight: 700 !important;
+    }
+
+    .mobile-accounts,
+    .mobile-accounts a {
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        font-weight: 700 !important;
     }
 
     {# /* //// Product grid */ #}

@@ -198,10 +198,16 @@ LS.ready.then(function() {
                     {# For custom modals #}
 
                     if($(".js-fullscreen-modal").hasClass("modal-xs-right-in")){
-
-                        $(".js-fullscreen-modal.modal-xs-right-in").toggleClass("modal-xs-right-in modal-xs-right-out");
-                        setTimeout(function() { 
-                            $(".js-fullscreen-modal.modal-xs-right-in").hide();
+                        var $openFullscreen = $(".js-fullscreen-modal.modal-xs-right-in");
+                        $openFullscreen.toggleClass("modal-xs-right-in modal-xs-right-out");
+                        setTimeout(function() {
+                            $openFullscreen.hide();
+                            if ($openFullscreen.hasClass("js-ajax-cart-panel") && window.restoreAjaxCartPanel) {
+                                window.restoreAjaxCartPanel();
+                            }
+                            if ($openFullscreen.is("#installments-modal") && window.restoreInstallmentsModal) {
+                                window.restoreInstallmentsModal();
+                            }
                         }, 300);
 
                     {# For bootstrap modals #}
@@ -219,6 +225,41 @@ LS.ready.then(function() {
             setTimeout(function(){
                 $('.modal-backdrop').addClass('sheet-bottom-backdrop');
             });
+        });
+
+        {# Installments / medios de pago: same filter+fixed bug on tall PDPs #}
+        window.pinInstallmentsModal = function($modal) {
+            $modal = $modal || $("#installments-modal");
+            if (!$modal.length) {
+                return;
+            }
+            if (!$modal.data("installments-home")) {
+                $modal.data("installments-home", $modal.parent());
+            }
+            if ($modal.parent()[0] !== document.documentElement) {
+                $("html").append($modal);
+            }
+            $modal.addClass("js-installments-viewport-fixed");
+        };
+
+        window.restoreInstallmentsModal = function() {
+            var $modal = $("#installments-modal");
+            if (!$modal.length) {
+                return;
+            }
+            var $home = $modal.data("installments-home");
+            $modal.removeClass("js-installments-viewport-fixed");
+            if ($home && $home.length && $modal.parent()[0] !== $home[0]) {
+                $home.append($modal);
+            }
+        };
+
+        $(document).on("show.bs.modal", "#installments-modal", function () {
+            window.pinInstallmentsModal($(this));
+        });
+
+        $(document).on("hidden.bs.modal", "#installments-modal", function () {
+            window.restoreInstallmentsModal();
         });
 
         {# Navigation vars #}
@@ -363,7 +404,7 @@ LS.ready.then(function() {
         $(".js-cart-notification-close").click(function(){
             $(".js-alert-added-to-cart").removeClass("notification-visible").addClass("notification-hidden");
             setTimeout(function(){
-                $('.js-cart-notification-item-img').attr('src', '');
+                $('.js-cart-notification-item-img').attr({ src: '', srcset: '' });
                 $(".js-alert-added-to-cart").hide();
             },2000);
         });
@@ -1669,6 +1710,28 @@ LS.ready.then(function() {
 
             const ajax_cart_panel = $(".js-ajax-cart-panel");
 
+            {# body { filter: invert(1) } creates a containing block: position:fixed
+               follows document scroll → blank/white panel on tall PDPs.
+               Pin cart to <html> while open (same pattern as mobile vars). #}
+
+            window.pinAjaxCartToViewport = function() {
+                if (!ajax_cart_panel.data("cart-home")) {
+                    ajax_cart_panel.data("cart-home", ajax_cart_panel.parent());
+                }
+                if (ajax_cart_panel.parent()[0] !== document.documentElement) {
+                    $("html").append(ajax_cart_panel);
+                }
+                ajax_cart_panel.addClass("js-ajax-cart-viewport-fixed");
+            };
+
+            window.restoreAjaxCartPanel = function() {
+                var $home = ajax_cart_panel.data("cart-home");
+                if ($home && $home.length && ajax_cart_panel.parent()[0] !== $home[0]) {
+                    $home.append(ajax_cart_panel);
+                }
+                ajax_cart_panel.removeClass("js-ajax-cart-viewport-fixed");
+            };
+
             mobileToggleAjaxCart = function(){
 
                 if(!$("body").hasClass("mobile-categories-visible")){
@@ -1677,12 +1740,14 @@ LS.ready.then(function() {
 
                 if(ajax_cart_panel.hasClass("modal-xs-right-in")){
                     ajax_cart_panel.toggleClass("modal-xs-right-in modal-xs-right-out");
-                    setTimeout(function() { 
+                    setTimeout(function() {
                         ajax_cart_panel.hide();
+                        window.restoreAjaxCartPanel();
                     }, 300);
                 }else{
+                    window.pinAjaxCartToViewport();
                     ajax_cart_panel.show();
-                    setTimeout(function() { 
+                    setTimeout(function() {
                         ajax_cart_panel.toggleClass("modal-xs-right-in modal-xs-right-out");
                     }, 300);
                 }
@@ -1764,7 +1829,7 @@ LS.ready.then(function() {
 
                         {# Fill notification info #}
 
-                        $('.js-cart-notification-item-img').attr('srcset', imageSrc);
+                        $('.js-cart-notification-item-img').attr({ src: imageSrc, srcset: imageSrc });
                         $('.js-cart-notification-item-name').text(name);
                         $('.js-cart-notification-item-quantity').text(quantity);
                         $('.js-cart-notification-item-price').text(price);
@@ -1818,22 +1883,18 @@ LS.ready.then(function() {
                             $(this).removeClass("jump").dequeue();
                         }); 
 
-                        {# Show notification and hide it only after second added to cart #}
+                        {# Show toast, then auto-dismiss #}
 
                         setTimeout(function(){
                             $(".js-alert-added-to-cart").show().addClass("notification-visible").removeClass("notification-hidden");
                         },500);
-                        if (!cookieService.get('first_product_added_successfully')) {
-                            cookieService.set('first_product_added_successfully', 1, 7 );
-                        } else{
+                        setTimeout(function(){
+                            $(".js-alert-added-to-cart").removeClass("notification-visible").addClass("notification-hidden");
                             setTimeout(function(){
-                                $(".js-alert-added-to-cart").removeClass("notification-visible").addClass("notification-hidden");
-                                setTimeout(function(){
-                                    $('.js-cart-notification-item-img').attr('src', '');
-                                    $(".js-alert-added-to-cart").hide();
-                                },2000);
-                            },8000);
-                        }
+                                $('.js-cart-notification-item-img').attr({ src: '', srcset: '' });
+                                $(".js-alert-added-to-cart").hide();
+                            },500);
+                        },4500);
 
                         if (isQuickShop && $(window).width() < 768) {
                             cleanURLHash();

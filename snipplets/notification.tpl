@@ -34,49 +34,48 @@
 {# Add to cart notification #}
 
 {% if add_to_cart %}
-	<div class="js-alert-added-to-cart notification-floating notification-hidden {% if add_to_cart_fixed %}notification-fixed{% endif %}" style="display: none;">
-        <div class="notification notification notification-primary">
-            <div class="notification-header">
-                <div class="js-cart-notification-close notification-close">
-                    {% include "snipplets/svg/times.tpl" with {fa_custom_class: "icon-inline fa-2x  svg-icon-text"} %}
-                </div>
+	<div class="js-alert-added-to-cart cart-toast notification-floating notification-hidden {% if add_to_cart_fixed %}notification-fixed{% endif %}" style="display: none;">
+        <div class="cart-toast-card notification notification-primary">
+            <button type="button" class="js-cart-notification-close cart-toast-close" aria-label="{{ 'Cerrar' | translate }}">
+                {% include "snipplets/svg/times.tpl" with {fa_custom_class: "fa-lg svg-icon-text"} %}
+            </button>
+
+            <div class="cart-toast-status">
+                {{ 'Agregado al carrito' | translate }}
             </div>
-            <div class="js-cart-notification-item row" data-store="cart-notification-item">
-                <div class="col-xs-3 p-right-none notification-img">
-                    <img src="" class="js-cart-notification-item-img img-responsive" />
+
+            <div class="js-cart-notification-item cart-toast-item" data-store="cart-notification-item">
+                <div class="cart-toast-img">
+                    <img src="" class="js-cart-notification-item-img" alt="" />
                 </div>
-                <div class="col-xs-9 text-left">
-                    <div class="m-bottom-quarer m-right-double">
+                <div class="cart-toast-info">
+                    <div class="cart-toast-name">
                         <span class="js-cart-notification-item-name"></span>
-                        <span class="js-cart-notification-item-variant-container" style="display: none;">
-                            (<span class="js-cart-notification-item-variant"></span>)
+                        <span class="js-cart-notification-item-variant-container cart-toast-variant" style="display: none;">
+                            <span class="js-cart-notification-item-variant"></span>
                         </span>
                     </div>
-                    <div>
+                    <div class="cart-toast-meta">
                         <span class="js-cart-notification-item-quantity"></span>
-                        <span> x </span>
+                        <span class="cart-toast-meta-sep">×</span>
                         <span class="js-cart-notification-item-price"></span>
                     </div>
-                    <strong>{{ '¡Agregado al carrito con éxito!' | translate }}</strong>
                 </div>
             </div>
-            <div class="notification-footer">
-                <div class="row h4 font-weight-normal m-top m-bottom-half p-top-half">
-                    <span class="col-xs-6 text-left">
-                        <strong>{{ "Total" | translate }}</strong> 
-                        (<span class="js-cart-widget-amount">
-                            {{ "{1}" | translate(cart.items_count ) }} 
-                        </span>
-                        <span class="js-cart-counts-plural" style="display: none;">
-                            {{ 'productos' | translate }}):
-                        </span>
-                        <span class="js-cart-counts-singular" style="display: none;">
-                            {{ 'producto' | translate }}):
+
+            <div class="cart-toast-footer">
+                <div class="cart-toast-total">
+                    <span class="cart-toast-total-label">
+                        {{ "Total" | translate }}
+                        <span class="cart-toast-total-count">
+                            <span class="js-cart-widget-amount">{{ cart.items_count }}</span>
+                            <span class="js-cart-counts-plural" style="display: none;">{{ 'productos' | translate }}</span>
+                            <span class="js-cart-counts-singular" style="display: none;">{{ 'producto' | translate }}</span>
                         </span>
                     </span>
-                    <strong class="js-cart-total col-xs-6 text-right">{{ cart.total | money }}</strong>
+                    <strong class="js-cart-total cart-toast-total-price">{{ cart.total | money }}</strong>
                 </div>
-                <a href="#" class="js-toggle-cart js-cart-notification-close js-fullscreen-modal-open btn btn-primary btn-medium full-width d-inline-block" data-modal-url="modal-fullscreen-cart">
+                <a href="#" class="js-toggle-cart js-cart-notification-close js-fullscreen-modal-open cart-toast-cta btn btn-primary" data-modal-url="modal-fullscreen-cart">
                     {{ "Ver carrito" | translate }}
                 </a>
             </div>

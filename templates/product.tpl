@@ -13,7 +13,7 @@
                 <div class="row">
                 {% endif %}
                     {# Product name + price (layout original; col precio un poco más ancha para moneda) #}
-                    <div class="row" style="margin-top: 0;">
+                    <div class="row product-title-price-row" style="margin-top: 0;">
                             <h5 id="product-name" class="product-name col-xs-8 col-lg-8" style="margin-top: 0; font-weight: bold;" itemprop="name" data-store="product-name-{{ product.id }}">{{ product.name }}</h5>
                             <div class="product-price-container {% if not settings.show_description_bottom %} p-none-xs {% endif %} col-xs-4 col-lg-4 text-right" data-store="product-price-{{ product.id }}">
                             {% if product.promotional_offer.script.is_percentage_off %}

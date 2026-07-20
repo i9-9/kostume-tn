@@ -50,7 +50,7 @@
     {% if product.show_installments and product.display_price %}
         {% set installments_info = product.installments_info_from_any_variant %}
         {% if installments_info %}
-            <div class="product-payments-link display-when-content-ready" {% if (not product.get_max_installments) and (not product.get_max_installments(false)) %}style="display:none;margin:12px 0;"{% else %}style="margin:12px 0;"{% endif %}>
+            <div class="product-payments-link display-when-content-ready" {% if (not product.get_max_installments) and (not product.get_max_installments(false)) %}style="display:none;margin:8px 0 32px;"{% else %}style="margin:8px 0 32px;"{% endif %}>
                 {% if custom_payment.discount > 0 %}
                     <div class="m-bottom-quarter">
                         <span class="text-tertiary product-payments-link-text"><strong>{{ custom_payment.discount }}% {{'de descuento' | translate }}</strong> {{'pagando con' | translate }} {{ custom_payment.name }}</span>
@@ -77,7 +77,7 @@
 
 {% if show_product_fulfillment %}
 
-            <div class="{% if not settings.show_description_bottom %}row{% endif %} display-when-content-ready" style="margin:0 0 16px;">
+            <div class="{% if not settings.show_description_bottom %}row{% endif %} display-when-content-ready" style="margin:0 0 8px;">
         {# Shipping calculator and branch link #}
 
         <div class="col-xs-12{% if settings.show_description_bottom %} col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4{% endif %}">

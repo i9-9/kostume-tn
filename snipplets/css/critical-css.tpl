@@ -802,10 +802,20 @@ body {
 .nav-top-item .nav-top-link,
 .nav-top-item .nav-top-advertising {
 	font-size: 10px;
-	font-weight: 300;
+	font-weight: 700;
 	text-decoration: none;
 	outline: 0;
 	color: #FFFFFF;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+.account-links,
+.account-links .nav-top-link,
+.mobile-accounts,
+.mobile-accounts a {
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	font-weight: 700;
 }
 .nav-top-item .nav-top-link:hover, .nav-top-item .nav-top-link:focus,
 .nav-top-item .nav-top-advertising:hover,
@@ -1783,12 +1793,28 @@ body {
   position: relative;
   height: 50px;
 }
+.product-shipping-calculator .free-shipping-title {
+  height: auto;
+  margin: 0 0 8px; /* 1x */
+}
+.free-shipping-title.text-left,
+.free-shipping-title.text-left .js-free-shipping-title,
+.free-shipping-title.text-left .js-free-shipping-title-min-cost {
+  text-align: left !important;
+}
 .shipping-calculator-head.with-zip {
   height: 25px;
 }
 .shipping-calculator-head.with-zip.with-free-shipping {
   height: 75px;
   margin-top: 10px;
+}
+.product-shipping-calculator .shipping-calculator-head.with-zip,
+.product-shipping-calculator .shipping-calculator-head.with-zip.with-free-shipping,
+.product-shipping-calculator .shipping-calculator-head.with-form,
+.product-shipping-calculator .shipping-calculator-head.with-error {
+  height: auto;
+  margin-top: 0;
 }
 .shipping-calculator-head.with-form {
   height: 95px;
@@ -1806,6 +1832,22 @@ body {
 @media (min-width: 768px) {
 	.product-form-container.text-left {
 		padding-left: 40px !important;
+	}
+}
+/* Mobile PDP: el .container suma 10px al gutter del form (15) → ~25px.
+   Sacamos el padding del container; form queda a 15px; galería a full-bleed. */
+@media (max-width: 767px) {
+	.js-product-container.container {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+	.js-product-image-container {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+	.product-form-container.text-left {
+		padding-left: 15px !important;
+		padding-right: 15px !important;
 	}
 }
 .product-form-container.text-left .row {
@@ -2309,10 +2351,16 @@ body {
 	}
 	.hamburger-panel .hamburger-panel-first-row .mobile-accounts {
 		padding: 0 12px;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
 	}
 	.hamburger-panel .hamburger-panel-first-row .mobile-accounts .mobile-accounts-item {
 		width: auto;
 		display: inline-block;
+	}
+	.hamburger-panel .hamburger-panel-first-row .mobile-accounts .mobile-accounts-item a {
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
 	}
 	.hamburger-panel .hamburger-panel-first-row .mobile-accounts .mobile-accounts-item .mobile-accounts-link {
 		padding: 10px 5px;
