@@ -160,11 +160,11 @@ LS.ready.then(function() {
                 cleanURLHash();
             }
 
-            {# Logout → landing www.kostumeweb.net (TN siempre redirige al eshop) #}
+            {# Logout → landing de marca (data-landing-url en body) #}
             $(document).on("click", 'a[href*="/account/logout"]', function(e) {
                 e.preventDefault();
                 var logoutUrl = this.href.split("#")[0];
-                var landingUrl = "https://www.kostumeweb.net/";
+                var landingUrl = (document.body.getAttribute("data-landing-url") || "https://www.kostumeweb.net/").trim() || "https://www.kostumeweb.net/";
                 fetch(logoutUrl, {
                     credentials: "same-origin",
                     redirect: "manual",
@@ -1506,6 +1506,21 @@ LS.ready.then(function() {
         }
 
         $('.js-product-quantity').keypress(productValidateNumber);
+
+        $(document).on('click', '.js-quantity-up, .js-quantity-down', function (e) {
+            e.preventDefault();
+            var $input = $(this).closest('.product-quantity-controls, .quantity').find('.js-quantity-input, .js-product-quantity').first();
+            if (!$input.length) {
+                return;
+            }
+            var value = parseInt($input.val(), 10) || 1;
+            if ($(this).hasClass('js-quantity-up')) {
+                value += 1;
+            } else {
+                value = Math.max(1, value - 1);
+            }
+            $input.val(value).trigger('change');
+        });
 
         {% if template == 'product' %}
 

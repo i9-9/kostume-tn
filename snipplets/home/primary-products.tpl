@@ -2,7 +2,10 @@
     <h4 class="m-top-none m-bottom p-left-half-xs">{{ "Productos destacados" | translate }}</h4>
     <div class="product-row js-masonry-grid row">
             {% for product in sections.primary.products %}
-                    {% include 'snipplets/single_product.tpl' %}
+                    {% set is_private_sale %}{% include 'snipplets/helpers/is-private-sale.tpl' %}{% endset %}
+                    {% if not (is_private_sale|trim) %}
+                        {% include 'snipplets/single_product.tpl' %}
+                    {% endif %}
             {% endfor %}
     </div>
     <div class="text-center p-left-half p-right-half full-width d-inline-block m-bottom m-top">

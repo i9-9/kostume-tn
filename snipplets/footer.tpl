@@ -184,10 +184,10 @@
         {#  Legal Footer: contains store´s legal information #}
         <div class="footer-legal font-small-extra">
             <div class="container footer-legal-inner p-top-half p-bottom-half visible-when-content-ready" style="margin: 0; padding: 10px 0; width: 100%; font-size: 7px;">
-                <div class="row">
-                    <div class="copyright-container col-sm-8 m-top-half m-bottom-half">© KOSTÜME {{ "now" | date('Y') }}</div>
+                <div class="row footer-legal-row">
+                    <div class="copyright-container col-xs-6 col-sm-8">© KOSTÜME {{ "now" | date('Y') }}</div>
 
-                    <div class="powered-by col-sm-4 text-right m-top-half m-bottom-half">
+                    <div class="powered-by col-xs-6 col-sm-4 text-right">
                         {#
                         La leyenda que aparece debajo de esta linea de código debe mantenerse
                         con las mismas palabras y con su apropiado link a Tienda Nube;
@@ -200,7 +200,7 @@
                         e a posição dos créditos para que ele se adque ao seu site. Porém você precisa
                         manter visivél e com um link funcionando.
                         #}
-                        <span class="pull-right">{{ new_powered_by_link }}</span>
+                        <span class="footer-powered-by-link">{{ new_powered_by_link }}</span>
                     </div>
                 </div>
             </div>

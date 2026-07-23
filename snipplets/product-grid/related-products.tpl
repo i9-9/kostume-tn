@@ -36,7 +36,11 @@
         <div class="js-masonry-grid category-products-grid">
             <div class="product-row row">
                 {% for related in related_products %}
-                    {% include 'snipplets/single_product.tpl' with {product : related} %}
+                    {% set product = related %}
+                    {% set is_private_sale %}{% include 'snipplets/helpers/is-private-sale.tpl' %}{% endset %}
+                    {% if not (is_private_sale|trim) %}
+                        {% include 'snipplets/single_product.tpl' with {product : related} %}
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>

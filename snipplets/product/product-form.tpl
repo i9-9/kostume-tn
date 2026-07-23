@@ -15,7 +15,19 @@
                     <label class="quantity-label" for="product-quantity-input">
                         {{ "Cantidad" | translate }}
                     </label>
-                    <input id="product-quantity-input" class="js-product-quantity js-quantity-input quantity-input form-control" value="1" type="number" name="quantity{{ item.id }}" value="{{ item.quantity }}" aria-label="{{ "Cantidad" | translate }}">
+                    <div class="product-quantity-controls">
+                        <button type="button" class="js-quantity-down product-quantity-btn" aria-label="{{ 'Reducir cantidad' | translate }}">
+                            <span class="product-quantity-btn-icon" aria-hidden="true">
+                                {% include "snipplets/svg/minus.tpl" %}
+                            </span>
+                        </button>
+                        <input id="product-quantity-input" class="js-product-quantity js-quantity-input quantity-input form-control" value="1" type="number" name="quantity{{ item.id }}" min="1" inputmode="numeric" aria-label="{{ "Cantidad" | translate }}">
+                        <button type="button" class="js-quantity-up product-quantity-btn" aria-label="{{ 'Aumentar cantidad' | translate }}">
+                            <span class="product-quantity-btn-icon" aria-hidden="true">
+                                {% include "snipplets/svg/plus.tpl" %}
+                            </span>
+                        </button>
+                    </div>
                 </div>
             </div>
         {% endif %}

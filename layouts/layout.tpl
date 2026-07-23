@@ -1,3 +1,4 @@
+{% set landing_url %}{% snipplet "helpers/landing-url.tpl" %}{% endset %}
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/" lang="{% for language in languages %}{% if language.active %}{{ language.lang }}{% endif %}{% endfor %}">
 <head>
@@ -72,6 +73,14 @@
        Footer siempre pegado al fondo de la pantalla
        ============================================ #}
     <style>
+        /* Reserva siempre el espacio de la scrollbar vertical, esté visible o no.
+           Sin esto, cada vez que un menú/modal pone overflow:hidden en <body>
+           (hamburguesa, "Ver todo" mobile, buscador, panel de variantes) el
+           navegador saca la scrollbar y el viewport gana ese ancho de golpe,
+           corriendo todo el contenido. */
+        html {
+            scrollbar-gutter: stable;
+        }
         .js-page-wrapper {
             display: flex !important;
             flex-direction: column !important;
@@ -91,6 +100,16 @@
        INVERSIÓN DE TEMA - KOSTÜME
        Activa tema claro: fondos blancos, textos negros
        Las imágenes, fotos y logos NO se invierten
+
+       VOLVER A TEMA DARK DEFAULT:
+       Comentar / borrar este bloque <style> completo.
+       El CSS del theme ya está en paleta dark-first
+       (#070707, #171717, #fff, #2a2a2a) — sin invert
+       el sitio vuelve al dark nativo.
+
+       REGLA: UI de sistema (alerts, errores, badges de stock,
+       inputs) usa solo esa paleta mono. Colores cromáticos
+       (rojo/verde/azul Bootstrap) se ven mal bajo invert.
        ============================================ #}
     <style>
         /* 1. INVERTIR TODO EL SITIO */
@@ -98,6 +117,17 @@
         body {
             -webkit-filter: invert(1) !important;
             filter: invert(1) !important;
+        }
+
+        /* Selección de texto: colores PRE-invert para que tras invert
+           se vea negro sobre blanco (no el highlight del browser invertido). */
+        ::selection {
+            background: #ffffff !important;
+            color: #070707 !important;
+        }
+        ::-moz-selection {
+            background: #ffffff !important;
+            color: #070707 !important;
         }
 
         /* Sombra del navbar se invierte a un gris/blanco distinto → línea bajo el menú */
@@ -199,8 +229,18 @@
         html > .shipping-pickup-modal .shipping-pickup-modal-header,
         html > .js-modal-shipping-suboptions .shipping-pickup-modal-header {
             position: relative !important;
+            display: -webkit-box !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center !important;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between !important;
+            gap: 12px !important;
             margin: 0 !important;
-            padding: 15px 48px 15px 15px !important;
+            padding: 15px !important;
             border-bottom: 1px solid #2a2a2a !important;
             box-sizing: border-box !important;
             background: #070707 !important;
@@ -214,20 +254,23 @@
         }
         html > .shipping-pickup-modal .shipping-pickup-modal-title,
         html > .js-modal-shipping-suboptions .shipping-pickup-modal-title {
+            flex: 1 1 auto !important;
+            min-width: 0 !important;
             margin: 0 !important;
             padding: 0 !important;
             font-size: 12px !important;
             font-weight: 700 !important;
             letter-spacing: 0.1em !important;
             text-transform: uppercase !important;
+            line-height: 1.2 !important;
             text-align: left !important;
             color: #fff !important;
         }
         html > .shipping-pickup-modal .shipping-pickup-modal-close,
         html > .js-modal-shipping-suboptions .shipping-pickup-modal-close {
-            position: absolute !important;
-            top: 12px !important;
-            right: 12px !important;
+            position: static !important;
+            top: auto !important;
+            right: auto !important;
             width: 32px !important;
             height: 32px !important;
             margin: 0 !important;
@@ -237,10 +280,11 @@
             display: inline-flex !important;
             -webkit-box-align: center;
             -ms-flex-align: center;
-            align-items: center;
+            align-items: center !important;
             -webkit-box-pack: center;
             -ms-flex-pack: center;
-            justify-content: center;
+            justify-content: center !important;
+            flex: 0 0 32px !important;
         }
         html > .shipping-pickup-modal .shipping-pickup-modal-close svg,
         html > .js-modal-shipping-suboptions .shipping-pickup-modal-close svg {
@@ -633,15 +677,14 @@
             filter: invert(1) !important;
         }
 
-        /* 13. RE-INVERTIR: UI de terceros de Tienda Nube (wallet / login modal).
-           El invert del body los deja con contraste roto (fondo negro, marca amarilla).
-           Re-invertir el contenedor restaura colores originales; imgs internas
-           no deben llevar el invert genérico o quedarían invertidas de nuevo. */
-        [class*="wallet-lib-auth"],
-        [class*="wallet-lib-storefront"],
-        [data-rsbs-root],
-        [data-rsbs-overlay],
-        [data-rsbs-backdrop],
+        /* 13. RE-INVERTIR: UI de terceros TN (OTP / Acceso rápido / bottom sheet).
+           Solo la RAÍZ del portal. Invertir cada .wallet-lib-auth_* anidado
+           (o root+overlay+backdrop) suma inverts y deja el modal feo/invertido. */
+        #otp-modal-root,
+        body > reach-portal,
+        html > reach-portal,
+        body > [data-rsbs-portal],
+        body > [data-rsbs-root],
         #walletAuthProxyIframe,
         iframe[src*="nuvempay"],
         iframe[src*="services-wallet"] {
@@ -649,12 +692,30 @@
             filter: invert(1) !important;
         }
 
-        [class*="wallet-lib-auth"] img,
-        [class*="wallet-lib-storefront"] img,
-        [data-rsbs-root] img,
-        [data-rsbs-overlay] img {
+        /* Imgs del portal: el invert de la raíz ya canceló body; el invert
+           global de img las volvería a invertir. */
+        #otp-modal-root img,
+        body > reach-portal img,
+        html > reach-portal img,
+        body > [data-rsbs-portal] img,
+        body > [data-rsbs-root] img {
             -webkit-filter: none !important;
             filter: none !important;
+        }
+
+        /* 14. RE-INVERTIR: Google reCAPTCHA — solo wrappers (no iframe interno).
+           Wrapper + iframe = 3 inverts con body → sigue viéndose invertido. */
+        .g-recaptcha,
+        .account-auth-recaptcha,
+        .grecaptcha-badge {
+            -webkit-filter: invert(1) !important;
+            filter: invert(1) !important;
+        }
+
+        /* Challenge popup (bframe) suele ir fuera de .g-recaptcha, directo en body */
+        iframe[src*="recaptcha/api2/bframe"] {
+            -webkit-filter: invert(1) !important;
+            filter: invert(1) !important;
         }
     </style>
 
@@ -693,7 +754,7 @@
     {% include 'snipplets/structured_data/webpage-structured-data.tpl' %}
 
 </head>
-<body class="{% if customer %}customer-logged-in{% endif %} template-{{ template | replace('.', '-') }}">
+<body class="{% if customer %}customer-logged-in{% endif %} template-{{ template | replace('.', '-') }}" data-landing-url="{{ landing_url }}">
 
 {# Social JS for Twitter home widgets and Facebook comments on product page #}
 {% if template == 'home' %}
@@ -796,8 +857,8 @@
 {% endif %}
 
 {# Private Sale Password Protection - Al final del body #}
-{# DESACTIVADO TEMPORALMENTE #}
-{# {% snipplet "vip-protection.tpl" %} #}
+{# Activo 23 jul → 2 ago 2026 · password KOSTUMEPVT #}
+{% snipplet "vip-protection.tpl" %}
 
 </body>
 </html>

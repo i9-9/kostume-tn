@@ -1,5 +1,6 @@
+{% set landing_url %}{% snipplet "helpers/landing-url.tpl" %}{% endset %}
 <div class="mobile-nav-tabs-container visible-xs">
-    <a href="https://www.kostumeweb.net/" class="mobile-nav-tab {% if store.is_catalog %} col-xs-6 {% else %} col-xs-6 {% endif %} {% if template == 'home' %} js-current-page selected {% endif %}">
+    <a href="{{ landing_url }}" class="mobile-nav-tab {% if store.is_catalog %} col-xs-6 {% else %} col-xs-6 {% endif %} {% if template == 'home' %} js-current-page selected {% endif %}">
         <div class="mobile-nav-tab-text" style="color: white;">{{ 'Inicio' | translate }}</div>
     </a>
     {% if not store.is_catalog %}

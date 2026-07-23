@@ -19,26 +19,26 @@
                             {% if product.promotional_offer.script.is_percentage_off %}
                                 <input class="js-promotional-parameter" type="hidden" value="{{product.promotional_offer.parameters.percent}}">
                             {% endif %}
-                            <h3 class="js-compare-price-display price-compare" {% if not product.compare_at_price or not product.display_price %}style="display:none;"{% endif %}>
-                                {% if product.compare_at_price %}
-                                    {{ product.compare_at_price | money }}
-                                {% endif %}
-                             </h3>
-                            <h5 class="js-price-display product-price" {% if product.display_price %}style="display:inline-block;"{% endif %}>
-                                {% if product.display_price %}
-                                    {{ product.price | money }}
-                                {% endif %}
-                            </h5>
-                            <div class="product-labels m-bottom" data-store="product-item-labels">
+                            <div class="product-price-row">
+                                <span class="js-compare-price-display price-compare" {% if not product.compare_at_price or not product.display_price %}style="display:none;"{% endif %}>
+                                    {% if product.compare_at_price %}
+                                        {{ product.compare_at_price | money }}
+                                    {% endif %}
+                                </span>
+                                <span class="js-price-display product-price" {% if not product.display_price %}style="display:none;"{% endif %}>
+                                    {% if product.display_price %}
+                                        {{ product.price | money }}
+                                    {% endif %}
+                                </span>
+                            </div>
+                            <div class="product-labels product-labels-price" data-store="product-item-labels">
                                 {% if product.promotional_offer %}
-                                    <div class="product-label product-label-offer label label-accent" {% if not product.display_price %}style="display:none;"{% endif %} data-store="product-item-promotion-label">
+                                    <div class="product-label product-label-offer" {% if not product.display_price %}style="display:none;"{% endif %} data-store="product-item-promotion-label">
                                         {% if product.promotional_offer.script.is_percentage_off %}
-                                            <strong>{{ product.promotional_offer.parameters.percent * 100 }}%</strong> OFF
+                                            {{ product.promotional_offer.parameters.percent * 100 }}% OFF
                                         {% elseif product.promotional_offer.script.is_discount_for_quantity %}
-                                            <div>
-                                                <h4 class="m-none"><strong>{{ product.promotional_offer.selected_threshold.discount_decimal_percentage * 100 }}% OFF</strong></h4>
-                                                <div class="label-small">{{ "Comprando {1} o más." | translate(product.promotional_offer.selected_threshold.quantity) }}</div>
-                                            </div>
+                                            {{ product.promotional_offer.selected_threshold.discount_decimal_percentage * 100 }}% OFF
+                                            <span class="label-small">{{ "Comprando {1} o más." | translate(product.promotional_offer.selected_threshold.quantity) }}</span>
                                         {% else %}
                                             {% if store.country == 'BR' %}
                                                 {{ "Leve {1} Pague {2}" | translate(product.promotional_offer.script.quantity_to_take, product.promotional_offer.script.quantity_to_pay) }}
@@ -48,7 +48,7 @@
                                         {% endif %}
                                     </div>
                                 {% else %}
-                                    <div class="product-label product-label-offer label label-accent {% if not product.promotional_offer %} js-offer-label {% endif %}" {% if not product.compare_at_price or product.promotional_offer or not product.display_price %}style="display:none;"{% endif %} data-store="product-item-offer-label">
+                                    <div class="product-label product-label-offer {% if not product.promotional_offer %} js-offer-label {% endif %}" {% if not product.compare_at_price or product.promotional_offer or not product.display_price %}style="display:none;"{% endif %} data-store="product-item-offer-label">
                                         <span class="js-offer-percentage">{{ price_discount_percentage |round }}</span>% OFF
                                     </div>
                                 {% endif %}
@@ -62,10 +62,12 @@
                                         </span>
                                     </div>
                                 {% endif %}
-                                <div class="product-label product-label-no-stock js-stock-label" {% if product.has_stock %}style="display:none;"{% endif %}>{{ "Sin stock" | translate }}</div>
                             </div>
                             <span class="hidden" data-store="stock-product-{{ product.id }}-{% if product.has_stock %}{% if product.stock %}{{ product.stock }}{% else %}infinite{% endif %}{% else %}0{% endif %}"></span>
                             </div>
+                    </div>
+                    <div class="product-stock-status m-bottom-half" data-store="product-stock-label">
+                        <div class="product-label product-label-no-stock js-stock-label" {% if product.has_stock %}style="display:none;"{% endif %}>{{ "Sin stock" | translate }}</div>
                     </div>
                     <div class="pull-left {% if settings.show_description_bottom %}col-xs-12 col-md-6 col-md-offset-3 {% else %} full-width {% endif %}">
                             {% if product.promotional_offer and not product.promotional_offer.script.is_percentage_off and product.display_price %}

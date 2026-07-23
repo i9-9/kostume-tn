@@ -1,6 +1,12 @@
 {% set show_filters = settings.product_filters and (filter_categories or insta_colors or other_colors or size_properties_values or variants_properties) %}
 
-{% paginate by settings.category_quantity_products %}
+{# Private Sale: traer todos los ítems en una página (evita quedar en 12 por paginación/infinite scroll).
+   Condición inline: en Twig TN el {% set %} dentro de {% if %} no propaga al scope externo. #}
+{% if category and (('private sale' in (category.name | default('') | lower)) or ((category.name | default('') | lower) == 'private') or ('private-sale' in (category.url | default('') | lower))) %}
+    {% paginate by 50 %}
+{% else %}
+    {% paginate by settings.category_quantity_products %}
+{% endif %}
 {% set show_help = not has_products %}
 {% set help_url = has_products ? '/admin/products/feature/' : '/admin/products/new/' %}
 

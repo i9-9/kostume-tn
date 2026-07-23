@@ -2,6 +2,7 @@ primary_brand_color = #6901AD
 accent_brand_color = #6901AD
 text_color = #434343
 background_color = #FFFFFF
+landing_url = https://www.kostumeweb.net/
 image_borders = 1
 home_display = products
 slider_auto = 1

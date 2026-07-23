@@ -1,6 +1,7 @@
+{% set landing_url %}{% snipplet "helpers/landing-url.tpl" %}{% endset %}
 <ul class="breadcrumb {% if template != 'product'%}{% if template == 'category' and category.images is not empty %}category-image-breadcrumb{% else %}pull-left{% endif %}{% else %}product-breadcrumb{% endif %}">
     <li>
-        <a class="breadcrumb-crumb" href="https://www.kostumeweb.net/" title="{{ store.name }}">{{ "Inicio" | translate }}</a>
+        <a class="breadcrumb-crumb" href="{{ landing_url }}" title="{{ store.name }}">{{ "Inicio" | translate }}</a>
     </li>
     {% for crumb in breadcrumbs %}
         <span class="breadcrumb-divider">/</span>

@@ -1,3 +1,4 @@
+{% set landing_url %}{% snipplet "helpers/landing-url.tpl" %}{% endset %}
 <div class="js-desktop-head-container {% if settings.head_fix %}js-head-fixed{% endif %} head-container transition-soft">
     <div class="container-fluid">
         <header>    
@@ -14,10 +15,10 @@
                         <h1 class="mobile-logo-home text-center-xs">
                     {% endif %}
                         <div id="logo" class="mobile-logo-home logo-img-container {% if not has_logo %}hidden{% endif %}">
-                            {{ store.logo('large') | img_tag(store.name, {class: 'logo-img  transition-soft-slow'}) | a_tag(store.url) }}
+                            {{ store.logo('large') | img_tag(store.name, {class: 'logo-img  transition-soft-slow'}) | a_tag(landing_url) }}
                         </div>
                         <div id="no-logo" {% if has_logo %} class="hidden" {% endif %}>
-                            <a class="logo-text h1" href="{{ store.url }}">{{ store.name }}</a>
+                            <a class="logo-text h1" href="{{ landing_url }}">{{ store.name }}</a>
                         </div>
                     {% if template == 'home' %}
                         </h1>

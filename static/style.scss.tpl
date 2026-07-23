@@ -1263,11 +1263,9 @@ textarea{
     bottom: 0;
     left: 0;
     z-index: 4100;
-    background-color: rgba(0,0,0,.5);
-    -webkit-animation: fade .5s;
-    -moz-animation: fade .5s;
-    -o-animation: fade .5s;
-    animation: fade .5s;
+    background-color: rgba(0,0,0,.3);
+    opacity: 1;
+    transition: opacity 0.3s ease;
   }
 }
 
@@ -1289,6 +1287,9 @@ textarea{
             &.selected .hamburger-panel-arrow {
                 transform: rotate(90deg);
             }
+        }
+        .hamburger-panel-arrow {
+            transition: transform 0.25s ease;
         }
         .list-subitems { 
             padding: 0;
@@ -2206,7 +2207,7 @@ input.cart-quantity-input {
   }
   .modal-xs-right.modal.fade.in,
   .modal-xs-right-in{
-    transition: all .5s cubic-bezier(.16,.68,.43,.99);
+    transition: transform 0.4s cubic-bezier(.25,.1,.25,1);
     @include prefix(transform, translate3d(0,0,0), webkit ms moz o);
   }
 
@@ -2230,7 +2231,7 @@ input.cart-quantity-input {
     height: 100%;
     -webkit-overflow-scrolling: touch;
     overflow-y: auto;
-    transition: all .2s cubic-bezier(.16,.68,.43,.99);
+    transition: left 0.35s cubic-bezier(.25,.1,.25,1);
     z-index: 4200;
     &.modal-full {
       width: 100%;

@@ -1,5 +1,6 @@
+{% set landing_url %}{% snipplet "helpers/landing-url.tpl" %}{% endset %}
 <div class="breadcrumb m-bottom-half m-top-half" {% if template != 'page' %}data-store="page-title"{% endif %}>
-    <a class="h6 font-body-xs crumb" href="{{ store.url }}" title="{{ store.name }}">{{ "Inicio" | translate }}</a>
+    <a class="h6 font-body-xs crumb" href="{{ landing_url }}" title="{{ store.name }}">{{ "Inicio" | translate }}</a>
     {% if template == 'page' %}
         <span class="breadcrumb-divider">/</span>
         <h1 class="breadcrumb-crumb active">{{ page.name }}</h1>

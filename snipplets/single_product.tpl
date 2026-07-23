@@ -10,13 +10,8 @@
     {% endfor %}
 {% endif %}
 
-{# Verificar si es producto de Private Sale por tags (más confiable en búsqueda) #}
-{% set is_private_sale_product = false %}
-{% for tag in product.tags %}
-    {% if 'private-sale' in tag|lower or 'private' in tag|lower %}
-        {% set is_private_sale_product = true %}
-    {% endif %}
-{% endfor %}
+{% set is_private_sale %}{% include 'snipplets/helpers/is-private-sale.tpl' %}{% endset %}
+{% set is_private_sale_product = is_private_sale|trim == '1' %}
 <div class="js-item-product js-masonry-item item-container{% if columns_list == 1 %} col-xs-12 col-sm-6 col-md-4 col-lg-4{% else %} col-xs-6 col-sm-4 col-md-3 col-lg-3{% endif %}{% if related_product %} item-container-related p-left-none-xs{% endif %}{% if is_private_sale_product %} js-private-sale-product{% endif %}" data-product-type="list" data-product-id="{{ product.id }}" data-store="product-item-{{ product.id }}" {% if is_private_sale_product %}data-private-sale="true"{% endif %}>
     <div class="item">
         {% if settings.quick_view or settings.product_color_variants %}

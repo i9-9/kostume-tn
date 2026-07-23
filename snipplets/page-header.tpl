@@ -19,10 +19,6 @@
 					{% snipplet 'navigation/breadcrumbs.tpl' %}
 				</div>
 			{% endif %}
-			{% if page_header_title %}
-				{# Category already shows the name in breadcrumbs; keep a real h1 for SEO without duplicating the UI. #}
-				<h1 class="page-header-title{% if template == 'category' %} page-header-title-category{% endif %}">{{ page_header_title }}</h1>
-			{% endif %}
 				<div class="category-controls visible-when-content-ready pull-none-xs col-xs-12 col-sm-2 col-md-2 col-lg-2 pull-right text-right">
                 {% if template == 'category' %}
 					{% snipplet 'sort-by.tpl' %}

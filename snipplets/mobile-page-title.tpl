@@ -13,7 +13,7 @@
 {% elseif template == 'search' %}
     {{ "Resultados de búsqueda" | translate }}
 {% elseif template == '404' %}
-    {{ "La página no existe" | translate }}
+    {{ "Página no encontrada" | translate }}
 {% elseif template == 'account.login' %}
     {{ "Iniciar sesión" | translate }}
 {% elseif template == 'account.register' %}

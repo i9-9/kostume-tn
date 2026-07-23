@@ -1,4 +1,5 @@
 # Credenciales FTP - NO SUBIR AL REPOSITORIO
+.env
 ftp_config.json
 
 # Sistema

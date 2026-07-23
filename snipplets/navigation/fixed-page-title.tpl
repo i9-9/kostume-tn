@@ -20,7 +20,7 @@
     {{ "Resultados de búsqueda" | translate }}
 {% endif %}
 {% if template == '404' %}
-    {{ "La página no existe" | translate }}
+    {{ "Página no encontrada" | translate }}
 {% endif %}
 {% if template == 'account.login' %}
     {{ "Iniciar sesión" | translate }}

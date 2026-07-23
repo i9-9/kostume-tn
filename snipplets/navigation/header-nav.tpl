@@ -1,3 +1,4 @@
+{% set landing_url %}{% snipplet "helpers/landing-url.tpl" %}{% endset %}
 {% snipplet "navigation/locations-bar.tpl" %}
 <div class="nav-main navbar js-main-navbar js-search-container mobile-nav" data-store="head" style="min-height: auto; padding-bottom: 5px; padding-top: 5px;">
     {# Top nav links: account and languages #}
@@ -75,12 +76,12 @@
                 <div class="mobile-logo-home m-none text-center-xs">
             {% endif %}
                 <div id="logo" class="mobile-logo-home logo-img-container {% if not has_logo %}hidden{% endif %}">
-                    <a href="https://www.kostumeweb.net/">
+                    <a href="{{ landing_url }}">
                         {% include "snipplets/svg/logo.tpl" %}
                     </a>
                 </div>
                 <div id="no-logo" {% if has_logo %} class="hidden" {% endif %}>
-                    <a class="logo-text h1 h3-xs" href="{{ store.url }}">{{ store.name }}</a>
+                    <a class="logo-text h1 h3-xs" href="{{ landing_url }}">{{ store.name }}</a>
                 </div>
             {% if template == 'home' %}
                 </div>
@@ -96,12 +97,12 @@
                         display: inline-block;">
             {% endif %}
                 <div id="logo"  style="padding-top: 10px;">
-                    <a href="https://www.kostumeweb.net/">
+                    <a href="{{ landing_url }}">
                         {% include "snipplets/svg/logo.tpl" %}
                     </a>
                 </div>
                 <div id="no-logo" {% if has_logo %} class="hidden" {% endif %}>
-                    <a class="logo-text h1 h3-xs" href="{{ store.url }}">{{ store.name }}</a>
+                    <a class="logo-text h1 h3-xs" href="{{ landing_url }}">{{ store.name }}</a>
                 </div>
             {% if template == 'home' %}
                 </div>

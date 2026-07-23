@@ -38,35 +38,51 @@ def print_info(msg):
 def print_warning(msg):
     print(f"{Colors.YELLOW}⚠ {msg}{Colors.END}")
 
-def load_config():
-    """Carga la configuración FTP desde ftp_config.json"""
-    config_file = Path(__file__).parent / 'ftp_config.json'
-    
-    if not config_file.exists():
-        print_error("No se encontró ftp_config.json")
-        print_info("Creando archivo de configuración...")
-        create_config_template(config_file)
-        print_warning("Por favor, completa ftp_config.json con tus credenciales FTP")
-        sys.exit(1)
-    
-    with open(config_file, 'r') as f:
-        return json.load(f)
+def load_dotenv(env_file):
+    """Carga variables desde un archivo .env al entorno del proceso"""
+    if not env_file.exists():
+        return
+    with open(env_file, 'r') as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith('#') or '=' not in line:
+                continue
+            key, _, value = line.partition('=')
+            key = key.strip()
+            value = value.strip().strip('"').strip("'")
+            os.environ.setdefault(key, value)
 
-def create_config_template(config_file):
-    """Crea un template de configuración"""
-    template = {
-        "host": "tu-servidor-ftp.com",
-        "port": 21,
-        "username": "tu-usuario",
-        "password": "tu-contraseña",
-        "remote_path": "/",
-        "use_passive": True,
-        "use_tls": True,
-        "timeout": 30
-    }
-    
-    with open(config_file, 'w') as f:
-        json.dump(template, f, indent=2)
+def env_bool(name, default=False):
+    value = os.environ.get(name)
+    if value is None:
+        return default
+    return value.strip().lower() in ('1', 'true', 'yes', 'y', 'si', 'sí')
+
+def load_config():
+    """Carga la configuración FTP desde .env (prioridad) o ftp_config.json"""
+    root = Path(__file__).parent
+    load_dotenv(root / '.env')
+
+    if os.environ.get('FTP_HOST') and os.environ.get('FTP_USER') and os.environ.get('FTP_PASSWORD'):
+        return {
+            "host": os.environ['FTP_HOST'],
+            "port": int(os.environ.get('FTP_PORT', '21')),
+            "username": os.environ['FTP_USER'],
+            "password": os.environ['FTP_PASSWORD'],
+            "remote_path": os.environ.get('FTP_REMOTE_PATH', '/'),
+            "use_passive": env_bool('FTP_USE_PASSIVE', True),
+            "use_tls": env_bool('FTP_USE_TLS', True),
+            "timeout": int(os.environ.get('FTP_TIMEOUT', '30')),
+        }
+
+    config_file = root / 'ftp_config.json'
+    if config_file.exists():
+        with open(config_file, 'r') as f:
+            return json.load(f)
+
+    print_error("No se encontró .env ni ftp_config.json")
+    print_info("Copiá .env.example a .env y completá las credenciales FTP")
+    sys.exit(1)
 
 def get_files_to_upload(files_arg=None):
     """Determina qué archivos subir"""
@@ -184,7 +200,7 @@ def main():
                 ftp.login(config['username'], config['password'])
             except error_perm as e:
                 if '530' in str(e) or 'Authentication failed' in str(e):
-                    print_error("Error de autenticación. Verifica usuario y contraseña en ftp_config.json")
+                    print_error("Error de autenticación. Verifica usuario y contraseña en .env")
                     print_info("Asegúrate de que las credenciales sean correctas")
                 raise
             
